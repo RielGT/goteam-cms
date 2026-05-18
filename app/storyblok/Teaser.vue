@@ -1,9 +1,9 @@
 <script setup>
-defineProps({ blok: Object });
+defineProps({ blok: { type: Object, default: () => ({}) } });
 </script>
 
 <template>
-	<div class="teaser" v-editable="blok">
+	<div v-editable="blok" class="teaser">
 		<h2>{{ blok.headline }}</h2>
 	</div>
 </template>

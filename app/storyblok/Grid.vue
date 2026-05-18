@@ -1,9 +1,9 @@
 <script setup>
-defineProps({ blok: Object });
+defineProps({ blok: { type: Object, default: () => ({}) } });
 </script>
 
 <template>
-	<div class="grid" v-editable="blok">
+	<div v-editable="blok" class="grid">
 		<StoryblokComponent
 			v-for="currentBlok in blok.columns"
 			:key="currentBlok._uid"

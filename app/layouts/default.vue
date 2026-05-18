@@ -2,6 +2,8 @@
 const currentYear = new Date().getFullYear();
 </script>
 <template>
-	<slot></slot>
-	<footer>All rights reserved © {{ currentYear }}</footer>
+	<div>
+		<slot />
+		<footer>All rights reserved © {{ currentYear }}</footer>
+	</div>
 </template>

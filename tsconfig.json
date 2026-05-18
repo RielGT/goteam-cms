@@ -3,5 +3,6 @@
 	"extends": "./.nuxt/tsconfig.json",
 	"compilerOptions": {
 		"importHelpers": true
-	}
+	},
+	"files": ["types/global.d.ts"]
 }
