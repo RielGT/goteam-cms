@@ -4,12 +4,24 @@
     "display_name": null,
     "description": null,
     "created_at": "2026-05-18T09:50:22.133Z",
-    "updated_at": "2026-05-18T09:50:22.133Z",
+    "updated_at": "2026-05-18T11:56:22.919Z",
     "id": 177800077866936,
     "schema": {
       "name": {
         "type": "text",
         "id": "zYu2sdxmS_S4sU6LSoOc_Q"
+      },
+      "link": {
+        "type": "multilink",
+        "id": "8eH6hguTRrWy-72Kyb7PzQ"
+      },
+      "description": {
+        "type": "textarea",
+        "id": "SPvqihnwTKOhEL3AxkrhpQ"
+      },
+      "link_label": {
+        "type": "multilink",
+        "id": "i3dSST2jQaCxqkdc-u3ppQ"
       }
     },
     "image": null,
@@ -311,7 +323,7 @@
     "display_name": null,
     "description": null,
     "created_at": "2026-05-18T09:50:22.080Z",
-    "updated_at": "2026-05-18T11:24:57.917Z",
+    "updated_at": "2026-05-18T12:02:11.821Z",
     "id": 177800077649845,
     "schema": {
       "body": {
@@ -341,12 +353,16 @@
     "display_name": null,
     "description": null,
     "created_at": "2026-05-18T09:50:22.101Z",
-    "updated_at": "2026-05-18T09:50:22.101Z",
+    "updated_at": "2026-05-18T11:56:51.289Z",
     "id": 177800077731766,
     "schema": {
       "headline": {
         "type": "text",
         "id": "_vViJcFcS_CbldwENkr8IQ"
+      },
+      "description": {
+        "type": "textarea",
+        "id": "qOWVnMxJQiK7FXkmDRtR3A"
       }
     },
     "image": null,
@@ -370,7 +386,7 @@
     "display_name": "Website Header",
     "description": null,
     "created_at": "2026-05-18T10:55:36.535Z",
-    "updated_at": "2026-05-18T10:55:36.535Z",
+    "updated_at": "2026-05-18T13:20:54.415Z",
     "id": 177816111257801,
     "schema": {
       "variant": {
@@ -402,6 +418,13 @@
         "type": "tab",
         "pos": 10,
         "display_name": "Branding",
+        "keys": [
+          "brand_image",
+          "brand_text",
+          "show_brand_image",
+          "show_brand_text",
+          "brand_link"
+        ],
         "id": "2r-7p9Jw"
       },
       "brand_image": {
@@ -442,6 +465,9 @@
         "type": "tab",
         "pos": 20,
         "display_name": "Navigation",
+        "keys": [
+          "nav_items"
+        ],
         "id": "2r968grShw"
       },
       "nav_items": {
@@ -458,6 +484,10 @@
         "type": "tab",
         "pos": 30,
         "display_name": "CTAs",
+        "keys": [
+          "cta_buttons",
+          "action_buttons"
+        ],
         "id": "2r_NoA"
       },
       "cta_buttons": {
@@ -484,6 +514,9 @@
         "type": "tab",
         "pos": 40,
         "display_name": "Utility",
+        "keys": [
+          "utility_links"
+        ],
         "id": "2r_tJS0g"
       },
       "utility_links": {
@@ -500,6 +533,14 @@
         "type": "tab",
         "pos": 50,
         "display_name": "Features",
+        "keys": [
+          "show_promo_card",
+          "promo_card",
+          "show_search",
+          "show_auth_buttons",
+          "show_language_switcher",
+          "show_social_links"
+        ],
         "id": "2r_-revs"
       },
       "show_promo_card": {
@@ -546,6 +587,12 @@
         "type": "tab",
         "pos": 60,
         "display_name": "Behavior",
+        "keys": [
+          "enable_sticky",
+          "enable_shadow",
+          "enable_mobile_menu",
+          "enable_transparent_header"
+        ],
         "id": "2r--GvKL"
       },
       "enable_sticky": {
@@ -579,6 +626,27 @@
         "type": "tab",
         "pos": 70,
         "display_name": "Theme",
+        "keys": [
+          "theme_mode",
+          "allow_theme_toggle",
+          "default_theme",
+          "light_background_color",
+          "light_nav_text_color",
+          "light_nav_hover_color",
+          "light_cta_color",
+          "light_border_color",
+          "light_dropdown_background",
+          "light_dropdown_text",
+          "light_mobile_menu_background",
+          "dark_background_color",
+          "dark_nav_text_color",
+          "dark_nav_hover_color",
+          "dark_cta_color",
+          "dark_border_color",
+          "dark_dropdown_background",
+          "dark_dropdown_text",
+          "dark_mobile_menu_background"
+        ],
         "id": "2r_R5uA"
       },
       "theme_mode": {

@@ -1,0 +1,54 @@
+{
+  "status": "PARTIAL_SUCCESS",
+  "meta": {
+    "startedAt": "2026-05-18T12:17:40.484Z",
+    "command": "storyblok stories push",
+    "cliVersion": "4.17.5",
+    "runId": "1779106660484",
+    "config": {
+      "space": "292587481558987",
+      "verbose": false,
+      "apiMaxRetries": 3,
+      "apiMaxConcurrency": 6,
+      "logConsoleEnabled": false,
+      "logConsoleLevel": "info",
+      "logFileEnabled": true,
+      "logFileLevel": "info",
+      "logFileMaxFiles": 10,
+      "uiEnabled": true,
+      "reportEnabled": true,
+      "reportMaxFiles": 10,
+      "region": "eu"
+    },
+    "logPath": "/home/gesparellano/playground/goteam-cms/.storyblok/logs/292587481558987/storyblok-stories-push-1779106660484.jsonl",
+    "failedStories": [
+      {
+        "full_slug": "home",
+        "slug": "home",
+        "uuid": "aa10410b-b734-481e-a091-b34c312a2b1e",
+        "id": 177800078000416,
+        "error": "The request was well-formed but was unable to be followed due to semantic errors"
+      }
+    ],
+    "endedAt": "2026-05-18T12:17:42.242Z",
+    "durationMs": 1758
+  },
+  "summary": {
+    "creationResults": {
+      "total": 2,
+      "succeeded": 0,
+      "skipped": 2,
+      "failed": 0
+    },
+    "processResults": {
+      "total": 2,
+      "succeeded": 2,
+      "failed": 0
+    },
+    "updateResults": {
+      "total": 2,
+      "succeeded": 1,
+      "failed": 1
+    }
+  }
+}

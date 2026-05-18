@@ -1,0 +1,99 @@
+{
+  "name": "Home",
+  "parent_id": 0,
+  "group_id": "3d3c8652-51e2-4d82-b4cc-12356dfb837a",
+  "alternates": [],
+  "created_at": "2026-05-18T09:50:22.160Z",
+  "deleted_at": null,
+  "sort_by_date": null,
+  "tag_list": [],
+  "updated_at": "2026-05-18T11:51:19.173Z",
+  "published_at": "2026-05-18T11:51:19.135Z",
+  "id": 177800078000416,
+  "uuid": "aa10410b-b734-481e-a091-b34c312a2b1e",
+  "is_folder": false,
+  "content": {
+    "_uid": "87e2b0cf-197e-4103-b8de-00222ace3f55",
+    "body": [
+      {
+        "_uid": "6449d620-1dac-42df-bd28-9c73387d34d8",
+        "headline": "Build smarter with GoTeam CMS",
+        "component": "teaser",
+        "description": "A modern content platform powered by Storyblok and Nuxt. Design, manage, and ship pages — faster than ever."
+      },
+      {
+        "_uid": "376cd36a-3efb-4e53-88f9-455b12e73ab8",
+        "columns": [
+          {
+            "_uid": "017a72e1-52a4-4c40-a80e-ad3977e4ba85",
+            "link": { "url": "#", "linktype": "url", "cached_url": "" },
+            "name": "Visual Editor",
+            "component": "feature",
+            "link_label": { "url": "", "linktype": "url", "cached_url": "" },
+            "description": "Edit content in real-time with Storyblok's live visual editor — no code required."
+          },
+          {
+            "_uid": "2ca7aaf7-0ef8-4adb-b642-1523960da477",
+            "link": { "url": "#", "linktype": "url", "cached_url": "" },
+            "name": "Component Library",
+            "component": "feature",
+            "link_label": { "url": "", "linktype": "url", "cached_url": "" },
+            "description": "Reusable bloks that snap together to build any layout, from landing pages to dashboards."
+          },
+          {
+            "_uid": "95c2c6d5-edf5-478a-b077-adfca82d7beb",
+            "link": { "url": "#", "linktype": "url", "cached_url": "" },
+            "name": "Deploy Anywhere",
+            "component": "feature",
+            "link_label": { "url": "", "linktype": "url", "cached_url": "" },
+            "description": "Ship to Vercel, Netlify, or any edge network with a single push. Full Nuxt SSR support."
+          }
+        ],
+        "component": "grid"
+      }
+    ],
+    "component": "page"
+  },
+  "published": true,
+  "slug": "home",
+  "path": null,
+  "full_slug": "home",
+  "default_root": null,
+  "disble_fe_editor": false,
+  "disable_fe_editor": false,
+  "parent": null,
+  "is_startpage": false,
+  "unpublished_changes": false,
+  "meta_data": null,
+  "imported_at": null,
+  "preview_token": {
+    "token": "4d8eed8fbf320b66571231e3bcd1f84d8d13453b",
+    "timestamp": "1779106579"
+  },
+  "pinned": false,
+  "breadcrumbs": [],
+  "publish_at": null,
+  "expire_at": null,
+  "first_published_at": "2026-05-18T10:56:11.319Z",
+  "last_author": {
+    "id": 172714174133407,
+    "userid": "RielGT",
+    "friendly_name": "RielGT"
+  },
+  "last_author_id": 172714174133407,
+  "user_ids": [],
+  "space_role_ids": [],
+  "translated_slugs": [],
+  "localized_paths": [],
+  "position": 0,
+  "translated_stories": [],
+  "can_not_view": false,
+  "is_scheduled": null,
+  "scheduled_dates": null,
+  "ideas": [],
+  "current_version_id": 177829800086991,
+  "variant_type": null,
+  "experiment_ids": [],
+  "stage": null,
+  "favourite_for_user_ids": []
+}

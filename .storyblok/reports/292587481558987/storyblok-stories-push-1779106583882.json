@@ -1,0 +1,45 @@
+{
+  "status": "FAILURE",
+  "meta": {
+    "startedAt": "2026-05-18T12:16:23.883Z",
+    "command": "storyblok stories push",
+    "cliVersion": "4.17.5",
+    "runId": "1779106583882",
+    "config": {
+      "space": "292587481558987",
+      "verbose": false,
+      "apiMaxRetries": 3,
+      "apiMaxConcurrency": 6,
+      "logConsoleEnabled": false,
+      "logConsoleLevel": "info",
+      "logFileEnabled": true,
+      "logFileLevel": "info",
+      "logFileMaxFiles": 10,
+      "uiEnabled": true,
+      "reportEnabled": true,
+      "reportMaxFiles": 10,
+      "region": "eu"
+    },
+    "logPath": "/home/gesparellano/playground/goteam-cms/.storyblok/logs/292587481558987/storyblok-stories-push-1779106583882.jsonl",
+    "endedAt": "2026-05-18T12:16:23.892Z",
+    "durationMs": 9
+  },
+  "summary": {
+    "creationResults": {
+      "total": 2,
+      "succeeded": 0,
+      "skipped": 0,
+      "failed": 2
+    },
+    "processResults": {
+      "total": 0,
+      "succeeded": 0,
+      "failed": 0
+    },
+    "updateResults": {
+      "total": 0,
+      "succeeded": 0,
+      "failed": 0
+    }
+  }
+}
