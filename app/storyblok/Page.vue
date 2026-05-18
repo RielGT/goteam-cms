@@ -3,11 +3,11 @@ defineProps({ blok: { type: Object, default: () => ({}) } });
 </script>
 
 <template>
-  <div v-editable="blok">
+  <main v-editable="blok" class="w-full flex-1">
     <StoryblokComponent
       v-for="currentBlok in blok.body"
       :key="currentBlok._uid"
       :blok="currentBlok"
     />
-  </div>
+  </main>
 </template>

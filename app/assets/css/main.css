@@ -13,14 +13,27 @@
 
 /* Adds pointer cursor to buttons */
 @layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ffffff;
+    color: #111827;
+  }
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
 }
 
-/* Dark mode only activates via .dark class on <html>, not OS preference */
-@custom-variant dark (&:where(.dark, .dark *));
+/* Dark mode disabled — all content is light mode only */
+@custom-variant dark (&:where(.never-dark));
 
 /* Defaults hover styles on all devices */
 @custom-variant hover (&:hover);

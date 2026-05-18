@@ -20,14 +20,15 @@ export function useThemeMode(defaultTheme: ThemeMode = 'auto', allowToggle = tru
   }
 
   function resolveInitialTheme(): 'light' | 'dark' {
-    // 1. User persisted preference
+    // 1. User persisted preference always wins
     const stored = localStorage.getItem(STORAGE_KEY) as 'light' | 'dark' | null
     if (stored === 'light' || stored === 'dark') return stored
 
-    // 2. Configured default
-    if (defaultTheme === 'light' || defaultTheme === 'dark') return defaultTheme
+    // 2. Explicit non-auto default from block config
+    if (defaultTheme === 'dark') return 'dark'
+    if (defaultTheme === 'light') return 'light'
 
-    // 3. System preference
+    // 3. System preference (auto mode)
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
 
     return 'light'

@@ -16,10 +16,9 @@ const headerClasses = computed(() => [
   'w-full bg-[var(--header-light-bg,#ffffff)] text-[var(--header-light-nav-text,#374151)]',
   'dark:bg-[var(--header-dark-bg,#111827)] dark:text-[var(--header-dark-nav-text,#d1d5db)]',
   props.blok.enable_sticky ? 'sticky top-0 z-50' : 'relative',
-  props.blok.enable_shadow ? 'shadow-sm' : '',
   props.blok.enable_transparent_header ? 'bg-transparent dark:bg-transparent' : '',
   props.blok.enable_shadow
-    ? 'border-b border-[var(--header-light-border,#e5e7eb)] dark:border-[var(--header-dark-border,#374151)]'
+    ? 'shadow-sm border-b border-[var(--header-light-border,#e5e7eb)] dark:border-[var(--header-dark-border,#374151)]'
     : '',
 ])
 </script>

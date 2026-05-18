@@ -3,7 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   compatibilityDate: "2026-01-13",
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   modules: [
     [
       "@storyblok/nuxt",
@@ -24,15 +24,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: {
-        class: "light",
-      },
-      link: [
-        {
-          rel: "stylesheet",
-          href: "https://a.storyblok.com/f/212319/x/e6ccda03b8/blueprint-blank.css",
-        },
-      ],
+      htmlAttrs: {},
     },
   },
 
