@@ -20,7 +20,7 @@ import("preline");
 
 export default defineNuxtPlugin(() => {
   const router = useRouter();
-  router.afterEach(async () => {
+  router.afterEach(() => {
     setTimeout(() => window.HSStaticMethods.autoInit());
   });
 });

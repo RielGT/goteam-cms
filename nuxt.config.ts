@@ -24,6 +24,9 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        class: "light",
+      },
       link: [
         {
           rel: "stylesheet",
