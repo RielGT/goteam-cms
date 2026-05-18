@@ -27,6 +27,7 @@
 		"@types/lodash": "^4.17.24",
 		"oxc-parser": "^0.131.0",
 		"rolldown": "^1.0.1",
+		"storyblok": "^4.17.5",
 		"typescript": "^6.0.3",
 		"vite-plugin-mkcert": "^1.17.8"
 	}
