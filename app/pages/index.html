@@ -1,0 +1,2824 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alex Rivera — Freelance Full Stack Developer</title>
+<meta name="description" content="I build web apps that actually ship on time. Freelance full stack developer helping founders turn ideas into shipped products." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+        colors: {
+          brand: {
+            purple: '#8B5CF6',
+            green: '#10B981',
+            orange: '#FB923C',
+          },
+          paper: '#FEFCFB',
+          ink: '#0D0B1E',
+        },
+        boxShadow: {
+          soft: '0 1px 0 rgba(0,0,0,0.04), 0 8px 24px -12px rgba(0,0,0,0.08)',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  html { font-family: 'Inter', system-ui, sans-serif; }
+  .font-display { font-family: 'Space Grotesk', system-ui, sans-serif; letter-spacing: -0.02em; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* Subtle grid background */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(139,92,246,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(139,92,246,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .dark .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(139,92,246,0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(139,92,246,0.08) 1px, transparent 1px);
+  }
+
+  /* Squiggle underline */
+  .squiggle {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8'><path d='M0 4 Q 15 0 30 4 T 60 4 T 90 4 T 120 4' fill='none' stroke='%2310B981' stroke-width='2.5' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 8px;
+    padding-bottom: 10px;
+  }
+
+  /* Pulsing availability dot */
+  @keyframes pulseDot {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+    50%      { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  }
+  .pulse-dot { animation: pulseDot 2s infinite; }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Project image hover */
+  .project-card img { transition: transform .6s ease; }
+  .project-card:hover img { transform: scale(1.03); }
+
+  /* Custom selection */
+  ::selection { background: #8B5CF6; color: #fff; }
+
+  /* Lifecycle timeline: section background var so the active dot's halo blends seamlessly with the page */
+  #lcRail { --lc-bg: #FEFCFB; }
+  .dark  #lcRail { --lc-bg: #0D0B1E; }
+
+  /* Process cycle: active-node halo blends with section bg (light: paper-tinted, dark: ink-tinted) */
+  #pcWheel { --pc-bg: #FEFCFB; }
+  .dark  #pcWheel { --pc-bg: #0D0B1E; }
+  .pc-node:hover .pc-dot { transform: scale(1.08); }
+
+  /* Tech stack marquee */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+  .tech-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .65rem 1.1rem;
+    margin: 0 .4rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: rgba(255,255,255,0.6);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .82rem;
+    white-space: nowrap;
+    transition: all .25s ease;
+  }
+  .dark .tech-pill {
+    border-color: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+  }
+  .tech-pill:hover {
+    border-color: #8B5CF6;
+    color: #8B5CF6;
+    transform: translateY(-2px);
+  }
+  .tech-pill svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* Featured posts multi-card carousel */
+  .fp-track {
+    display: flex;
+    transition: transform .55s cubic-bezier(.22,.61,.36,1);
+    will-change: transform;
+  }
+  .fp-slide {
+    flex: 0 0 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+  @media (min-width: 640px) { .fp-slide { flex: 0 0 50%; } }
+  @media (min-width: 1024px) { .fp-slide { flex: 0 0 33.3333%; } }
+  .fp-card img { transition: transform .6s ease; }
+  .fp-card:hover img { transform: scale(1.04); }
+  .fp-dot {
+    width: 8px; height: 8px; border-radius: 999px;
+    background: currentColor; opacity: .2;
+    transition: all .35s ease;
+    cursor: pointer; border: none; padding: 0;
+  }
+  .fp-dot.active { opacity: 1; width: 28px; background: #8B5CF6; }
+
+  /* Case study carousel */
+  .cs-step { position: relative; }
+  .cs-step::before {
+    content: '';
+    position: absolute;
+    left: 11px; top: 28px; bottom: -22px;
+    width: 2px;
+    background: linear-gradient(to bottom, #8B5CF6 0%, rgba(139,92,246,0.1) 100%);
+  }
+  .cs-step:last-child::before { display: none; }
+  .cs-step-dot {
+    position: relative;
+    z-index: 1;
+    width: 24px; height: 24px;
+    border-radius: 999px;
+    background: #fff;
+    border: 2px solid #8B5CF6;
+    display: grid; place-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    color: #8B5CF6;
+    flex-shrink: 0;
+  }
+  .dark .cs-step-dot { background: #0D0B1E; }
+  .cs-dot {
+    width: 8px; height: 8px; border-radius: 999px;
+    background: currentColor; opacity: .2;
+    transition: all .35s ease;
+    cursor: pointer; border: none; padding: 0;
+  }
+  .cs-dot.active { opacity: 1; width: 28px; background: #8B5CF6; }
+
+
+  /* Animated metric underline — replays on each carousel change */
+  @keyframes csMetric {
+    from { background-size: 0% 3px; }
+    to   { background-size: 100% 3px; }
+  }
+  .cs-metric-num {
+    background: linear-gradient(120deg, currentColor 0%, currentColor 100%);
+    background-size: 0% 3px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    animation: csMetric .8s ease .15s forwards;
+  }
+
+  /* LinkedIn rec cards */
+  .rec-quote .line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .rec-card.expanded .rec-quote .line-clamp {
+    display: block;
+    overflow: visible;
+  }
+  #recTrack::-webkit-scrollbar { height: 6px; }
+  #recTrack::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.3); border-radius: 999px; }
+  #recTrack::-webkit-scrollbar-track { background: transparent; }
+  .rec-dot { width: 6px; height: 6px; border-radius: 999px; background: currentColor; opacity: .25; transition: all .3s ease; cursor: pointer; }
+  .rec-dot.active { opacity: 1; width: 22px; background: #8B5CF6; }
+
+  /* Hand-drawn arrow */
+  .hand-arrow path { stroke-dasharray: 200; stroke-dashoffset: 200; animation: draw 1.4s ease forwards .4s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+</style>
+</head>
+
+<body class="bg-paper text-ink dark:bg-ink dark:text-zinc-100 antialiased transition-colors duration-300">
+
+<!-- ============ NAV ============ -->
+<header class="sticky top-0 z-50 backdrop-blur bg-paper/70 dark:bg-ink/70 border-b border-zinc-200/60 dark:border-white/5">
+  <nav class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <a href="#" class="font-display font-bold text-lg flex items-center gap-2">
+      <span class="inline-block w-2.5 h-2.5 rounded-full bg-brand-green pulse-dot"></span>
+      alex<span class="text-brand-purple">.dev</span>
+    </a>
+    <div class="hidden md:flex items-center gap-7 text-sm text-zinc-600 dark:text-zinc-400">
+      <a href="#work" class="hover:text-ink dark:hover:text-white transition">Work</a>
+      <a href="#process" class="hover:text-ink dark:hover:text-white transition">How I work</a>
+      <a href="#words" class="hover:text-ink dark:hover:text-white transition">Kind words</a>
+      <a href="#faq" class="hover:text-ink dark:hover:text-white transition">FAQ</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="themeToggle" aria-label="Toggle dark mode"
+        class="w-9 h-9 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 hover:border-brand-purple hover:text-brand-purple transition">
+        <svg class="hidden dark:block w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="block dark:hidden w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+      </button>
+      <a href="#talk" class="hidden sm:inline-flex items-center gap-2 bg-ink text-paper dark:bg-white dark:text-ink text-sm font-medium px-4 py-2 rounded-full hover:bg-brand-purple dark:hover:bg-brand-purple dark:hover:text-white transition">
+        Let's chat →
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 pt-16 sm:pt-24 pb-20 relative">
+    <div class="grid lg:grid-cols-12 gap-12 items-center">
+      <!-- Copy -->
+      <div class="lg:col-span-7 reveal">
+        <div class="inline-flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-full bg-brand-green/10 text-brand-green border border-brand-green/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-green pulse-dot"></span>
+          Booking for June 2026
+        </div>
+
+        <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.02] mt-6">
+          I build web apps that <span class="squiggle text-brand-purple">actually ship</span> on time.
+        </h1>
+
+        <p class="mt-6 text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed">
+          Hey, I'm Alex — a freelance full stack dev. I help founders and small teams turn half-baked ideas into real, working products that users love (and don't break on Mondays).
+        </p>
+
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a href="#talk" class="group inline-flex items-center gap-2 bg-brand-purple text-white px-6 py-3.5 rounded-full font-medium hover:bg-ink dark:hover:bg-white dark:hover:text-ink transition-all hover:-translate-y-0.5 shadow-soft">
+            Tell me about your project
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#work" class="inline-flex items-center gap-2 text-sm font-medium hover:text-brand-purple transition">
+            or peek at the work
+            <svg class="hand-arrow w-12 h-3" viewBox="0 0 60 12" fill="none"><path d="M2 6 Q 20 2 40 6 L 55 6 M 50 2 L 55 6 L 50 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Photo + code window -->
+      <div class="lg:col-span-5 reveal relative">
+        <div class="relative">
+          <!-- Photo placeholder -->
+          <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-gradient-to-br from-brand-purple/20 via-brand-green/10 to-brand-orange/20 border border-zinc-200 dark:border-white/10">
+            <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=900&q=80"
+                 alt="Alex working at a sunlit desk with coffee"
+                 class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" loading="lazy" />
+            <!-- Sticker -->
+            <div class="absolute top-4 left-4 bg-paper dark:bg-ink border border-zinc-200 dark:border-white/10 rounded-full px-3 py-1.5 text-xs font-mono shadow-soft">
+              ☕ probably on coffee #3
+            </div>
+          </div>
+
+          <!-- Floating code snippet -->
+          <div class="hidden sm:block absolute -bottom-8 -left-8 w-64 rotate-[-3deg] rounded-xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-soft">
+            <div class="flex items-center gap-1.5 px-3 py-2 border-b border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-zinc-950">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+              <span class="ml-2 text-[10px] font-mono text-zinc-500">ship.ts</span>
+            </div>
+            <pre class="text-[11px] font-mono p-3 leading-relaxed text-zinc-700 dark:text-zinc-300"><span class="text-brand-purple">const</span> ship = <span class="text-brand-orange">async</span> () => {
+  <span class="text-zinc-400">// no scope creep</span>
+  <span class="text-brand-purple">await</span> build()
+  <span class="text-brand-purple">return</span> <span class="text-brand-green">'on time'</span>
+}</pre>
+          </div>
+
+          <!-- Floating badge -->
+          <div class="hidden sm:flex absolute -top-6 -right-4 rotate-[6deg] items-center gap-2 bg-brand-orange text-white px-3 py-1.5 rounded-full text-xs font-medium shadow-soft">
+            <span>shipping since '17</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECH STACK MARQUEE ============ -->
+<section aria-label="Tech stack" class="border-y border-zinc-200/70 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] py-10 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 mb-6">
+    <div class="flex items-center gap-3 text-xs font-mono text-zinc-500 dark:text-zinc-500">
+      <span class="w-1.5 h-1.5 rounded-full bg-brand-green pulse-dot"></span>
+      <span>/ tools I reach for daily</span>
+      <span class="flex-1 h-px bg-zinc-200 dark:bg-white/5"></span>
+      <span class="hidden sm:inline text-zinc-400 dark:text-zinc-600">hover to pause →</span>
+    </div>
+  </div>
+
+  <div class="marquee marquee-mask">
+    <div class="marquee-track">
+      <!-- Set 1 -->
+      <div class="flex items-center">
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path fill="#3178C6" d="M0 64v64h128V0H0z"/><path fill="#fff" d="M22.7 65.1v5.2h16.6v47.1h11.7V70.3h16.6v-5.1c0-2.8 0-5.2-.2-5.2-.1-.1-10-.2-22-.1l-21.9.1zm81.6-5.4c3.2.8 5.7 2.2 7.9 4.5 1.2 1.3 2.9 3.5 3.1 4 0 .2-5.5 3.9-8.8 6-.1 0-.6-.5-1.1-1.4-1.6-2.3-3.3-3.3-5.8-3.5-3.8-.3-6.3 1.7-6.3 5 0 1 .2 1.6.5 2.3.8 1.6 2.2 2.5 6.7 4.5 8.4 3.6 12 6 14.2 9.3 2.5 3.7 3.1 9.7 1.4 14.1-1.9 4.8-6.4 8-12.7 9.1-2 .3-6.6.3-8.7 0-4.7-.9-9-3.2-12.1-6.5-1.2-1.3-3.6-4.8-3.5-5 .2-.1.7-.5 1.2-.8.5-.4 2.4-1.5 4.1-2.5l3.2-1.9.7 1c.9 1.4 2.9 3.4 4.1 4 3.4 1.8 8.1 1.6 10.4-.5.9-.9 1.2-1.8 1.2-3.2 0-1.3-.2-1.9-.9-2.9-.9-1.3-2.7-2.4-7.9-4.6-5.9-2.5-8.4-4.1-10.7-6.5-1.3-1.5-2.5-3.7-3.1-5.7-.4-1.7-.5-5.8-.2-7.5 1.1-5 4.9-8.5 10.4-9.6 1.8-.3 5.9-.2 7.6.2z"/></svg>
+          TypeScript
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><circle fill="#61DAFB" cx="64" cy="64" r="11.4"/><g stroke="#61DAFB" stroke-width="4" fill="none"><ellipse cx="64" cy="64" rx="56" ry="21"/><ellipse cx="64" cy="64" rx="56" ry="21" transform="rotate(60 64 64)"/><ellipse cx="64" cy="64" rx="56" ry="21" transform="rotate(120 64 64)"/></g></svg>
+          React
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path d="M64 0a64 64 0 1 0 0 128A64 64 0 0 0 64 0zm-7 33.4l31.4 47.4V33.4h6.6v61.2h-7.9L55.6 47.2v47.4H49V33.4h8z" fill="currentColor"/></svg>
+          Next.js
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path fill="#83CD29" d="M64 128a6.4 6.4 0 0 1-3.2-.9l-10.2-6c-1.5-.8-.8-1.1-.3-1.3 2-.7 2.4-.9 4.6-2.1.2-.1.5-.1.8.1l7.8 4.7c.3.2.7.2 1 0l30.6-17.7c.3-.2.5-.5.5-.9V68.6c0-.4-.2-.7-.5-.9l-30.6-17.7c-.3-.2-.7-.2-1 0L33 67.7c-.3.2-.5.5-.5.9v35.4c0 .3.2.7.5.8l8.4 4.9c4.5 2.3 7.3-.4 7.3-3.1V71.7c0-.5.4-.9.9-.9h3.9c.5 0 .9.4.9.9v34.9c0 6-3.3 9.5-9 9.5-1.8 0-3.2 0-7.1-1.9l-8-4.6a6.4 6.4 0 0 1-3.2-5.5V68.6a6.4 6.4 0 0 1 3.2-5.5L60.8 45.4a6.7 6.7 0 0 1 6.4 0l30.6 17.7a6.4 6.4 0 0 1 3.2 5.5v35.4a6.4 6.4 0 0 1-3.2 5.5l-30.6 17.7a6.4 6.4 0 0 1-3.2.8z"/></svg>
+          Node.js
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path fill="#336791" d="M93.8 93c.6-5 .4-5.8 4.2-5 1 .1 1.7.2 2.6.2 2.7 0 6.1-.6 8.1-1.5 4.3-2 7-5.4 2.7-4.5-9.6 2-10.3-1.3-10.3-1.3 10.2-15.1 14.4-34.3 10.8-39C102 25.3 86.9 29.6 86.7 29.7l-.1.1c-1.9-.6-4-1-6.4-1-4.3-.1-7.6.4-11 1.7L69 30.4c-.4-.2-9.2-5.5-19.1-1.8-6.8 2.6-9.5 8.6-6.4 22.5 4.5 19.3 12.7 22.7 14.5 22.3.6-.1.7-.7.8-1.2l.1-1.6c-2.2-2.4-2.3-6.7-2-9.6l.7-.7c.4 1.4 1 2.7 1.8 4 2.1 3.2 6.9 8.5 12.6 6.7 4.2-1.3 7.3-7.7 7.3-7.7s1.1 11.1 2.7 14.7c1.6 3.5-3.6 11.2-7.4 13.4-.4.2-.5.4-.1.4 1 .1 3.8 0 7.4-3.1 3.5-3 6-7 7.4-10.8 1.4-3.7 2-4.3 2.5-3.8.4.6 0 4.9-2 7.3-1.5 1.9-7 6.6-8.7 8.3-.8.7-1 .7-1.4.8-.4.1-.8.3-.6.6.3.4 1.2.9 2.5 1.4 2.6.9 5.8 1.4 9.2.7 5.8-1.1 6.7-7.7 7.2-10.2.4-2.5 1.4-2.6 1.4-2.6z"/></svg>
+          PostgreSQL
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path fill="#38BDF8" d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597 6.398-8.531 13.867-11.73 22.398-9.597 4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602-6.399 8.535-13.867 11.735-22.399 9.602-4.87-1.215-8.347-4.746-12.207-8.66-6.27-6.367-13.53-13.738-29.394-13.738zM32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.871 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66 6.274 6.367 13.536 13.738 29.395 13.738 17.066 0 27.73-8.53 32-25.597-6.399 8.531-13.867 11.73-22.399 9.597-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64z"/></svg>
+          Tailwind CSS
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path fill="#F05032" d="M124.7 58L70 3.3a5.7 5.7 0 0 0-8.1 0L50.5 14.8l14.4 14.4a6.8 6.8 0 0 1 8.7 8.7l13.9 13.9a6.8 6.8 0 1 1-4.1 3.8L70.5 42.9v34a6.8 6.8 0 1 1-5.6-.2V42.4a6.8 6.8 0 0 1-3.7-9L46.9 19 3.3 62.5a5.7 5.7 0 0 0 0 8.1l54.7 54.7a5.7 5.7 0 0 0 8.1 0l54.5-54.5a5.7 5.7 0 0 0 0-8.1"/></svg>
+          Git
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path fill="#000" d="M64 0L0 26.7v74.6L64 128l64-26.7V26.7L64 0zm0 13.6l50.4 21V93.4L64 114.4 13.6 93.4V34.6L64 13.6z"/><path fill="#000" d="M64 30L30 44v40l34 14 34-14V44L64 30zm0 12l22 9.1v25.8L64 86l-22-9.1V51.1L64 42z"/></svg>
+          Prisma
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path fill="#06B6D4" d="M37 19.7L8 64l29 44.3 23-15.4L46.1 64 60 35.1zM91 19.7L62 64l29 44.3 23-15.4L100.1 64 114 35.1z"/></svg>
+          tRPC
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><circle cx="64" cy="64" r="64" fill="#635BFF"/><path fill="#fff" d="M59.4 47.6c0-2.9 2.4-4 6.3-4 5.7 0 12.8 1.7 18.5 4.7v-17.6c-6.2-2.5-12.4-3.4-18.5-3.4-15.1 0-25.1 7.9-25.1 21 0 20.5 28.2 17.2 28.2 26 0 3.4-3 4.5-7.1 4.5-6.2 0-14.2-2.5-20.5-6v17.9c7 3 14.1 4.3 20.5 4.3 15.5 0 26.1-7.7 26.1-21 0-22.1-28.4-18.1-28.4-26.4z"/></svg>
+          Stripe
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path fill="#000" d="M64 0L0 110.4h128zm0 25.4L23.4 95.8h81.2z"/></svg>
+          Vercel
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path fill="#F38020" d="M115.7 78.5c-1.5-5.2-7.1-9-12.2-9 -.5 0-1.1 0-1.6.1l-.7.2-22.5 7.3-2.5.8 1.2-2.3 7.4-13.4c.6-1 .9-2.2.9-3.4 0-1.7-.6-3.3-1.7-4.6-3.2-3.6-9.4-2.7-12.8 1.9L57.5 64.2 50 70.4l-2-2.4c-4.1-4.7-10.5-7.5-17.1-7.5C18.2 60.5 8.1 70.7 8.1 83.2c0 1.4.1 2.7.4 4.1l1.4 7c.4 1.7 1.9 2.9 3.6 2.8h95.6c1.8 0 3.3-1.3 3.7-3l1.6-5.7c.4-1.5.5-3 .5-4.5 0-1.8-.4-3.5-1.2-5.4z"/></svg>
+          Cloudflare
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><path fill="#FF6B35" d="M64 0L8 128h112zM64 24l32 80H32z"/></svg>
+          Remix
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><circle cx="64" cy="64" r="60" fill="#000"/><text x="64" y="78" text-anchor="middle" fill="#fff" font-family="monospace" font-weight="bold" font-size="32">sh</text></svg>
+          Bash
+        </span>
+        <span class="tech-pill">
+          <svg viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#181818"/><path d="M44 50v28l24-14z" fill="#10B981"/></svg>
+          Supabase
+        </span>
+      </div>
+
+      <!-- Set 2 (duplicate, aria-hidden for screen readers) -->
+      <div class="flex items-center" aria-hidden="true">
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path fill="#3178C6" d="M0 64v64h128V0H0z"/><path fill="#fff" d="M22.7 65.1v5.2h16.6v47.1h11.7V70.3h16.6v-5.1c0-2.8 0-5.2-.2-5.2-.1-.1-10-.2-22-.1l-21.9.1zm81.6-5.4c3.2.8 5.7 2.2 7.9 4.5 1.2 1.3 2.9 3.5 3.1 4 0 .2-5.5 3.9-8.8 6-.1 0-.6-.5-1.1-1.4-1.6-2.3-3.3-3.3-5.8-3.5-3.8-.3-6.3 1.7-6.3 5 0 1 .2 1.6.5 2.3.8 1.6 2.2 2.5 6.7 4.5 8.4 3.6 12 6 14.2 9.3 2.5 3.7 3.1 9.7 1.4 14.1-1.9 4.8-6.4 8-12.7 9.1-2 .3-6.6.3-8.7 0-4.7-.9-9-3.2-12.1-6.5-1.2-1.3-3.6-4.8-3.5-5 .2-.1.7-.5 1.2-.8.5-.4 2.4-1.5 4.1-2.5l3.2-1.9.7 1c.9 1.4 2.9 3.4 4.1 4 3.4 1.8 8.1 1.6 10.4-.5.9-.9 1.2-1.8 1.2-3.2 0-1.3-.2-1.9-.9-2.9-.9-1.3-2.7-2.4-7.9-4.6-5.9-2.5-8.4-4.1-10.7-6.5-1.3-1.5-2.5-3.7-3.1-5.7-.4-1.7-.5-5.8-.2-7.5 1.1-5 4.9-8.5 10.4-9.6 1.8-.3 5.9-.2 7.6.2z"/></svg>TypeScript</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><circle fill="#61DAFB" cx="64" cy="64" r="11.4"/><g stroke="#61DAFB" stroke-width="4" fill="none"><ellipse cx="64" cy="64" rx="56" ry="21"/><ellipse cx="64" cy="64" rx="56" ry="21" transform="rotate(60 64 64)"/><ellipse cx="64" cy="64" rx="56" ry="21" transform="rotate(120 64 64)"/></g></svg>React</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path d="M64 0a64 64 0 1 0 0 128A64 64 0 0 0 64 0zm-7 33.4l31.4 47.4V33.4h6.6v61.2h-7.9L55.6 47.2v47.4H49V33.4h8z" fill="currentColor"/></svg>Next.js</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path fill="#83CD29" d="M64 128a6.4 6.4 0 0 1-3.2-.9l-10.2-6c-1.5-.8-.8-1.1-.3-1.3 2-.7 2.4-.9 4.6-2.1.2-.1.5-.1.8.1l7.8 4.7c.3.2.7.2 1 0l30.6-17.7c.3-.2.5-.5.5-.9V68.6c0-.4-.2-.7-.5-.9l-30.6-17.7c-.3-.2-.7-.2-1 0L33 67.7c-.3.2-.5.5-.5.9v35.4c0 .3.2.7.5.8l8.4 4.9c4.5 2.3 7.3-.4 7.3-3.1V71.7c0-.5.4-.9.9-.9h3.9c.5 0 .9.4.9.9v34.9c0 6-3.3 9.5-9 9.5-1.8 0-3.2 0-7.1-1.9l-8-4.6a6.4 6.4 0 0 1-3.2-5.5V68.6a6.4 6.4 0 0 1 3.2-5.5L60.8 45.4a6.7 6.7 0 0 1 6.4 0l30.6 17.7a6.4 6.4 0 0 1 3.2 5.5v35.4a6.4 6.4 0 0 1-3.2 5.5l-30.6 17.7a6.4 6.4 0 0 1-3.2.8z"/></svg>Node.js</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path fill="#336791" d="M93.8 93c.6-5 .4-5.8 4.2-5 1 .1 1.7.2 2.6.2 2.7 0 6.1-.6 8.1-1.5 4.3-2 7-5.4 2.7-4.5-9.6 2-10.3-1.3-10.3-1.3 10.2-15.1 14.4-34.3 10.8-39C102 25.3 86.9 29.6 86.7 29.7l-.1.1c-1.9-.6-4-1-6.4-1-4.3-.1-7.6.4-11 1.7L69 30.4c-.4-.2-9.2-5.5-19.1-1.8-6.8 2.6-9.5 8.6-6.4 22.5 4.5 19.3 12.7 22.7 14.5 22.3.6-.1.7-.7.8-1.2l.1-1.6c-2.2-2.4-2.3-6.7-2-9.6l.7-.7c.4 1.4 1 2.7 1.8 4 2.1 3.2 6.9 8.5 12.6 6.7 4.2-1.3 7.3-7.7 7.3-7.7s1.1 11.1 2.7 14.7c1.6 3.5-3.6 11.2-7.4 13.4-.4.2-.5.4-.1.4 1 .1 3.8 0 7.4-3.1 3.5-3 6-7 7.4-10.8 1.4-3.7 2-4.3 2.5-3.8.4.6 0 4.9-2 7.3-1.5 1.9-7 6.6-8.7 8.3-.8.7-1 .7-1.4.8-.4.1-.8.3-.6.6.3.4 1.2.9 2.5 1.4 2.6.9 5.8 1.4 9.2.7 5.8-1.1 6.7-7.7 7.2-10.2.4-2.5 1.4-2.6 1.4-2.6z"/></svg>PostgreSQL</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path fill="#38BDF8" d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597 6.398-8.531 13.867-11.73 22.398-9.597 4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602-6.399 8.535-13.867 11.735-22.399 9.602-4.87-1.215-8.347-4.746-12.207-8.66-6.27-6.367-13.53-13.738-29.394-13.738zM32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.871 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66 6.274 6.367 13.536 13.738 29.395 13.738 17.066 0 27.73-8.53 32-25.597-6.399 8.531-13.867 11.73-22.399 9.597-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64z"/></svg>Tailwind CSS</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path fill="#F05032" d="M124.7 58L70 3.3a5.7 5.7 0 0 0-8.1 0L50.5 14.8l14.4 14.4a6.8 6.8 0 0 1 8.7 8.7l13.9 13.9a6.8 6.8 0 1 1-4.1 3.8L70.5 42.9v34a6.8 6.8 0 1 1-5.6-.2V42.4a6.8 6.8 0 0 1-3.7-9L46.9 19 3.3 62.5a5.7 5.7 0 0 0 0 8.1l54.7 54.7a5.7 5.7 0 0 0 8.1 0l54.5-54.5a5.7 5.7 0 0 0 0-8.1"/></svg>Git</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path fill="#000" d="M64 0L0 26.7v74.6L64 128l64-26.7V26.7L64 0zm0 13.6l50.4 21V93.4L64 114.4 13.6 93.4V34.6L64 13.6z"/><path fill="#000" d="M64 30L30 44v40l34 14 34-14V44L64 30zm0 12l22 9.1v25.8L64 86l-22-9.1V51.1L64 42z"/></svg>Prisma</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path fill="#06B6D4" d="M37 19.7L8 64l29 44.3 23-15.4L46.1 64 60 35.1zM91 19.7L62 64l29 44.3 23-15.4L100.1 64 114 35.1z"/></svg>tRPC</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><circle cx="64" cy="64" r="64" fill="#635BFF"/><path fill="#fff" d="M59.4 47.6c0-2.9 2.4-4 6.3-4 5.7 0 12.8 1.7 18.5 4.7v-17.6c-6.2-2.5-12.4-3.4-18.5-3.4-15.1 0-25.1 7.9-25.1 21 0 20.5 28.2 17.2 28.2 26 0 3.4-3 4.5-7.1 4.5-6.2 0-14.2-2.5-20.5-6v17.9c7 3 14.1 4.3 20.5 4.3 15.5 0 26.1-7.7 26.1-21 0-22.1-28.4-18.1-28.4-26.4z"/></svg>Stripe</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path fill="#000" d="M64 0L0 110.4h128zm0 25.4L23.4 95.8h81.2z"/></svg>Vercel</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path fill="#F38020" d="M115.7 78.5c-1.5-5.2-7.1-9-12.2-9 -.5 0-1.1 0-1.6.1l-.7.2-22.5 7.3-2.5.8 1.2-2.3 7.4-13.4c.6-1 .9-2.2.9-3.4 0-1.7-.6-3.3-1.7-4.6-3.2-3.6-9.4-2.7-12.8 1.9L57.5 64.2 50 70.4l-2-2.4c-4.1-4.7-10.5-7.5-17.1-7.5C18.2 60.5 8.1 70.7 8.1 83.2c0 1.4.1 2.7.4 4.1l1.4 7c.4 1.7 1.9 2.9 3.6 2.8h95.6c1.8 0 3.3-1.3 3.7-3l1.6-5.7c.4-1.5.5-3 .5-4.5 0-1.8-.4-3.5-1.2-5.4z"/></svg>Cloudflare</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><path fill="#FF6B35" d="M64 0L8 128h112zM64 24l32 80H32z"/></svg>Remix</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><circle cx="64" cy="64" r="60" fill="#000"/><text x="64" y="78" text-anchor="middle" fill="#fff" font-family="monospace" font-weight="bold" font-size="32">sh</text></svg>Bash</span>
+        <span class="tech-pill"><svg viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#181818"/><path d="M44 50v28l24-14z" fill="#10B981"/></svg>Supabase</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE HOOK ============ -->
+<section class="border-y border-zinc-200/70 dark:border-white/5 bg-white/40 dark:bg-white/[0.02]">
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
+    <p class="font-display text-2xl sm:text-4xl leading-snug reveal">
+      <span class="text-zinc-400 dark:text-zinc-600">I help</span> early-stage founders and bootstrapped teams <span class="text-zinc-400 dark:text-zinc-600">turn napkin sketches into</span> shipped products people pay for. <span class="text-zinc-400 dark:text-zinc-600">No agencies, no junior devs,</span> just me, your roadmap, <span class="text-zinc-400 dark:text-zinc-600">and a calendar that says</span> <span class="text-brand-purple font-semibold">"launched."</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ RECENT WORK ============ -->
+<section id="work" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+  <div class="flex items-end justify-between mb-14 reveal">
+    <div>
+      <p class="font-mono text-xs text-brand-purple mb-3">/ recent work</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold">Stuff I've shipped lately.</h2>
+    </div>
+    <a href="#talk" class="hidden sm:inline-flex text-sm font-medium hover:text-brand-purple transition">Yours could be next →</a>
+  </div>
+
+  <div class="space-y-24">
+    <!-- Project 1 -->
+    <article class="project-card grid lg:grid-cols-12 gap-8 lg:gap-14 items-center reveal">
+      <div class="lg:col-span-7 order-2 lg:order-1">
+        <div class="relative rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-soft">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80" alt="Finch analytics dashboard" class="w-full aspect-[16/10] object-cover" loading="lazy"/>
+        </div>
+      </div>
+      <div class="lg:col-span-5 order-1 lg:order-2">
+        <p class="font-mono text-xs text-brand-green mb-2">01 — SaaS Dashboard</p>
+        <h3 class="font-display text-3xl font-bold mb-3">Finch Analytics</h3>
+        <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">A real-time analytics platform for e-commerce founders who were drowning in spreadsheets. Replaced 4 different tools with one clean dashboard.</p>
+        <ul class="text-sm space-y-2 mb-6">
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> Built the whole stack — Next.js, tRPC, Postgres, ClickHouse for events.</li>
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> Designed the dashboard from scratch with the founder.</li>
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> Shipped MVP in 7 weeks, paying customers in week 9.</li>
+        </ul>
+        <div class="flex items-center gap-4">
+          <a href="#" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition">Visit live site
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+          <span class="text-xs font-mono text-zinc-500">+ 38% MRR in 90 days</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 2 -->
+    <article class="project-card grid lg:grid-cols-12 gap-8 lg:gap-14 items-center reveal">
+      <div class="lg:col-span-7">
+        <div class="relative rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-soft">
+          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1400&q=80" alt="Stack mobile app screens" class="w-full aspect-[16/10] object-cover" loading="lazy"/>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <p class="font-mono text-xs text-brand-orange mb-2">02 — Mobile + Web</p>
+        <h3 class="font-display text-3xl font-bold mb-3">Stack — habit tracker for devs</h3>
+        <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">A solo founder's bootstrapped indie app. Tracks coding habits, ships beautiful streaks, and integrates with GitHub.</p>
+        <ul class="text-sm space-y-2 mb-6">
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> React Native app + Next.js marketing site + API.</li>
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> Stripe subscriptions, magic-link auth, no passwords.</li>
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> 4-month engagement, then handed off cleanly.</li>
+        </ul>
+        <div class="flex items-center gap-4">
+          <a href="#" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition">See case study
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+          <span class="text-xs font-mono text-zinc-500">2.1k paying users</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 3 -->
+    <article class="project-card grid lg:grid-cols-12 gap-8 lg:gap-14 items-center reveal">
+      <div class="lg:col-span-7 order-2 lg:order-1">
+        <div class="relative rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-soft">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80" alt="Northwind internal tool" class="w-full aspect-[16/10] object-cover" loading="lazy"/>
+        </div>
+      </div>
+      <div class="lg:col-span-5 order-1 lg:order-2">
+        <p class="font-mono text-xs text-brand-purple mb-2">03 — Internal Tool</p>
+        <h3 class="font-display text-3xl font-bold mb-3">Northwind Ops</h3>
+        <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">An ops team was running their whole logistics business on a 4MB Google Sheet. I replaced it with a custom internal app in 5 weeks.</p>
+        <ul class="text-sm space-y-2 mb-6">
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> Remix + Postgres + role-based access for 12 staff.</li>
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> Migrated 80k rows without losing a single record.</li>
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> Cut their daily admin from ~3 hrs to 20 min.</li>
+        </ul>
+        <div class="flex items-center gap-4">
+          <a href="#" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition">Read the write-up
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 4 -->
+    <article class="project-card grid lg:grid-cols-12 gap-8 lg:gap-14 items-center reveal">
+      <div class="lg:col-span-7">
+        <div class="relative rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-soft">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&q=80" alt="Bramble marketplace site" class="w-full aspect-[16/10] object-cover" loading="lazy"/>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <p class="font-mono text-xs text-brand-green mb-2">04 — Marketplace</p>
+        <h3 class="font-display text-3xl font-bold mb-3">Bramble</h3>
+        <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">A two-sided marketplace for independent ceramicists. From zero to first sale in 6 weeks, including payments and shipping.</p>
+        <ul class="text-sm space-y-2 mb-6">
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> Next.js storefront, Stripe Connect, Shippo integration.</li>
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> Designed the seller dashboard with the founder over Loom.</li>
+          <li class="flex gap-3"><span class="text-brand-purple font-mono">→</span> $14k in GMV month one, zero downtime since launch.</li>
+        </ul>
+        <div class="flex items-center gap-4">
+          <a href="#" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition">Visit live site
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ INTERACTIVE CASE STUDIES (CAROUSEL) ============ -->
+<section id="case-studies" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+  <div class="grid lg:grid-cols-12 gap-8 mb-10 items-end reveal">
+    <div class="lg:col-span-8">
+      <p class="font-mono text-xs text-brand-purple mb-3">/ go deeper</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight">Pick a project. See how it actually got built.</h2>
+    </div>
+    <p class="lg:col-span-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">No fluff — the real problem, the choices I made, what broke, and what it shipped as.</p>
+  </div>
+
+  <!-- Carousel controls -->
+  <div class="flex items-center justify-between mb-6 reveal">
+    <div class="flex items-center gap-3 text-sm text-zinc-500">
+      <span id="csCurrent" class="font-mono text-2xl font-bold text-ink dark:text-white">01</span>
+      <span class="font-mono">/ <span id="csTotal">04</span></span>
+      <span class="hidden sm:block ml-3 text-xs font-mono text-zinc-400">— <span id="csTitle">Finch Analytics</span></span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="csPrev" aria-label="Previous case study" class="w-11 h-11 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple hover:text-brand-purple transition disabled:opacity-40 disabled:cursor-not-allowed">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button id="csNext" aria-label="Next case study" class="w-11 h-11 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple hover:text-brand-purple transition disabled:opacity-40 disabled:cursor-not-allowed">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="h-1 rounded-full bg-zinc-200/70 dark:bg-white/5 overflow-hidden mb-10 reveal">
+    <div id="csProgress" class="h-full bg-gradient-to-r from-brand-purple to-brand-green transition-all duration-500" style="width:25%"></div>
+  </div>
+
+  <!-- Track -->
+  <div class="cs-carousel relative -mx-5 sm:mx-0 overflow-hidden">
+    <div id="csTrack" class="flex transition-transform duration-500 ease-out" style="will-change: transform;">
+
+      <!-- Slide 1: Finch -->
+      <article class="cs-slide shrink-0 w-full px-5 sm:px-0" data-title="Finch Analytics">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink p-6 sm:p-10 shadow-soft">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="relative rounded-xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80" alt="Finch dashboard" class="w-full aspect-[16/10] object-cover"/>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">SaaS</span>
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-brand-green/15 text-brand-green border border-brand-green/30">Shipped · 2025</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                <div class="font-display text-3xl font-bold text-brand-purple"><span class="cs-metric-num">7 wks</span></div>
+                <div class="text-[11px] font-mono text-zinc-500 mt-1">MVP to launch</div>
+              </div>
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                <div class="font-display text-3xl font-bold text-brand-green"><span class="cs-metric-num">+38%</span></div>
+                <div class="text-[11px] font-mono text-zinc-500 mt-1">MRR in 90 days</div>
+              </div>
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                <div class="font-display text-3xl font-bold text-brand-orange"><span class="cs-metric-num">4→1</span></div>
+                <div class="text-[11px] font-mono text-zinc-500 mt-1">tools replaced</div>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Next.js</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">tRPC</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Postgres</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">ClickHouse</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Tailwind</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-7">
+            <div>
+              <p class="font-mono text-xs text-brand-orange mb-2">→ the problem</p>
+              <h3 class="font-display text-2xl font-bold mb-3">Drowning in 4 dashboards.</h3>
+              <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[15px]">Maya and her team stitched Shopify, GA4, Klaviyo, and a Google Sheet together every Monday. Two hours of copy-paste before any decisions got made.</p>
+            </div>
+            <div>
+              <p class="font-mono text-xs text-brand-purple mb-4">→ how it came together</p>
+              <div class="space-y-6">
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">01</span><div><h4 class="font-semibold text-sm mb-1">Scope the smallest thing that works</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Cut the wishlist in half. Picked the 3 metrics that drive real decisions.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">02</span><div><h4 class="font-semibold text-sm mb-1">Pipe the data once, correctly</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Ingestion into ClickHouse, backfilled 2 years. Worth it for clean events.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">03</span><div><h4 class="font-semibold text-sm mb-1">Designed live, with Maya</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Daily Loom + staging URL. Threw out the first design — felt too "SaaS-y."</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">04</span><div><h4 class="font-semibold text-sm mb-1">Launch + first paying customer</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Soft launch to 12 stores. Two converted in 48 hours.</p></div></div>
+              </div>
+            </div>
+            <div class="p-5 rounded-xl bg-brand-purple/5 dark:bg-brand-purple/10 border border-brand-purple/20">
+              <p class="font-mono text-xs text-brand-purple mb-2">→ the result</p>
+              <p class="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">$14k MRR with 9% monthly growth, zero infrastructure incidents in 6 months.</p>
+            </div>
+            <div class="flex items-center gap-4">
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition">Visit live site
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+              <a href="#talk" class="text-sm font-medium text-brand-purple hover:underline">Build something like this →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 2: Stack -->
+      <article class="cs-slide shrink-0 w-full px-5 sm:px-0" data-title="Stack">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink p-6 sm:p-10 shadow-soft">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="relative rounded-xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1400&q=80" alt="Stack app" class="w-full aspect-[16/10] object-cover"/>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">Mobile + Web</span>
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-brand-green/15 text-brand-green border border-brand-green/30">Live · 2024</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10"><div class="font-display text-3xl font-bold text-brand-purple"><span class="cs-metric-num">4 mo</span></div><div class="text-[11px] font-mono text-zinc-500 mt-1">full build</div></div>
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10"><div class="font-display text-3xl font-bold text-brand-green"><span class="cs-metric-num">2.1k</span></div><div class="text-[11px] font-mono text-zinc-500 mt-1">paying users</div></div>
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10"><div class="font-display text-3xl font-bold text-brand-orange"><span class="cs-metric-num">4.8★</span></div><div class="text-[11px] font-mono text-zinc-500 mt-1">App Store</div></div>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">React Native</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Expo</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Next.js</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Stripe</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">GitHub API</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-7">
+            <div>
+              <p class="font-mono text-xs text-brand-orange mb-2">→ the problem</p>
+              <h3 class="font-display text-2xl font-bold mb-3">A solo founder, zero engineering hires.</h3>
+              <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[15px]">Jordan had a clear vision for a habit tracker built for devs, a small budget, and no time to learn React Native himself.</p>
+            </div>
+            <div>
+              <p class="font-mono text-xs text-brand-purple mb-4">→ how it came together</p>
+              <div class="space-y-6">
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">01</span><div><h4 class="font-semibold text-sm mb-1">Marketing site + waitlist first</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">800 emails in 3 weeks — validated demand before writing a screen.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">02</span><div><h4 class="font-semibold text-sm mb-1">Core habit-tracking loop</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">React Native + Expo. TestFlight builds every Friday, Jordan dogfooded daily.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">03</span><div><h4 class="font-semibold text-sm mb-1">GitHub integration + streaks</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">The killer feature — pulls commits, draws beautiful streak art.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">04</span><div><h4 class="font-semibold text-sm mb-1">Stripe + App Store + handoff</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Full walkthrough + a Notion runbook so Jordan could take over.</p></div></div>
+              </div>
+            </div>
+            <div class="p-5 rounded-xl bg-brand-purple/5 dark:bg-brand-purple/10 border border-brand-purple/20">
+              <p class="font-mono text-xs text-brand-purple mb-2">→ the result</p>
+              <p class="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">$9k MRR in its first 6 months. Jordan maintains it solo now.</p>
+            </div>
+            <div class="flex items-center gap-4">
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition">Read full case study
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+              <a href="#talk" class="text-sm font-medium text-brand-purple hover:underline">Build something like this →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 3: Northwind -->
+      <article class="cs-slide shrink-0 w-full px-5 sm:px-0" data-title="Northwind Ops">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink p-6 sm:p-10 shadow-soft">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="relative rounded-xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80" alt="Northwind ops" class="w-full aspect-[16/10] object-cover"/>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">Internal Tool</span>
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-brand-green/15 text-brand-green border border-brand-green/30">In use · 2024</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10"><div class="font-display text-3xl font-bold text-brand-purple"><span class="cs-metric-num">5 wks</span></div><div class="text-[11px] font-mono text-zinc-500 mt-1">total build</div></div>
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10"><div class="font-display text-3xl font-bold text-brand-green"><span class="cs-metric-num">−89%</span></div><div class="text-[11px] font-mono text-zinc-500 mt-1">daily admin</div></div>
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10"><div class="font-display text-3xl font-bold text-brand-orange"><span class="cs-metric-num">80k</span></div><div class="text-[11px] font-mono text-zinc-500 mt-1">rows migrated</div></div>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Remix</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Postgres</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Prisma</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Fly.io</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-7">
+            <div>
+              <p class="font-mono text-xs text-brand-orange mb-2">→ the problem</p>
+              <h3 class="font-display text-2xl font-bold mb-3">A 4MB sheet running a logistics company.</h3>
+              <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[15px]">12 staff, 80k rows, version conflicts daily. One bad edit could lose a week of orders. They needed real software, fast.</p>
+            </div>
+            <div>
+              <p class="font-mono text-xs text-brand-purple mb-4">→ how it came together</p>
+              <div class="space-y-6">
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">01</span><div><h4 class="font-semibold text-sm mb-1">Shadow the team for a week</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Found 6 workflows nobody had written down — the real product spec.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">02</span><div><h4 class="font-semibold text-sm mb-1">Schema + migration plan</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Postgres schema matching their mental model. Idempotent nightly imports.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">03</span><div><h4 class="font-semibold text-sm mb-1">Build with operators in the loop</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">UI looks almost like their sheet on purpose — zero retraining.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">04</span><div><h4 class="font-semibold text-sm mb-1">Cutover weekend</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Zero records lost. One bug filed in the first week, fixed in 20 minutes.</p></div></div>
+              </div>
+            </div>
+            <div class="p-5 rounded-xl bg-brand-purple/5 dark:bg-brand-purple/10 border border-brand-purple/20">
+              <p class="font-mono text-xs text-brand-purple mb-2">→ the result</p>
+              <p class="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">Admin time from ~3 hrs to 20 min. Paid for the project in 4 months.</p>
+            </div>
+            <div class="flex items-center gap-4">
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition">Read the write-up
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+              <a href="#talk" class="text-sm font-medium text-brand-purple hover:underline">Build something like this →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 4: Bramble -->
+      <article class="cs-slide shrink-0 w-full px-5 sm:px-0" data-title="Bramble">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink p-6 sm:p-10 shadow-soft">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="relative rounded-xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&q=80" alt="Bramble marketplace" class="w-full aspect-[16/10] object-cover"/>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">Marketplace</span>
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-brand-green/15 text-brand-green border border-brand-green/30">Growing · 2024</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10"><div class="font-display text-3xl font-bold text-brand-purple"><span class="cs-metric-num">6 wks</span></div><div class="text-[11px] font-mono text-zinc-500 mt-1">zero to first sale</div></div>
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10"><div class="font-display text-3xl font-bold text-brand-green"><span class="cs-metric-num">$14k</span></div><div class="text-[11px] font-mono text-zinc-500 mt-1">GMV, month 1</div></div>
+              <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10"><div class="font-display text-3xl font-bold text-brand-orange"><span class="cs-metric-num">100%</span></div><div class="text-[11px] font-mono text-zinc-500 mt-1">uptime</div></div>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Next.js</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Stripe Connect</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Shippo</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Postgres</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Sanity</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-7">
+            <div>
+              <p class="font-mono text-xs text-brand-orange mb-2">→ the problem</p>
+              <h3 class="font-display text-2xl font-bold mb-3">Indie ceramicists, no platform that fit.</h3>
+              <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[15px]">Etsy felt impersonal, Shopify required every seller to run their own store. They wanted curated, beautiful, low-effort.</p>
+            </div>
+            <div>
+              <p class="font-mono text-xs text-brand-purple mb-4">→ how it came together</p>
+              <div class="space-y-6">
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">01</span><div><h4 class="font-semibold text-sm mb-1">Storefront + content model</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Sanity for products, Next.js storefront. Gallery feel, not a grid.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">02</span><div><h4 class="font-semibold text-sm mb-1">Stripe Connect + payouts</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Maker onboarding, split payments. $1 test transactions for a full week.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">03</span><div><h4 class="font-semibold text-sm mb-1">Shipping that doesn't suck</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Shippo integration. One click, get a tracking number.</p></div></div>
+                <div class="cs-step flex gap-4"><span class="cs-step-dot">04</span><div><h4 class="font-semibold text-sm mb-1">Seller dashboard + soft launch</h4><p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Designed live with the founder over Loom. First sale within 36 hours.</p></div></div>
+              </div>
+            </div>
+            <div class="p-5 rounded-xl bg-brand-purple/5 dark:bg-brand-purple/10 border border-brand-purple/20">
+              <p class="font-mono text-xs text-brand-purple mb-2">→ the result</p>
+              <p class="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">$14k GMV in month one. 30+ makers by month three. Zero downtime in 8 months.</p>
+            </div>
+            <div class="flex items-center gap-4">
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition">Visit live site
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+              <a href="#talk" class="text-sm font-medium text-brand-purple hover:underline">Build something like this →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- Dots -->
+  <div id="csDots" class="flex items-center justify-center gap-2 mt-8"></div>
+</section>
+
+<!-- ============ CAPABILITY-PATTERN CASE STUDIES (NDA-SAFE) ============ -->
+<section id="case-studies-nda" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+  <div class="grid lg:grid-cols-12 gap-8 mb-12 items-end reveal">
+    <div class="lg:col-span-8">
+      <p class="font-mono text-xs text-brand-green mb-3">/ patterns I've shipped</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight">Architectures, in the wild.</h2>
+    </div>
+    <p class="lg:col-span-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">I work in-house, so instead of brand names and screenshots — here's the shape of the work. What I built, the stack, and what it unlocked.</p>
+  </div>
+
+  <!-- Card grid -->
+  <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+
+    <!-- Card 1 — CMS / Frontend separation -->
+    <article class="reveal pattern-card group rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink p-7 sm:p-8 shadow-soft hover:border-brand-purple transition flex flex-col">
+      <div class="flex items-center justify-between mb-5">
+        <span class="font-mono text-[11px] text-brand-purple">/ pattern · 01</span>
+        <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-brand-green/15 text-brand-green border border-brand-green/30">Shipped</span>
+      </div>
+
+      <h3 class="font-display text-2xl font-bold mb-3 leading-snug">Component-Driven Website Architecture with Storyblok and Nuxt.</h3>
+      <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[15px] mb-6">Implemented a scalable content workflow that separates frontend application logic from editable CMS-managed content. Marketing ships pages without touching code; engineering ships components without touching copy.</p>
+
+      <p class="font-mono text-xs text-brand-orange mb-3">→ what it unlocked</p>
+      <ul class="space-y-2 mb-6 text-sm text-zinc-600 dark:text-zinc-400">
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Typed component library mirrored 1:1 in the CMS schema.</span></li>
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Live preview pipeline so editors see the real page before publish.</span></li>
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Incremental static regeneration — fresh content, no rebuild bottleneck.</span></li>
+      </ul>
+
+      <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-purple">~95</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">Lighthouse</div>
+        </div>
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-green">0 devs</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">per page launch</div>
+        </div>
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-orange">~30+</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">reusable blocks</div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-1.5 pt-4 mt-auto border-t border-zinc-200 dark:border-white/10">
+        <span class="text-[11px] font-mono text-zinc-400 dark:text-zinc-500 mr-1">stack:</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Nuxt</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Storyblok</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">TypeScript</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Tailwind</span>
+      </div>
+    </article>
+
+    <!-- Card 2 — Event-Driven Workflows -->
+    <article class="reveal pattern-card group rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink p-7 sm:p-8 shadow-soft hover:border-brand-purple transition flex flex-col">
+      <div class="flex items-center justify-between mb-5">
+        <span class="font-mono text-[11px] text-brand-purple">/ pattern · 02</span>
+        <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-brand-green/15 text-brand-green border border-brand-green/30">In production</span>
+      </div>
+
+      <h3 class="font-display text-2xl font-bold mb-3 leading-snug">Event-Driven Workflow Orchestration with Temporal and Postgres.</h3>
+      <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[15px] mb-6">Replaced a fragile chain of cron jobs and spreadsheets with durable, observable workflows. Every step is idempotent, every failure is replayable, every state change is auditable.</p>
+
+      <p class="font-mono text-xs text-brand-orange mb-3">→ what it unlocked</p>
+      <ul class="space-y-2 mb-6 text-sm text-zinc-600 dark:text-zinc-400">
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Long-running processes survive deploys, restarts, and the occasional 3am.</span></li>
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Exception-first dashboard: ops only sees what needs a human.</span></li>
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Backfills and replays are a click, not an incident.</span></li>
+      </ul>
+
+      <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-purple">−90%</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">manual ops</div>
+        </div>
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-green">0</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">lost jobs</div>
+        </div>
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-orange">100%</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">audit coverage</div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-1.5 pt-4 mt-auto border-t border-zinc-200 dark:border-white/10">
+        <span class="text-[11px] font-mono text-zinc-400 dark:text-zinc-500 mr-1">stack:</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Temporal</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Node.js</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Postgres</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Grafana</span>
+      </div>
+    </article>
+
+    <!-- Card 3 — Resumable Multi-Step UX -->
+    <article class="reveal pattern-card group rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink p-7 sm:p-8 shadow-soft hover:border-brand-purple transition flex flex-col">
+      <div class="flex items-center justify-between mb-5">
+        <span class="font-mono text-[11px] text-brand-purple">/ pattern · 03</span>
+        <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-brand-green/15 text-brand-green border border-brand-green/30">Live</span>
+      </div>
+
+      <h3 class="font-display text-2xl font-bold mb-3 leading-snug">Resumable Multi-Step Form Architecture with Next.js and tRPC.</h3>
+      <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[15px] mb-6">Built a long-form intake experience where every keystroke is autosaved, every step is deep-linkable, and every field is validated end-to-end with shared schemas across client and server.</p>
+
+      <p class="font-mono text-xs text-brand-orange mb-3">→ what it unlocked</p>
+      <ul class="space-y-2 mb-6 text-sm text-zinc-600 dark:text-zinc-400">
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Users resume from any device, mid-flow, weeks later.</span></li>
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>One Zod schema = one source of truth for form, API, and DB.</span></li>
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Field-level audit log for compliance, without slowing the UI.</span></li>
+      </ul>
+
+      <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-purple">−60%</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">drop-off</div>
+        </div>
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-green">3×</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">completion rate</div>
+        </div>
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-orange">1 schema</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">end-to-end</div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-1.5 pt-4 mt-auto border-t border-zinc-200 dark:border-white/10">
+        <span class="text-[11px] font-mono text-zinc-400 dark:text-zinc-500 mr-1">stack:</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Next.js</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">tRPC</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Zod</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Postgres</span>
+      </div>
+    </article>
+
+    <!-- Card 4 — Schema-Driven Internal Tooling -->
+    <article class="reveal pattern-card group rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink p-7 sm:p-8 shadow-soft hover:border-brand-purple transition flex flex-col">
+      <div class="flex items-center justify-between mb-5">
+        <span class="font-mono text-[11px] text-brand-purple">/ pattern · 04</span>
+        <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-brand-green/15 text-brand-green border border-brand-green/30">Shipped</span>
+      </div>
+
+      <h3 class="font-display text-2xl font-bold mb-3 leading-snug">Schema-Driven Internal Tooling with React, TipTap, and Zod.</h3>
+      <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[15px] mb-6">Designed an authoring environment where non-technical editors produce strictly-typed, machine-readable content. The schema defines the editor, the editor produces the data, the data drives the product.</p>
+
+      <p class="font-mono text-xs text-brand-orange mb-3">→ what it unlocked</p>
+      <ul class="space-y-2 mb-6 text-sm text-zinc-600 dark:text-zinc-400">
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Block-based editor with inline validation and live preview.</span></li>
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Branching + review workflow so two authors never clobber each other.</span></li>
+        <li class="flex gap-2.5"><span class="text-brand-purple shrink-0 mt-1">▸</span><span>Engineers consume content as typed objects — zero parsing code.</span></li>
+      </ul>
+
+      <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-purple">~4×</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">authoring speed</div>
+        </div>
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-green">100%</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">type-safe output</div>
+        </div>
+        <div class="p-3 rounded-xl border border-zinc-200 dark:border-white/10">
+          <div class="font-display text-2xl font-bold text-brand-orange">1</div>
+          <div class="text-[10px] font-mono text-zinc-500 mt-1">training session</div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-1.5 pt-4 mt-auto border-t border-zinc-200 dark:border-white/10">
+        <span class="text-[11px] font-mono text-zinc-400 dark:text-zinc-500 mr-1">stack:</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">React</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">TipTap</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Zod</span>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400">Fastify</span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Footer CTA -->
+  <div class="reveal mt-12 grid sm:grid-cols-2 gap-4 items-center p-6 sm:p-8 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink shadow-soft">
+    <div>
+      <p class="font-mono text-xs text-brand-purple mb-2">/ want the deep dive?</p>
+      <p class="text-zinc-700 dark:text-zinc-300 leading-relaxed">Hop on a call. I'll walk you through the architecture, share sanitized code, and answer the questions a one-pager can't.</p>
+    </div>
+    <div class="flex flex-wrap gap-3 sm:justify-end">
+      <a href="#talk" class="inline-flex items-center gap-2 bg-brand-purple text-white px-6 py-3.5 rounded-full font-medium hover:bg-ink dark:hover:bg-white dark:hover:text-ink hover:-translate-y-0.5 transition shadow-soft">Book a walkthrough →</a>
+      <a href="#talk" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition self-center">Ask for references →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED POSTS (MULTI-CARD CAROUSEL) ============ -->
+<section id="posts" class="border-y border-zinc-200/70 dark:border-white/5 bg-white/40 dark:bg-white/[0.02]">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 reveal">
+      <div>
+        <p class="font-mono text-xs text-brand-purple mb-3">/ from the blog</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight">Things I've written lately.</h2>
+        <p class="mt-4 text-zinc-600 dark:text-zinc-400 max-w-lg">Notes from real projects — what worked, what didn't, and the boring bits in between.</p>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <button id="fpPrev" aria-label="Previous posts" class="w-11 h-11 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple hover:text-brand-purple transition disabled:opacity-40 disabled:cursor-not-allowed">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="fpNext" aria-label="Next posts" class="w-11 h-11 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple hover:text-brand-purple transition disabled:opacity-40 disabled:cursor-not-allowed">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Carousel viewport -->
+    <div class="overflow-hidden -mx-2 reveal">
+      <div id="fpTrack" class="fp-track">
+
+        <!-- Card 1 -->
+        <div class="fp-slide">
+          <a href="#" class="fp-card group block h-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft">
+            <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80" alt="" class="w-full h-full object-cover" loading="lazy"/>
+              <span class="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">Engineering</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-[11px] font-mono text-zinc-500 mb-3">
+                <span>May 12, 2026</span>
+                <span class="w-1 h-1 rounded-full bg-zinc-400"></span>
+                <span>6 min read</span>
+              </div>
+              <h3 class="font-display text-xl font-bold leading-snug group-hover:text-brand-purple transition">Why I stopped reaching for Redis on every project</h3>
+              <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Postgres can do more than you think. A tour of the queues, locks, and caches I've replaced with a single table.</p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-purple">Read post
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="fp-slide">
+          <a href="#" class="fp-card group block h-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft">
+            <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=900&q=80" alt="" class="w-full h-full object-cover" loading="lazy"/>
+              <span class="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">Freelance</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-[11px] font-mono text-zinc-500 mb-3">
+                <span>Apr 28, 2026</span>
+                <span class="w-1 h-1 rounded-full bg-zinc-400"></span>
+                <span>4 min read</span>
+              </div>
+              <h3 class="font-display text-xl font-bold leading-snug group-hover:text-brand-purple transition">The "scope creep" line I steal from carpenters</h3>
+              <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">One question I ask in every client kickoff that has saved me hundreds of awkward conversations.</p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-purple">Read post
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="fp-slide">
+          <a href="#" class="fp-card group block h-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft">
+            <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80" alt="" class="w-full h-full object-cover" loading="lazy"/>
+              <span class="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">Tooling</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-[11px] font-mono text-zinc-500 mb-3">
+                <span>Apr 14, 2026</span>
+                <span class="w-1 h-1 rounded-full bg-zinc-400"></span>
+                <span>8 min read</span>
+              </div>
+              <h3 class="font-display text-xl font-bold leading-snug group-hover:text-brand-purple transition">My 2026 dev setup, after 9 years of tweaking</h3>
+              <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Editor, terminal, window manager, and the weirdly specific keyboard shortcut I refuse to live without.</p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-purple">Read post
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="fp-slide">
+          <a href="#" class="fp-card group block h-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft">
+            <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80" alt="" class="w-full h-full object-cover" loading="lazy"/>
+              <span class="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">Shipping</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-[11px] font-mono text-zinc-500 mb-3">
+                <span>Mar 30, 2026</span>
+                <span class="w-1 h-1 rounded-full bg-zinc-400"></span>
+                <span>5 min read</span>
+              </div>
+              <h3 class="font-display text-xl font-bold leading-snug group-hover:text-brand-purple transition">Ship-it Friday: a tiny ritual that fixed my deadlines</h3>
+              <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">How a no-meeting, no-PR-review afternoon every week made me 30% more reliable to clients.</p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-purple">Read post
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="fp-slide">
+          <a href="#" class="fp-card group block h-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft">
+            <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="" class="w-full h-full object-cover" loading="lazy"/>
+              <span class="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">Engineering</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-[11px] font-mono text-zinc-500 mb-3">
+                <span>Mar 16, 2026</span>
+                <span class="w-1 h-1 rounded-full bg-zinc-400"></span>
+                <span>7 min read</span>
+              </div>
+              <h3 class="font-display text-xl font-bold leading-snug group-hover:text-brand-purple transition">tRPC is the most underrated tool in my stack</h3>
+              <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Type-safety across the wire without ceremony. A walkthrough with real-world client examples.</p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-purple">Read post
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="fp-slide">
+          <a href="#" class="fp-card group block h-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft">
+            <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=80" alt="" class="w-full h-full object-cover" loading="lazy"/>
+              <span class="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">Career</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-[11px] font-mono text-zinc-500 mb-3">
+                <span>Mar 02, 2026</span>
+                <span class="w-1 h-1 rounded-full bg-zinc-400"></span>
+                <span>9 min read</span>
+              </div>
+              <h3 class="font-display text-xl font-bold leading-snug group-hover:text-brand-purple transition">From full-time to freelance: the first 90 days</h3>
+              <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">What I got right, what I got embarrassingly wrong, and the numbers behind the leap.</p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-purple">Read post
+                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between gap-4 mt-10">
+      <div id="fpDots" class="flex items-center gap-2"></div>
+      <a href="#" class="inline-flex items-center gap-2 text-sm font-medium hover:text-brand-purple transition">
+        All posts →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW I WORK ============ -->
+<section id="process" class="bg-white/40 dark:bg-white/[0.02] border-y border-zinc-200/70 dark:border-white/5">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+    <div class="max-w-2xl mb-16 reveal">
+      <p class="font-mono text-xs text-brand-purple mb-3">/ how I work</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold">Simple. No surprises.</h2>
+      <p class="mt-4 text-zinc-600 dark:text-zinc-400 text-lg">I keep the process boring on purpose. The fun part is your product.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="reveal relative p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition">
+        <span class="absolute -top-4 left-7 font-display text-5xl font-bold text-brand-purple/20 dark:text-brand-purple/30">01</span>
+        <h3 class="font-display text-xl font-bold mt-4 mb-3">I start with a real conversation.</h3>
+        <p class="text-zinc-600 dark:text-zinc-400 text-[15px] leading-relaxed">Free 30-minute call. You tell me what you're building and why. I tell you honestly if I'm the right fit — and if I'm not, I'll point you somewhere better.</p>
+      </div>
+      <div class="reveal relative p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-green transition">
+        <span class="absolute -top-4 left-7 font-display text-5xl font-bold text-brand-green/20 dark:text-brand-green/30">02</span>
+        <h3 class="font-display text-xl font-bold mt-4 mb-3">Then I build, in the open.</h3>
+        <p class="text-zinc-600 dark:text-zinc-400 text-[15px] leading-relaxed">A shared Linear board, Loom updates twice a week, and a staging URL from day one. You watch it come together. No black boxes, no "we're working on it" emails.</p>
+      </div>
+      <div class="reveal relative p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-orange transition">
+        <span class="absolute -top-4 left-7 font-display text-5xl font-bold text-brand-orange/20 dark:text-brand-orange/30">03</span>
+        <h3 class="font-display text-xl font-bold mt-4 mb-3">Finally, I launch — and stick around.</h3>
+        <p class="text-zinc-600 dark:text-zinc-400 text-[15px] leading-relaxed">I deploy it, document it, and hand over keys. Plus 30 days of free fixes and a friendly Slack channel for whenever something feels off.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW I WORK — LIFECYCLE (INTERACTIVE) ============ -->
+<section id="process-lifecycle" class="relative overflow-hidden border-y border-zinc-200/70 dark:border-white/5 bg-paper dark:bg-ink">
+  <div class="absolute inset-0 bg-grid opacity-40 pointer-events-none"></div>
+  <div class="absolute -top-32 -left-24 w-96 h-96 rounded-full bg-brand-purple/10 blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-32 -right-24 w-96 h-96 rounded-full bg-brand-green/10 blur-3xl pointer-events-none"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+    <div class="max-w-2xl mb-12 reveal">
+      <p class="font-mono text-xs text-brand-purple mb-3">/ how I work — the full lifecycle</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold">From <span class="squiggle text-brand-green">first call</span> to live in production.</h2>
+      <p class="mt-4 text-zinc-600 dark:text-zinc-400 text-lg">Click any phase to see what actually happens — the artifacts, the cadence, and the receipts.</p>
+    </div>
+
+  <!-- Timeline rail -->
+  <div class="relative mb-10 pt-2" id="lcRail">
+      <!-- Rail (inset so it starts/ends at dot centers: 1/12 from each side on a 6-col grid) -->
+      <div class="hidden sm:block absolute top-1/2 -translate-y-1/2 h-1 rounded-full bg-zinc-200 dark:bg-white/10 overflow-hidden" style="left: 8.333%; right: 8.333%;">
+        <div id="lcProgress" class="h-full bg-gradient-to-r from-brand-purple via-brand-green to-brand-orange transition-all duration-700 ease-out" style="width: 0%"></div>
+      </div>
+
+      <!-- Phase steps -->
+      <div role="tablist" aria-label="Project lifecycle phases" class="relative grid grid-cols-3 sm:grid-cols-6 gap-3 sm:gap-2">
+        <!-- 01 Discovery -->
+        <button role="tab" data-lc-step="0" aria-selected="true" class="lc-step group flex flex-col items-center gap-2 focus:outline-none">
+          <span class="lc-dot relative w-12 h-12 rounded-full grid place-items-center font-mono text-xs font-semibold border-2 border-brand-purple bg-paper dark:bg-ink text-brand-purple shadow-soft transition-all">
+            01
+          </span>
+          <span class="lc-label text-[11px] sm:text-xs font-mono text-center text-ink dark:text-white font-semibold">Discovery</span>
+        </button>
+        <!-- 02 Scope -->
+        <button role="tab" data-lc-step="1" aria-selected="false" class="lc-step group flex flex-col items-center gap-2 focus:outline-none">
+          <span class="lc-dot relative w-12 h-12 rounded-full grid place-items-center font-mono text-xs font-semibold border-2 border-zinc-300 dark:border-white/15 bg-paper dark:bg-ink text-zinc-500 dark:text-zinc-400 transition-all">
+            02
+          </span>
+          <span class="lc-label text-[11px] sm:text-xs font-mono text-center text-zinc-500 dark:text-zinc-400 transition">Scope</span>
+        </button>
+        <!-- 03 Design -->
+        <button role="tab" data-lc-step="2" aria-selected="false" class="lc-step group flex flex-col items-center gap-2 focus:outline-none">
+          <span class="lc-dot relative w-12 h-12 rounded-full grid place-items-center font-mono text-xs font-semibold border-2 border-zinc-300 dark:border-white/15 bg-paper dark:bg-ink text-zinc-500 dark:text-zinc-400 transition-all">
+            03
+          </span>
+          <span class="lc-label text-[11px] sm:text-xs font-mono text-center text-zinc-500 dark:text-zinc-400 transition">Design</span>
+        </button>
+        <!-- 04 Build -->
+        <button role="tab" data-lc-step="3" aria-selected="false" class="lc-step group flex flex-col items-center gap-2 focus:outline-none">
+          <span class="lc-dot relative w-12 h-12 rounded-full grid place-items-center font-mono text-xs font-semibold border-2 border-zinc-300 dark:border-white/15 bg-paper dark:bg-ink text-zinc-500 dark:text-zinc-400 transition-all">
+            04
+          </span>
+          <span class="lc-label text-[11px] sm:text-xs font-mono text-center text-zinc-500 dark:text-zinc-400 transition">Build</span>
+        </button>
+        <!-- 05 QA -->
+        <button role="tab" data-lc-step="4" aria-selected="false" class="lc-step group flex flex-col items-center gap-2 focus:outline-none">
+          <span class="lc-dot relative w-12 h-12 rounded-full grid place-items-center font-mono text-xs font-semibold border-2 border-zinc-300 dark:border-white/15 bg-paper dark:bg-ink text-zinc-500 dark:text-zinc-400 transition-all">
+            05
+          </span>
+          <span class="lc-label text-[11px] sm:text-xs font-mono text-center text-zinc-500 dark:text-zinc-400 transition">QA</span>
+        </button>
+        <!-- 06 Deploy -->
+        <button role="tab" data-lc-step="5" aria-selected="false" class="lc-step group flex flex-col items-center gap-2 focus:outline-none">
+          <span class="lc-dot relative w-12 h-12 rounded-full grid place-items-center font-mono text-xs font-semibold border-2 border-zinc-300 dark:border-white/15 bg-paper dark:bg-ink text-zinc-500 dark:text-zinc-400 transition-all">
+            06
+          </span>
+          <span class="lc-label text-[11px] sm:text-xs font-mono text-center text-zinc-500 dark:text-zinc-400 transition">Deploy</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Phase autoplay control -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 reveal">
+      <div class="flex items-center gap-2 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+        <span id="lcPhaseIndex" class="text-brand-purple font-semibold">01</span>
+        <span>/</span>
+        <span>06</span>
+        <span class="mx-2 text-zinc-300 dark:text-white/20">•</span>
+        <span id="lcPhaseDuration">~3 days</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="lcAutoplay" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono border border-zinc-200 dark:border-white/10 hover:border-brand-purple hover:text-brand-purple transition">
+          <svg id="lcAutoplayIcon" class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <span id="lcAutoplayLabel">Autoplay</span>
+        </button>
+        <button id="lcPrev" aria-label="Previous phase" class="w-8 h-8 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 hover:border-brand-purple hover:text-brand-purple transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="lcNext" aria-label="Next phase" class="w-8 h-8 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 hover:border-brand-purple hover:text-brand-purple transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Phase panels -->
+    <div class="grid lg:grid-cols-12 gap-6">
+      <!-- Left: narrative -->
+      <div class="lg:col-span-7 reveal">
+        <div id="lcPanels" class="relative rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 p-7 sm:p-9 shadow-soft min-h-[420px] overflow-hidden">
+
+          <!-- 01 Discovery -->
+          <article data-lc-panel="0" class="lc-panel">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-[11px] font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-purple"></span> phase 01
+              </span>
+              <span class="text-[11px] font-mono text-zinc-400">~30 min call · free</span>
+            </div>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-3">Discovery — figuring out if this is real.</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">A no-deck, no-pitch call. You walk me through the problem and the people you're solving it for. I ask uncomfortable questions about scope, timeline, and budget early — because finding out later is expensive.</p>
+            <ul class="space-y-2.5 text-sm">
+              <li class="flex gap-3"><span class="text-brand-purple font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">What you'll get:</strong> a written recap with my honest read, risks I see, and whether I'm a fit.</span></li>
+              <li class="flex gap-3"><span class="text-brand-purple font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">What I need:</strong> 30 minutes, any context you've got, and an honest budget range.</span></li>
+              <li class="flex gap-3"><span class="text-brand-purple font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">If we're not a fit:</strong> I'll point you to two devs who probably are. Free of charge.</span></li>
+            </ul>
+          </article>
+
+          <!-- 02 Scope -->
+          <article data-lc-panel="1" class="lc-panel hidden">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-[11px] font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-purple"></span> phase 02
+              </span>
+              <span class="text-[11px] font-mono text-zinc-400">~3 days · fixed-price proposal</span>
+            </div>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-3">Scope — pricing reality, not optimism.</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">I write a one-page proposal: what we're building, what we're explicitly <em>not</em> building, the timeline with milestones, and a fixed price. No "TBD" line items. No vague AI sprinkled on top.</p>
+            <ul class="space-y-2.5 text-sm">
+              <li class="flex gap-3"><span class="text-brand-purple font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Deliverable:</strong> proposal PDF, signed SOW, 30% deposit invoice.</span></li>
+              <li class="flex gap-3"><span class="text-brand-purple font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Milestones:</strong> 3–4 named checkpoints with go/no-go decisions you control.</span></li>
+              <li class="flex gap-3"><span class="text-brand-purple font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Change requests:</strong> handled in writing, priced before any work starts.</span></li>
+            </ul>
+          </article>
+
+          <!-- 03 Design -->
+          <article data-lc-panel="2" class="lc-panel hidden">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-green/10 text-brand-green text-[11px] font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span> phase 03
+              </span>
+              <span class="text-[11px] font-mono text-zinc-400">~1 week · Figma + flow review</span>
+            </div>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-3">Design — flows before pixels.</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">If you don't have a designer, I sketch the critical user flows in Figma — login, core action, edge cases. We argue about the boring stuff (empty states, error copy) early so the build phase is just building.</p>
+            <ul class="space-y-2.5 text-sm">
+              <li class="flex gap-3"><span class="text-brand-green font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Output:</strong> clickable Figma prototype + data model sketch.</span></li>
+              <li class="flex gap-3"><span class="text-brand-green font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Got a designer already?</strong> Even better. I'll do a build-feasibility pass and flag anything risky.</span></li>
+              <li class="flex gap-3"><span class="text-brand-green font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Sign-off:</strong> short async Loom from you saying "yes, build this."</span></li>
+            </ul>
+          </article>
+
+          <!-- 04 Build -->
+          <article data-lc-panel="3" class="lc-panel hidden">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-green/10 text-brand-green text-[11px] font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span> phase 04
+              </span>
+              <span class="text-[11px] font-mono text-zinc-400">~3–6 weeks · in the open</span>
+            </div>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-3">Build — staging URL from day one.</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">You get a Linear board, a Slack channel, and a live staging environment by end of week one. Two Loom updates per week. You see PRs as they merge. No surprises, no theater.</p>
+            <ul class="space-y-2.5 text-sm">
+              <li class="flex gap-3"><span class="text-brand-green font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Cadence:</strong> Mon plan, Thu demo, Fri staging deploy. Async-first.</span></li>
+              <li class="flex gap-3"><span class="text-brand-green font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Stack defaults:</strong> Next.js, TypeScript, Postgres, Vercel — boring tech that scales.</span></li>
+              <li class="flex gap-3"><span class="text-brand-green font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Tests:</strong> written alongside code, not "later." CI green or it doesn't ship.</span></li>
+            </ul>
+          </article>
+
+          <!-- 05 QA -->
+          <article data-lc-panel="4" class="lc-panel hidden">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-orange/10 text-brand-orange text-[11px] font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span> phase 05
+              </span>
+              <span class="text-[11px] font-mono text-zinc-400">~3–5 days · pre-launch hardening</span>
+            </div>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-3">QA — breaking it before users do.</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">A hardening sprint: end-to-end tests on critical flows, accessibility audit, perf budget check, real-data load test, and a written security pass. Then we triage every bug into "ship-blocker" or "next sprint."</p>
+            <ul class="space-y-2.5 text-sm">
+              <li class="flex gap-3"><span class="text-brand-orange font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Checklist:</strong> Lighthouse ≥ 90, WCAG AA, error tracking wired, backups tested.</span></li>
+              <li class="flex gap-3"><span class="text-brand-orange font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">UAT:</strong> you and 1–2 real users break the staging app. I fix and re-deploy daily.</span></li>
+              <li class="flex gap-3"><span class="text-brand-orange font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Rollback plan:</strong> documented, tested, one command away.</span></li>
+            </ul>
+          </article>
+
+          <!-- 06 Deploy -->
+          <article data-lc-panel="5" class="lc-panel hidden">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-orange/10 text-brand-orange text-[11px] font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span> phase 06
+              </span>
+              <span class="text-[11px] font-mono text-zinc-400">launch day + 30 days support</span>
+            </div>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold mb-3">Deploy — calm launch, no fireworks.</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">A boring launch is a good launch. Production deploy with feature flags, monitoring dashboards live, and a runbook for the first 72 hours. Then I hand over keys, ownership, and docs you can actually read.</p>
+            <ul class="space-y-2.5 text-sm">
+              <li class="flex gap-3"><span class="text-brand-orange font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Handover:</strong> repo access, env vars, deployment guide, architecture diagram.</span></li>
+              <li class="flex gap-3"><span class="text-brand-orange font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">Free for 30 days:</strong> any bug introduced by me, I fix on my time.</span></li>
+              <li class="flex gap-3"><span class="text-brand-orange font-mono mt-0.5">→</span><span class="text-zinc-700 dark:text-zinc-300"><strong class="text-ink dark:text-white">After that:</strong> retainer for new features, or an introduction to a long-term hire.</span></li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Right: live artifact preview -->
+      <div class="lg:col-span-5 reveal">
+        <div class="rounded-2xl border border-zinc-200 dark:border-white/10 bg-zinc-950 text-zinc-100 shadow-soft overflow-hidden">
+          <!-- Window chrome -->
+          <div class="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/[0.03]">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-400/80"></span>
+              <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
+            </div>
+            <div id="lcArtifactTitle" class="text-[11px] font-mono text-zinc-400 truncate">discovery-call-recap.md</div>
+            <div class="text-[10px] font-mono text-zinc-500">live</div>
+          </div>
+
+          <!-- Artifact content (swaps per phase) -->
+          <div class="relative p-5 sm:p-6 font-mono text-[12.5px] leading-relaxed min-h-[420px]">
+
+            <pre data-lc-artifact="0" class="lc-artifact whitespace-pre-wrap text-zinc-300"><span class="text-brand-purple"># Recap — Maya / Finch Analytics</span>
+<span class="text-zinc-500">Date: Mon, Mar 4 · 32 min</span>
+
+<span class="text-brand-green">// problem</span>
+Founders losing hours/week stitching
+Stripe + HubSpot data into Notion.
+
+<span class="text-brand-green">// success looks like</span>
+- ship MVP in &lt; 8 weeks
+- 5 design partners using daily
+- &lt; $200/mo infra at launch
+
+<span class="text-brand-green">// risks I flagged</span>
+- HubSpot API rate limits
+- you don't have a designer (yet)
+- "AI insights" is undefined → cut?
+
+<span class="text-brand-orange">// my honest read</span>
+Real problem. Tight but doable.
+I'm a fit. Proposal Wed.</pre>
+
+            <pre data-lc-artifact="1" class="lc-artifact hidden whitespace-pre-wrap text-zinc-300"><span class="text-brand-purple"># Statement of Work — v1</span>
+<span class="text-zinc-500">Finch Analytics · 7 weeks · fixed</span>
+
+<span class="text-brand-green">SCOPE — in</span>
+✓ Stripe + HubSpot ingest
+✓ unified customer timeline
+✓ Slack + email digests
+✓ team workspace, 3 roles
+
+<span class="text-red-400">SCOPE — out (v2)</span>
+✗ "AI insights" (revisit post-launch)
+✗ Salesforce, Intercom
+✗ mobile app
+
+<span class="text-brand-green">MILESTONES</span>
+M1  wk 2  · auth + ingest live
+M2  wk 4  · timeline + digest
+M3  wk 6  · roles + billing
+M4  wk 7  · launch
+
+<span class="text-brand-orange">PRICE</span>  $42,000 · 30/40/30
+<span class="text-brand-orange">START</span>  Mon Mar 18</pre>
+
+            <pre data-lc-artifact="2" class="lc-artifact hidden whitespace-pre-wrap text-zinc-300"><span class="text-brand-purple"># Flows — v0.3</span>
+<span class="text-zinc-500">figma.com/file/finch-mvp</span>
+
+<span class="text-brand-green">flows mapped</span>
+[1] sign-up → connect stripe
+[2] sign-up → connect hubspot
+[3] view customer timeline
+[4] configure digest cadence
+[5] invite teammate (admin/viewer)
+
+<span class="text-brand-green">edge cases written</span>
+· empty state · 0 customers
+· stripe disconnected mid-sync
+· hubspot 429 rate limit
+· invited user already exists
+
+<span class="text-brand-orange">data model — sketch</span>
+User ─┬─ Workspace ─┬─ Integration
+      │             └─ Customer
+      └─ Membership(role)
+
+<span class="text-brand-purple">→ awaiting your Loom approval</span></pre>
+
+            <pre data-lc-artifact="3" class="lc-artifact hidden whitespace-pre-wrap text-zinc-300"><span class="text-brand-purple"># Standup — Thu Apr 11</span>
+<span class="text-zinc-500">staging.finch.app · build wk 4</span>
+
+<span class="text-brand-green">$ git log --oneline -5</span>
+a3f9c2  feat: hubspot OAuth flow
+71b0de  fix: stripe webhook idempotency
+e4c1aa  test: timeline merge edge cases
+9d8721  chore: bump next 14.2 → 14.3
+2b04f5  feat: digest scheduler (cron)
+
+<span class="text-brand-green">linear ▸ this week</span>
+✓ FIN-42  hubspot ingest         done
+✓ FIN-44  timeline merge logic   done
+◐ FIN-47  digest preview UI      80%
+○ FIN-51  role permissions       next
+
+<span class="text-brand-orange">⚠ 1 thing for you</span>
+need decision on digest default
+cadence: daily or weekly? (loom ↗)</pre>
+
+            <pre data-lc-artifact="4" class="lc-artifact hidden whitespace-pre-wrap text-zinc-300"><span class="text-brand-purple"># QA Report — pre-launch</span>
+<span class="text-zinc-500">build 1.0.0-rc.3 · Tue May 14</span>
+
+<span class="text-brand-green">automated</span>
+✓ 184 unit tests          pass
+✓ 27  e2e (playwright)    pass
+✓ lighthouse perf         94
+✓ lighthouse a11y         98
+✓ axe-core violations     0
+
+<span class="text-brand-green">manual UAT</span>
+✓ Maya          12 flows ok
+✓ partner #1    found 2 bugs (fixed)
+✓ partner #2    found 1 bug  (fixed)
+
+<span class="text-brand-orange">load test</span>
+1k concurrent · p95 240ms ✓
+stripe webhook burst ✓ no drops
+
+<span class="text-red-400">deferred → v1.1</span>
+· bulk csv export (FIN-89)
+· dark mode polish (FIN-91)
+
+<span class="text-brand-purple">verdict: ship Friday.</span></pre>
+
+            <pre data-lc-artifact="5" class="lc-artifact hidden whitespace-pre-wrap text-zinc-300"><span class="text-brand-purple"># Launch — Fri May 17</span>
+<span class="text-zinc-500">prod.finch.app · v1.0.0</span>
+
+<span class="text-brand-green">$ vercel deploy --prod</span>
+✓ build         42s
+✓ migrations    ok (3 applied)
+✓ smoke tests   ok
+✓ DNS cutover   propagated
+
+<span class="text-brand-green">monitoring live</span>
+· Sentry        errors  → #alerts
+· Datadog       p95     → dash ↗
+· BetterStack   uptime  → status ↗
+
+<span class="text-brand-orange">handover bundle</span>
+✓ repo access (you = admin)
+✓ env vars vault (1Password)
+✓ runbook.md (incidents, rollback)
+✓ architecture.md + diagram
+✓ Loom walkthrough (18 min)
+
+<span class="text-brand-purple"># 30-day support clock starts now.
+# Slack channel stays open. Sleep well.</span></pre>
+
+          </div>
+        </div>
+
+        <!-- Stat strip -->
+        <div class="mt-5 grid grid-cols-3 gap-3">
+          <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink">
+            <div id="lcStat1" class="font-display text-2xl font-bold text-ink dark:text-white">7 wks</div>
+            <div class="text-[11px] font-mono text-zinc-500 mt-1">avg timeline</div>
+          </div>
+          <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink">
+            <div id="lcStat2" class="font-display text-2xl font-bold text-ink dark:text-white">2×/wk</div>
+            <div class="text-[11px] font-mono text-zinc-500 mt-1">demo cadence</div>
+          </div>
+          <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink">
+            <div id="lcStat3" class="font-display text-2xl font-bold text-ink dark:text-white">30 days</div>
+            <div class="text-[11px] font-mono text-zinc-500 mt-1">free post-launch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-2xl border border-zinc-200 dark:border-white/10 bg-white/60 dark:bg-white/[0.03] reveal">
+      <div>
+        <p class="font-display text-lg font-semibold">Like the way I work?</p>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-0.5">Phase 01 is free. Worst case, you get a second opinion.</p>
+      </div>
+      <a href="#talk" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-ink text-white dark:bg-white dark:text-ink font-medium hover:bg-brand-purple dark:hover:bg-brand-purple dark:hover:text-white transition shadow-soft">
+        Book a discovery call
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  const steps = document.querySelectorAll('[data-lc-step]');
+  const panels = document.querySelectorAll('[data-lc-panel]');
+  const artifacts = document.querySelectorAll('[data-lc-artifact]');
+  if (!steps.length) return;
+
+  const titles = [
+    'discovery-call-recap.md',
+    'statement-of-work.pdf',
+    'flows-v0.3.fig',
+    'standup-thu.md',
+    'qa-report.md',
+    'launch-runbook.md',
+  ];
+  const durations = ['~30 min', '~3 days', '~1 week', '~3–6 weeks', '~3–5 days', 'launch day'];
+  // Use class maps so Tailwind JIT (CDN) sees full class names at parse time.
+  const activeClasses = [
+    ['border-brand-purple', 'text-brand-purple'],
+    ['border-brand-purple', 'text-brand-purple'],
+    ['border-brand-green',  'text-brand-green'],
+    ['border-brand-green',  'text-brand-green'],
+    ['border-brand-orange', 'text-brand-orange'],
+    ['border-brand-orange', 'text-brand-orange'],
+  ];
+  const doneClasses = [
+    ['bg-brand-purple', 'border-brand-purple', 'text-white'],
+    ['bg-brand-purple', 'border-brand-purple', 'text-white'],
+    ['bg-brand-green',  'border-brand-green',  'text-white'],
+    ['bg-brand-green',  'border-brand-green',  'text-white'],
+    ['bg-brand-orange', 'border-brand-orange', 'text-white'],
+    ['bg-brand-orange', 'border-brand-orange', 'text-white'],
+  ];
+
+  const progress = document.getElementById('lcProgress');
+  const phaseIndex = document.getElementById('lcPhaseIndex');
+  const phaseDuration = document.getElementById('lcPhaseDuration');
+  const artifactTitle = document.getElementById('lcArtifactTitle');
+  const prevBtn = document.getElementById('lcPrev');
+  const nextBtn = document.getElementById('lcNext');
+  const autoBtn = document.getElementById('lcAutoplay');
+  const autoIcon = document.getElementById('lcAutoplayIcon');
+  const autoLabel = document.getElementById('lcAutoplayLabel');
+
+  let active = 0;
+  let autoplay = false;
+  let timer = null;
+
+  const setActive = (i) => {
+    active = (i + steps.length) % steps.length;
+
+    steps.forEach((s, idx) => {
+      const dot = s.querySelector('.lc-dot');
+      const label = s.querySelector('.lc-label');
+      const isActive = idx === active;
+      const isDone = idx < active;
+      s.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
+      dot.classList.remove(
+        'border-brand-purple','text-brand-purple',
+        'border-brand-green','text-brand-green',
+        'border-brand-orange','text-brand-orange',
+        'bg-brand-purple','bg-brand-green','bg-brand-orange',
+        'text-white','border-zinc-300','dark:border-white/15',
+        'text-zinc-500','dark:text-zinc-400'
+      );
+
+      if (isActive) {
+        dot.classList.add(...activeClasses[idx]);
+        dot.style.transform = 'scale(1.12)';
+        dot.style.boxShadow = '0 0 0 4px var(--lc-bg, #FEFCFB), 0 8px 24px -8px rgba(139,92,246,0.35)';
+        label.classList.remove('text-zinc-500','dark:text-zinc-400');
+        label.classList.add('text-ink','dark:text-white','font-semibold');
+      } else if (isDone) {
+        dot.classList.add(...doneClasses[idx]);
+        dot.style.transform = 'scale(1)';
+        dot.style.boxShadow = '';
+        label.classList.remove('text-zinc-500','dark:text-zinc-400','font-semibold');
+        label.classList.add('text-zinc-600','dark:text-zinc-300');
+      } else {
+        dot.classList.add('border-zinc-300','dark:border-white/15','text-zinc-500','dark:text-zinc-400');
+        dot.style.transform = 'scale(1)';
+        dot.style.boxShadow = '';
+        label.classList.remove('text-ink','dark:text-white','font-semibold','text-zinc-600','dark:text-zinc-300');
+        label.classList.add('text-zinc-500','dark:text-zinc-400');
+      }
+    });
+
+    panels.forEach((p, idx) => p.classList.toggle('hidden', idx !== active));
+    artifacts.forEach((a, idx) => a.classList.toggle('hidden', idx !== active));
+
+    const pct = (active / (steps.length - 1)) * 100;
+    if (progress) progress.style.width = pct + '%';
+    if (phaseIndex) phaseIndex.textContent = String(active + 1).padStart(2, '0');
+    if (phaseDuration) phaseDuration.textContent = durations[active];
+    if (artifactTitle) artifactTitle.textContent = titles[active];
+  };
+
+  steps.forEach((s) => {
+    s.addEventListener('click', () => {
+      stopAuto();
+      setActive(parseInt(s.dataset.lcStep, 10));
+    });
+  });
+
+  prevBtn?.addEventListener('click', () => { stopAuto(); setActive(active - 1); });
+  nextBtn?.addEventListener('click', () => { stopAuto(); setActive(active + 1); });
+
+  const startAuto = () => {
+    autoplay = true;
+    autoIcon.innerHTML = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+    autoLabel.textContent = 'Pause';
+    timer = setInterval(() => setActive(active + 1), 3500);
+  };
+  const stopAuto = () => {
+    autoplay = false;
+    autoIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    autoLabel.textContent = 'Autoplay';
+    if (timer) { clearInterval(timer); timer = null; }
+  };
+  autoBtn?.addEventListener('click', () => autoplay ? stopAuto() : startAuto());
+
+  document.addEventListener('keydown', (e) => {
+    const sec = document.getElementById('process-lifecycle');
+    if (!sec) return;
+    const r = sec.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) return;
+    if (e.key === 'ArrowRight') { stopAuto(); setActive(active + 1); }
+    if (e.key === 'ArrowLeft')  { stopAuto(); setActive(active - 1); }
+  });
+
+  setActive(0);
+})();
+</script>
+
+<!-- ============ HOW I WORK — PROCESS CYCLE (INTERACTIVE) ============ -->
+<section id="process-cycle" class="relative overflow-hidden bg-white/40 dark:bg-white/[0.02] border-b border-zinc-200/70 dark:border-white/5">
+  <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none"></div>
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+
+    <div class="max-w-2xl mb-14 reveal">
+      <p class="font-mono text-xs text-brand-purple mb-3">/ how I work — the cycle</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold">It's not a line. It's a <span class="squiggle text-brand-orange">loop</span>.</h2>
+      <p class="mt-4 text-zinc-600 dark:text-zinc-400 text-lg">Discovery never really ends. Each launch feeds back into the next round of discovery. Hover or tap a node to see what happens at each station.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+
+      <!-- LEFT: interactive cycle SVG -->
+      <div class="lg:col-span-5 reveal">
+        <div class="relative aspect-square max-w-[480px] mx-auto" id="pcWheel">
+          <!-- Center hub -->
+          <div class="absolute inset-0 grid place-items-center pointer-events-none">
+            <div class="text-center">
+              <p class="font-mono text-[10px] text-zinc-400 mb-1">/ currently</p>
+              <p id="pcHubLabel" class="font-display text-2xl font-bold text-ink dark:text-white">Discovery</p>
+              <p id="pcHubMeta"  class="font-mono text-[11px] text-brand-purple mt-1">phase 01 · ~30 min</p>
+            </div>
+          </div>
+
+          <!-- SVG cycle -->
+          <svg viewBox="0 0 400 400" class="absolute inset-0 w-full h-full" aria-hidden="true">
+            <defs>
+              <linearGradient id="pcRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#8B5CF6"/>
+                <stop offset="50%"  stop-color="#10B981"/>
+                <stop offset="100%" stop-color="#FB923C"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Faint background ring (radius matches node-ring at 42% of 400 = 168) -->
+            <circle cx="200" cy="200" r="168"
+                    fill="none"
+                    stroke="currentColor"
+                    class="text-zinc-200 dark:text-white/10"
+                    stroke-width="1.5"
+                    stroke-dasharray="3 6"
+                    vector-effect="non-scaling-stroke"/>
+
+            <!-- Animated progress arc (circumference = 2π·168 ≈ 1055.6, starts at 12 o'clock) -->
+            <circle id="pcArc"
+                    cx="200" cy="200" r="168"
+                    fill="none"
+                    stroke="url(#pcRing)"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-dasharray="1055.6"
+                    stroke-dashoffset="1055.6"
+                    transform="rotate(-90 200 200)"
+                    vector-effect="non-scaling-stroke"
+                    style="transition: stroke-dashoffset .8s cubic-bezier(.2,.7,.2,1), stroke .4s ease;"/>
+
+            <!-- Connector lines from hub to active node (drawn via JS) -->
+            <line id="pcSpoke" x1="200" y1="200" x2="200" y2="200"
+                  stroke="currentColor"
+                  class="text-brand-purple"
+                  stroke-width="1.5"
+                  stroke-dasharray="3 4"
+                  opacity="0.5"
+                  style="transition: all .6s ease;"/>
+          </svg>
+
+          <!-- 6 interactive nodes positioned around the circle -->
+          <div id="pcNodes" class="absolute inset-0"></div>
+        </div>
+
+        <!-- Mini legend / controls -->
+        <div class="mt-8 flex items-center justify-center gap-3">
+          <button id="pcPrev" aria-label="Previous phase" class="w-9 h-9 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 hover:border-brand-purple hover:text-brand-purple transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button id="pcAuto" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono border border-zinc-200 dark:border-white/10 hover:border-brand-purple hover:text-brand-purple transition">
+            <svg id="pcAutoIcon" class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <span id="pcAutoLabel">Spin the cycle</span>
+          </button>
+          <button id="pcNext" aria-label="Next phase" class="w-9 h-9 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 hover:border-brand-purple hover:text-brand-purple transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: content panel -->
+      <div class="lg:col-span-7 reveal">
+        <div class="relative rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink shadow-soft overflow-hidden min-h-[460px]">
+
+          <!-- Top bar showing all 6 phases as a breadcrumb -->
+          <div class="flex items-center gap-1 px-6 pt-5 pb-3 border-b border-zinc-200/70 dark:border-white/5 overflow-x-auto">
+            <span id="pcCrumbs" class="flex items-center gap-1 text-[11px] font-mono text-zinc-400 whitespace-nowrap"></span>
+          </div>
+
+          <!-- Panels -->
+          <div id="pcContent" class="p-7 sm:p-9">
+
+            <article data-pc-panel="0" class="pc-panel">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <p class="font-mono text-[11px] text-brand-purple">phase 01 · discovery</p>
+                  <h3 class="font-display text-3xl font-bold mt-1">We figure out if this is real.</h3>
+                </div>
+                <span class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-[11px] font-mono">~30 min · free</span>
+              </div>
+              <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">A short call with no agenda slides. You explain the problem. I ask the awkward questions about budget, timeline, and whether you actually need code at all. If we're a fit, I'll say so. If not, I'll point you somewhere better.</p>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">you bring</p>
+                  <p class="text-sm">The problem, the people, an honest budget range.</p>
+                </div>
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">you leave with</p>
+                  <p class="text-sm">A written recap + my honest read in 24h.</p>
+                </div>
+              </div>
+            </article>
+
+            <article data-pc-panel="1" class="pc-panel hidden">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <p class="font-mono text-[11px] text-brand-purple">phase 02 · scope</p>
+                  <h3 class="font-display text-3xl font-bold mt-1">Pricing reality, not optimism.</h3>
+                </div>
+                <span class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-[11px] font-mono">~3 days · fixed</span>
+              </div>
+              <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">A one-page proposal: what's in, what's explicitly out, four named milestones, and a fixed price. No "TBD" line items. Change requests are welcome but priced and signed before any work starts.</p>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">deliverable</p>
+                  <p class="text-sm">SOW PDF, signed contract, 30% deposit invoice.</p>
+                </div>
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">your control</p>
+                  <p class="text-sm">Go / no-go decision at every milestone.</p>
+                </div>
+              </div>
+            </article>
+
+            <article data-pc-panel="2" class="pc-panel hidden">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <p class="font-mono text-[11px] text-brand-green">phase 03 · design</p>
+                  <h3 class="font-display text-3xl font-bold mt-1">Flows before pixels.</h3>
+                </div>
+                <span class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-green/10 text-brand-green text-[11px] font-mono">~1 week</span>
+              </div>
+              <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">If you don't have a designer, I sketch the critical user flows in Figma — login, the core action, the messy edge cases. We argue about empty states and error copy now, so the build phase is just building.</p>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">output</p>
+                  <p class="text-sm">Clickable Figma prototype + data model sketch.</p>
+                </div>
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">have a designer?</p>
+                  <p class="text-sm">Even better — I do a build-feasibility pass instead.</p>
+                </div>
+              </div>
+            </article>
+
+            <article data-pc-panel="3" class="pc-panel hidden">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <p class="font-mono text-[11px] text-brand-green">phase 04 · build</p>
+                  <h3 class="font-display text-3xl font-bold mt-1">Staging URL from day one.</h3>
+                </div>
+                <span class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-green/10 text-brand-green text-[11px] font-mono">~3–6 weeks</span>
+              </div>
+              <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">A shared Linear board, a Slack channel, two Loom updates per week, and a live staging environment by Friday of week one. You see PRs as they merge. No black boxes, no "we're working on it" emails.</p>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">cadence</p>
+                  <p class="text-sm">Mon plan · Thu demo · Fri staging deploy.</p>
+                </div>
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">stack defaults</p>
+                  <p class="text-sm">Next.js · TypeScript · Postgres · Vercel.</p>
+                </div>
+              </div>
+            </article>
+
+            <article data-pc-panel="4" class="pc-panel hidden">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <p class="font-mono text-[11px] text-brand-orange">phase 05 · QA</p>
+                  <h3 class="font-display text-3xl font-bold mt-1">Breaking it before users do.</h3>
+                </div>
+                <span class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-orange/10 text-brand-orange text-[11px] font-mono">~3–5 days</span>
+              </div>
+              <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">A hardening sprint: end-to-end tests on critical flows, accessibility audit, perf budget, real-data load test. Then we triage every bug into "ship-blocker" or "next sprint" — together, in writing.</p>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">checklist</p>
+                  <p class="text-sm">Lighthouse ≥ 90 · WCAG AA · errors wired.</p>
+                </div>
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">rollback</p>
+                  <p class="text-sm">Documented, tested, one command away.</p>
+                </div>
+              </div>
+            </article>
+
+            <article data-pc-panel="5" class="pc-panel hidden">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <p class="font-mono text-[11px] text-brand-orange">phase 06 · deploy + learn</p>
+                  <h3 class="font-display text-3xl font-bold mt-1">Calm launch. Then we listen.</h3>
+                </div>
+                <span class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-orange/10 text-brand-orange text-[11px] font-mono">launch + 30 days</span>
+              </div>
+              <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">A boring launch is a good launch. Production deploy with feature flags, monitoring live, and a runbook for the first 72 hours. Then real-user feedback feeds straight back into <em>discovery</em> — and the loop starts again.</p>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">handover</p>
+                  <p class="text-sm">Repo, env vars, runbook, architecture doc.</p>
+                </div>
+                <div class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
+                  <p class="text-[11px] font-mono text-zinc-400 mb-1">free for 30 days</p>
+                  <p class="text-sm">Any bug I introduced → I fix on my time.</p>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Footer hint -->
+          <div class="px-6 py-3 border-t border-zinc-200/70 dark:border-white/5 flex items-center justify-between gap-4 text-[11px] font-mono text-zinc-500">
+            <span class="hidden sm:inline">tip: ← / → keys to step through</span>
+            <a href="#talk" class="inline-flex items-center gap-1.5 text-brand-purple hover:underline">
+              start at phase 01 →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  const wheel  = document.getElementById('pcWheel');
+  const nodesContainer = document.getElementById('pcNodes');
+  if (!wheel || !nodesContainer) return;
+
+  const phases = [
+    { key: 'Discovery', meta: 'phase 01 · ~30 min',     color: '#8B5CF6', tone: 'purple' },
+    { key: 'Scope',     meta: 'phase 02 · ~3 days',     color: '#8B5CF6', tone: 'purple' },
+    { key: 'Design',    meta: 'phase 03 · ~1 week',     color: '#10B981', tone: 'green'  },
+    { key: 'Build',     meta: 'phase 04 · ~3–6 weeks',  color: '#10B981', tone: 'green'  },
+    { key: 'QA',        meta: 'phase 05 · ~3–5 days',   color: '#FB923C', tone: 'orange' },
+    { key: 'Deploy',    meta: 'phase 06 · + 30 days',   color: '#FB923C', tone: 'orange' },
+  ];
+  const N = phases.length;
+
+  // Build nodes around the circle (start at top, clockwise)
+  const positions = phases.map((_, i) => {
+    const angle = (-Math.PI / 2) + (i * 2 * Math.PI / N);
+    return { angle, x: 50 + 42 * Math.cos(angle), y: 50 + 42 * Math.sin(angle) };
+  });
+
+  nodesContainer.innerHTML = phases.map((p, i) => `
+    <button type="button"
+            data-pc-node="${i}"
+            aria-label="${p.key}"
+            class="pc-node absolute -translate-x-1/2 -translate-y-1/2 group focus:outline-none"
+            style="left: ${positions[i].x}%; top: ${positions[i].y}%;">
+      <span class="pc-dot relative grid place-items-center w-14 h-14 rounded-full border-2 bg-paper dark:bg-ink font-mono text-[11px] font-semibold transition-all duration-300"
+            style="border-color: ${p.color}; color: ${p.color};">
+        ${String(i + 1).padStart(2, '0')}
+      </span>
+      <span class="pc-node-label absolute left-1/2 -translate-x-1/2 mt-2 text-[11px] font-mono whitespace-nowrap text-zinc-500 dark:text-zinc-400 transition-colors">
+        ${p.key}
+      </span>
+    </button>
+  `).join('');
+
+  // Build breadcrumbs
+  const crumbs = document.getElementById('pcCrumbs');
+  crumbs.innerHTML = phases.map((p, i) => `
+    <span data-pc-crumb="${i}" class="pc-crumb px-2 py-0.5 rounded transition-colors cursor-pointer">${String(i+1).padStart(2,'0')} ${p.key}</span>
+    ${i < N - 1 ? '<span class="text-zinc-300 dark:text-white/15">→</span>' : '<span class="text-brand-orange">↩</span>'}
+  `).join('');
+
+  const arc      = document.getElementById('pcArc');
+  const spoke    = document.getElementById('pcSpoke');
+  const hubLabel = document.getElementById('pcHubLabel');
+  const hubMeta  = document.getElementById('pcHubMeta');
+  const panels   = document.querySelectorAll('[data-pc-panel]');
+  const nodeBtns = document.querySelectorAll('[data-pc-node]');
+  const crumbEls = document.querySelectorAll('[data-pc-crumb]');
+  const prevBtn  = document.getElementById('pcPrev');
+  const nextBtn  = document.getElementById('pcNext');
+  const autoBtn  = document.getElementById('pcAuto');
+  const autoIcon = document.getElementById('pcAutoIcon');
+  const autoLbl  = document.getElementById('pcAutoLabel');
+
+  const CIRC = 2 * Math.PI * 168;
+  let active = 0;
+  let autoplay = false;
+  let timer = null;
+
+  const setActive = (i) => {
+    active = ((i % N) + N) % N;
+    const p = phases[active];
+
+    // Arc fill: from node 01 (12 o'clock) clockwise to the active node.
+    // active=0 → 0% (no arc, just node 01 highlighted); active=N-1 → 100% (full loop closed).
+    const filled = (active / (N - 1)) * CIRC;
+    arc.style.stroke = p.color;
+    arc.setAttribute('stroke-dashoffset', String(CIRC - filled));
+
+    // Spoke from center to active node
+    const cx = 50, cy = 50;
+    const tx = positions[active].x, ty = positions[active].y;
+    spoke.setAttribute('x1', String(cx * 4));
+    spoke.setAttribute('y1', String(cy * 4));
+    spoke.setAttribute('x2', String(tx * 4));
+    spoke.setAttribute('y2', String(ty * 4));
+    spoke.setAttribute('stroke', p.color);
+    spoke.setAttribute('opacity', '0.6');
+
+    // Hub
+    hubLabel.textContent = p.key;
+    hubMeta.textContent  = p.meta;
+    hubMeta.style.color  = p.color;
+
+    // Nodes
+    nodeBtns.forEach((btn, idx) => {
+      const dot   = btn.querySelector('.pc-dot');
+      const label = btn.querySelector('.pc-node-label');
+      const ph    = phases[idx];
+      const isActive = idx === active;
+
+      if (isActive) {
+        dot.style.background = ph.color;
+        dot.style.color = '#fff';
+        dot.style.transform = 'scale(1.15)';
+        dot.style.boxShadow = `0 0 0 4px var(--pc-bg, #FEFCFB), 0 8px 24px -6px ${ph.color}66`;
+        label.classList.remove('text-zinc-500','dark:text-zinc-400');
+        label.classList.add('text-ink','dark:text-white','font-semibold');
+        label.style.color = '';
+      } else {
+        dot.style.background = '';
+        dot.style.color = ph.color;
+        dot.style.transform = 'scale(1)';
+        dot.style.boxShadow = '';
+        label.classList.remove('text-ink','dark:text-white','font-semibold');
+        label.classList.add('text-zinc-500','dark:text-zinc-400');
+        label.style.color = '';
+      }
+    });
+
+    // Panels
+    panels.forEach((el, idx) => el.classList.toggle('hidden', idx !== active));
+
+    // Crumbs (explicit class lists so Tailwind CDN JIT picks them up)
+    const crumbActiveClasses = {
+      purple: ['bg-brand-purple/10', 'text-brand-purple'],
+      green:  ['bg-brand-green/10',  'text-brand-green'],
+      orange: ['bg-brand-orange/10', 'text-brand-orange'],
+    };
+    crumbEls.forEach((el, idx) => {
+      el.classList.remove(
+        'bg-brand-purple/10','text-brand-purple',
+        'bg-brand-green/10','text-brand-green',
+        'bg-brand-orange/10','text-brand-orange',
+        'text-ink','dark:text-white'
+      );
+      if (idx === active) {
+        el.classList.add(...crumbActiveClasses[phases[idx].tone]);
+      } else if (idx < active) {
+        el.classList.add('text-ink','dark:text-white');
+      }
+    });
+  };
+
+  nodeBtns.forEach(b => b.addEventListener('click', () => { stopAuto(); setActive(parseInt(b.dataset.pcNode, 10)); }));
+  crumbEls.forEach(b => b.addEventListener('click', () => { stopAuto(); setActive(parseInt(b.dataset.pcCrumb, 10)); }));
+  prevBtn?.addEventListener('click', () => { stopAuto(); setActive(active - 1); });
+  nextBtn?.addEventListener('click', () => { stopAuto(); setActive(active + 1); });
+
+  const startAuto = () => {
+    autoplay = true;
+    autoIcon.innerHTML = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+    autoLbl.textContent = 'Pause cycle';
+    timer = setInterval(() => setActive(active + 1), 3200);
+  };
+  const stopAuto = () => {
+    autoplay = false;
+    autoIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    autoLbl.textContent = 'Spin the cycle';
+    if (timer) { clearInterval(timer); timer = null; }
+  };
+  autoBtn?.addEventListener('click', () => autoplay ? stopAuto() : startAuto());
+
+  // Keyboard nav when section is in view
+  document.addEventListener('keydown', (e) => {
+    const sec = document.getElementById('process-cycle');
+    if (!sec) return;
+    const r = sec.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) return;
+    if (e.key === 'ArrowRight') { stopAuto(); setActive(active + 1); }
+    if (e.key === 'ArrowLeft')  { stopAuto(); setActive(active - 1); }
+  });
+
+  // Hover preview (desktop): show panel on hover without committing autoplay state
+  let hoverIdx = null;
+  nodeBtns.forEach(b => {
+    b.addEventListener('mouseenter', () => {
+      hoverIdx = parseInt(b.dataset.pcNode, 10);
+      if (hoverIdx !== active) setActive(hoverIdx);
+    });
+  });
+
+  setActive(0);
+})();
+</script>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="words" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+  <div class="mb-14 reveal">
+    <p class="font-mono text-xs text-brand-purple mb-3">/ kind words</p>
+    <h2 class="font-display text-4xl sm:text-5xl font-bold max-w-2xl">What people have said after we shipped.</h2>
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-6">
+    <figure class="reveal lg:col-span-2 p-8 sm:p-10 rounded-2xl bg-brand-purple text-white relative overflow-hidden">
+      <svg class="absolute top-6 right-6 w-16 h-16 opacity-15" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4H7v4H3V11a4 4 0 0 1 4-4zm10 0h4v4h-4v4h-4V11a4 4 0 0 1 4-4z"/></svg>
+      <blockquote class="font-display text-2xl sm:text-3xl leading-snug">
+        "Alex shipped a working MVP in seven weeks and didn't ghost us after. Honestly, the best money we spent in our pre-seed."
+      </blockquote>
+      <figcaption class="mt-8 flex items-center gap-4">
+        <img src="https://i.pravatar.cc/80?img=12" class="w-12 h-12 rounded-full border-2 border-white/30" alt="Maya Chen"/>
+        <div>
+          <div class="font-semibold">Maya Chen</div>
+          <div class="text-sm text-white/70">Founder, Finch Analytics</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="reveal p-8 rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900">
+      <blockquote class="font-display text-xl leading-snug">
+        "He pushed back on half of my ideas — and was right every time. Saved me months."
+      </blockquote>
+      <figcaption class="mt-6 flex items-center gap-3">
+        <img src="https://i.pravatar.cc/80?img=33" class="w-10 h-10 rounded-full" alt="Jordan Smith"/>
+        <div>
+          <div class="font-semibold text-sm">Jordan Smith</div>
+          <div class="text-xs text-zinc-500">Solo founder, Stack</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="reveal lg:col-span-3 p-8 rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 flex flex-col md:flex-row gap-8 items-start">
+      <div class="md:flex-1">
+        <blockquote class="font-display text-xl leading-snug">
+          "We'd been burned by two agencies before. Alex felt different from the first call — clear, no-bs, and genuinely interested in the problem. The app he built has been running for a year with basically zero issues."
+        </blockquote>
+        <figcaption class="mt-6 flex items-center gap-3">
+          <img src="https://i.pravatar.cc/80?img=58" class="w-10 h-10 rounded-full" alt="Priya Anand"/>
+          <div>
+            <div class="font-semibold text-sm">Priya Anand</div>
+            <div class="text-xs text-zinc-500">Ops Lead, Northwind</div>
+          </div>
+        </figcaption>
+      </div>
+      <!-- Slack-style snippet -->
+      <div class="md:w-72 shrink-0 rounded-xl border border-zinc-200 dark:border-white/10 p-4 bg-zinc-50 dark:bg-zinc-950 font-mono text-xs">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-2 h-2 rounded-full bg-brand-green"></span>
+          <span class="font-semibold">priya</span>
+          <span class="text-zinc-500">9:42 AM</span>
+        </div>
+        <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">honestly this is the calmest launch we've ever had 🙏 ship-it Friday for real this time</p>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ LINKEDIN RECOMMENDATIONS ============ -->
+<section id="linkedin" class="border-y border-zinc-200/70 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] relative overflow-hidden">
+  <div class="absolute inset-0 bg-grid opacity-40 pointer-events-none"></div>
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 reveal">
+      <div>
+        <p class="font-mono text-xs text-brand-purple mb-3 flex items-center gap-2">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+          / from linkedin
+        </p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold max-w-2xl">Recommendations from people I've worked with.</h2>
+        <p class="mt-4 text-zinc-600 dark:text-zinc-400 max-w-xl">Pulled straight from my LinkedIn — unedited, unpaid, slightly embarrassing.</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <button id="recPrev" aria-label="Previous recommendation" class="w-11 h-11 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple hover:text-brand-purple transition disabled:opacity-40 disabled:cursor-not-allowed">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="recNext" aria-label="Next recommendation" class="w-11 h-11 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple hover:text-brand-purple transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Carousel -->
+    <div class="relative">
+      <div id="recTrack" class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-6 -mx-5 px-5 sm:mx-0 sm:px-0 scroll-smooth" style="scrollbar-width: thin;">
+
+        <!-- Card 1 -->
+        <article class="rec-card snap-start shrink-0 w-[88%] sm:w-[420px] p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft flex flex-col">
+          <header class="flex items-start gap-4 mb-5">
+            <img src="https://i.pravatar.cc/120?img=15" alt="Daniel Okafor" class="w-12 h-12 rounded-full ring-2 ring-brand-purple/20" />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h3 class="font-semibold text-sm truncate">Daniel Okafor</h3>
+                <svg class="w-3.5 h-3.5 text-brand-purple shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-label="LinkedIn"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+              </div>
+              <p class="text-xs text-zinc-500 truncate">CTO at Lumen Health</p>
+              <p class="text-[11px] font-mono text-zinc-400 mt-0.5">Worked together · Mar 2025</p>
+            </div>
+          </header>
+          <blockquote class="rec-quote text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300 flex-1">
+            <span class="line-clamp">Alex is one of those rare engineers who can ship fast <em>and</em> write code you actually want to maintain six months later. He picked up our messy codebase in a week and was pushing thoughtful PRs by the next. Hire him before someone else does.</span>
+          </blockquote>
+          <button class="rec-toggle mt-4 text-xs font-mono text-brand-purple hover:underline self-start">Read more →</button>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="rec-card snap-start shrink-0 w-[88%] sm:w-[420px] p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft flex flex-col">
+          <header class="flex items-start gap-4 mb-5">
+            <img src="https://i.pravatar.cc/120?img=47" alt="Hannah Liu" class="w-12 h-12 rounded-full ring-2 ring-brand-green/20" />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h3 class="font-semibold text-sm truncate">Hannah Liu</h3>
+                <svg class="w-3.5 h-3.5 text-brand-purple shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+              </div>
+              <p class="text-xs text-zinc-500 truncate">Product Lead at Parcel.io</p>
+              <p class="text-[11px] font-mono text-zinc-400 mt-0.5">Managed Alex directly · Nov 2024</p>
+            </div>
+          </header>
+          <blockquote class="rec-quote text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300 flex-1">
+            <span class="line-clamp">I've worked with a lot of contractors. Alex is the only one I'd hand the keys to without checking in. He shipped our entire billing rewrite solo, on schedule, and the rollout was a non-event — which is the highest compliment in engineering.</span>
+          </blockquote>
+          <button class="rec-toggle mt-4 text-xs font-mono text-brand-purple hover:underline self-start">Read more →</button>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="rec-card snap-start shrink-0 w-[88%] sm:w-[420px] p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft flex flex-col">
+          <header class="flex items-start gap-4 mb-5">
+            <img src="https://i.pravatar.cc/120?img=11" alt="Marcus Reid" class="w-12 h-12 rounded-full ring-2 ring-brand-orange/20" />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h3 class="font-semibold text-sm truncate">Marcus Reid</h3>
+                <svg class="w-3.5 h-3.5 text-brand-purple shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+              </div>
+              <p class="text-xs text-zinc-500 truncate">Founder, Bramble</p>
+              <p class="text-[11px] font-mono text-zinc-400 mt-0.5">Client · Aug 2024</p>
+            </div>
+          </header>
+          <blockquote class="rec-quote text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300 flex-1">
+            <span class="line-clamp">Alex took a vague idea, half a Figma file, and a tight budget — and turned it into a real marketplace we now run our whole business on. He cares about the product, not just the code. Will absolutely work with him again.</span>
+          </blockquote>
+          <button class="rec-toggle mt-4 text-xs font-mono text-brand-purple hover:underline self-start">Read more →</button>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="rec-card snap-start shrink-0 w-[88%] sm:w-[420px] p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft flex flex-col">
+          <header class="flex items-start gap-4 mb-5">
+            <img src="https://i.pravatar.cc/120?img=49" alt="Sofia Marchetti" class="w-12 h-12 rounded-full ring-2 ring-brand-purple/20" />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h3 class="font-semibold text-sm truncate">Sofia Marchetti</h3>
+                <svg class="w-3.5 h-3.5 text-brand-purple shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+              </div>
+              <p class="text-xs text-zinc-500 truncate">Design Director, Northwind</p>
+              <p class="text-[11px] font-mono text-zinc-400 mt-0.5">Worked together · May 2024</p>
+            </div>
+          </header>
+          <blockquote class="rec-quote text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300 flex-1">
+            <span class="line-clamp">As a designer, working with Alex was a dream. He actually reads the Figma files. He asked the right questions, suggested better solutions when mine didn't quite work, and the final build looked sharper than the mockup. Rare combo.</span>
+          </blockquote>
+          <button class="rec-toggle mt-4 text-xs font-mono text-brand-purple hover:underline self-start">Read more →</button>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="rec-card snap-start shrink-0 w-[88%] sm:w-[420px] p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft flex flex-col">
+          <header class="flex items-start gap-4 mb-5">
+            <img src="https://i.pravatar.cc/120?img=68" alt="Tomás Vega" class="w-12 h-12 rounded-full ring-2 ring-brand-green/20" />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h3 class="font-semibold text-sm truncate">Tomás Vega</h3>
+                <svg class="w-3.5 h-3.5 text-brand-purple shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+              </div>
+              <p class="text-xs text-zinc-500 truncate">Engineering Manager, Helio</p>
+              <p class="text-[11px] font-mono text-zinc-400 mt-0.5">Senior to Alex · Feb 2024</p>
+            </div>
+          </header>
+          <blockquote class="rec-quote text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300 flex-1">
+            <span class="line-clamp">Brought Alex in for a 3-month gig and kept him for a year. He's the kind of engineer that quietly makes the whole team better — better tests, better docs, better PR reviews. Wish I could clone him.</span>
+          </blockquote>
+          <button class="rec-toggle mt-4 text-xs font-mono text-brand-purple hover:underline self-start">Read more →</button>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="rec-card snap-start shrink-0 w-[88%] sm:w-[420px] p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft flex flex-col">
+          <header class="flex items-start gap-4 mb-5">
+            <img src="https://i.pravatar.cc/120?img=23" alt="Aisha Bello" class="w-12 h-12 rounded-full ring-2 ring-brand-orange/20" />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h3 class="font-semibold text-sm truncate">Aisha Bello</h3>
+                <svg class="w-3.5 h-3.5 text-brand-purple shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+              </div>
+              <p class="text-xs text-zinc-500 truncate">Founder, Tide CRM</p>
+              <p class="text-[11px] font-mono text-zinc-400 mt-0.5">Client · Jan 2024</p>
+            </div>
+          </header>
+          <blockquote class="rec-quote text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300 flex-1">
+            <span class="line-clamp">We hired Alex to "help out for a sprint" and ended up extending three times. He's honest about trade-offs, fast where it matters, and patient where it counts. Worth every dollar.</span>
+          </blockquote>
+          <button class="rec-toggle mt-4 text-xs font-mono text-brand-purple hover:underline self-start">Read more →</button>
+        </article>
+
+        <!-- Card 7 -->
+        <article class="rec-card snap-start shrink-0 w-[88%] sm:w-[420px] p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft flex flex-col">
+          <header class="flex items-start gap-4 mb-5">
+            <img src="https://i.pravatar.cc/120?img=53" alt="Ryan Park" class="w-12 h-12 rounded-full ring-2 ring-brand-purple/20" />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h3 class="font-semibold text-sm truncate">Ryan Park</h3>
+                <svg class="w-3.5 h-3.5 text-brand-purple shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+              </div>
+              <p class="text-xs text-zinc-500 truncate">Co-founder, Quill</p>
+              <p class="text-[11px] font-mono text-zinc-400 mt-0.5">Client · Oct 2023</p>
+            </div>
+          </header>
+          <blockquote class="rec-quote text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300 flex-1">
+            <span class="line-clamp">Alex is the developer you call when the last developer ghosted you. He audited our codebase in two days, gave us a brutally honest report, then quietly fixed the worst of it. Calm under pressure, sharp on details.</span>
+          </blockquote>
+          <button class="rec-toggle mt-4 text-xs font-mono text-brand-purple hover:underline self-start">Read more →</button>
+        </article>
+
+      </div>
+
+      <!-- Progress dots -->
+      <div id="recDots" class="flex items-center justify-center gap-2 mt-6"></div>
+    </div>
+
+    <div class="mt-10 flex flex-wrap items-center justify-between gap-4 reveal">
+      <div class="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400">
+        <div class="flex -space-x-2">
+          <img src="https://i.pravatar.cc/40?img=15" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt=""/>
+          <img src="https://i.pravatar.cc/40?img=47" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt=""/>
+          <img src="https://i.pravatar.cc/40?img=11" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt=""/>
+          <img src="https://i.pravatar.cc/40?img=49" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt=""/>
+          <div class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink bg-brand-purple text-white text-[10px] font-mono grid place-items-center">+3</div>
+        </div>
+        <span><span class="font-semibold text-ink dark:text-white">7 recommendations</span> on LinkedIn</span>
+      </div>
+      <a href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-full border border-zinc-200 dark:border-white/10 hover:border-brand-purple hover:text-brand-purple transition">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+        See all on LinkedIn →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LINKEDIN CONNECT CTA ============ -->
+<section class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+  <div class="relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-white/10 bg-ink dark:bg-gradient-to-br dark:from-zinc-900 dark:to-ink p-8 sm:p-14">
+    <!-- Decorative grid + blobs -->
+    <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none"></div>
+    <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-brand-purple/30 blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-24 -left-16 w-72 h-72 rounded-full bg-brand-green/20 blur-3xl pointer-events-none"></div>
+
+    <div class="relative grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7 text-white reveal">
+        <div class="inline-flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-full bg-white/10 text-white border border-white/15 mb-6">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+          / let's be linkedin friends
+        </div>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight">
+          Prefer to <span class="squiggle text-brand-green">connect first</span>, chat later?
+        </h2>
+        <p class="mt-5 text-lg text-zinc-300 max-w-xl leading-relaxed">
+          No pressure, no pitch. Connect with me on LinkedIn — see what I'm building, what I'm reading, and reach out whenever the timing feels right.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener" class="group inline-flex items-center gap-2.5 bg-white text-ink px-6 py-3.5 rounded-full font-medium hover:bg-brand-purple hover:text-white transition-all hover:-translate-y-0.5 shadow-soft">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+            Connect on LinkedIn
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#talk" class="inline-flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-white transition">
+            or skip ahead and book a call →
+          </a>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="mt-10 grid grid-cols-3 gap-6 max-w-md">
+          <div>
+            <div class="font-display text-2xl font-bold text-white">2.4k+</div>
+            <div class="text-xs font-mono text-zinc-400 mt-1">connections</div>
+          </div>
+          <div>
+            <div class="font-display text-2xl font-bold text-white">7</div>
+            <div class="text-xs font-mono text-zinc-400 mt-1">recommendations</div>
+          </div>
+          <div>
+            <div class="font-display text-2xl font-bold text-white flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-brand-green pulse-dot"></span> active
+            </div>
+            <div class="text-xs font-mono text-zinc-400 mt-1">posts weekly</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile card mock -->
+      <div class="lg:col-span-5 reveal">
+        <div class="relative">
+          <div class="rounded-2xl bg-white dark:bg-zinc-900 overflow-hidden shadow-soft border border-zinc-200 dark:border-white/10 rotate-[-1.5deg] hover:rotate-0 transition-transform duration-500">
+            <div class="h-24 bg-gradient-to-r from-brand-purple via-brand-purple to-brand-green relative">
+              <div class="absolute inset-0 bg-grid opacity-30"></div>
+            </div>
+            <div class="px-5 pb-5 -mt-10 relative">
+              <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=200&q=80" alt="" class="w-20 h-20 rounded-full ring-4 ring-white dark:ring-zinc-900 object-cover relative z-10"/>
+              <div class="mt-3">
+                <div class="flex items-center gap-1.5">
+                  <h3 class="font-semibold text-ink dark:text-white">Alex Rivera</h3>
+                  <svg class="w-3.5 h-3.5 text-brand-purple" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66l.04 5.44z"/></svg>
+                </div>
+                <p class="text-sm text-zinc-600 dark:text-zinc-400">Freelance Full Stack Developer · I ship things</p>
+                <p class="text-xs text-zinc-500 mt-1">Remote · Available June 2026</p>
+              </div>
+              <div class="mt-4 flex items-center gap-2">
+                <button class="flex-1 inline-flex items-center justify-center gap-1.5 bg-brand-purple text-white text-sm font-medium py-2 rounded-full hover:bg-ink dark:hover:bg-white dark:hover:text-ink transition">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                  Connect
+                </button>
+                <button class="px-4 py-2 rounded-full border border-zinc-300 dark:border-white/10 text-sm font-medium text-ink dark:text-white hover:border-brand-purple hover:text-brand-purple transition">Message</button>
+              </div>
+            </div>
+          </div>
+          <!-- Floating sticker -->
+          <div class="absolute -top-3 -right-3 rotate-[8deg] bg-brand-orange text-white text-xs font-mono px-3 py-1.5 rounded-full shadow-soft">
+            ← that's me
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LET'S TALK ============ -->
+<section id="talk" class="relative overflow-hidden border-y border-zinc-200/70 dark:border-white/5 bg-white/40 dark:bg-white/[0.02]">
+  <div class="absolute inset-0 bg-grid opacity-50 pointer-events-none"></div>
+  <div class="relative max-w-5xl mx-auto px-5 sm:px-8 py-24 sm:py-32 grid lg:grid-cols-5 gap-12 items-start">
+    <div class="lg:col-span-2 reveal">
+      <p class="font-mono text-xs text-brand-purple mb-3">/ let's talk</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight">Free 30-min call. No pitch deck.</h2>
+      <p class="mt-5 text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed">Tell me what you're building. I'll tell you honestly whether I can help, what it'd take, and roughly when I could start.</p>
+
+      <div class="mt-8 space-y-3 text-sm">
+        <div class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span> Usually reply in under 24 hours</div>
+        <div class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span> Friendly call, no sales script</div>
+        <div class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span> Booking for June 2026 onward</div>
+      </div>
+    </div>
+
+    <form class="lg:col-span-3 reveal p-7 sm:p-9 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink shadow-soft space-y-5" onsubmit="event.preventDefault(); this.querySelector('button[type=submit]').textContent='Thanks — talk soon ✓'; this.reset();">
+      <div>
+        <label class="block text-xs font-mono text-zinc-500 mb-2" for="name">Your name</label>
+        <input id="name" required type="text" placeholder="e.g. Sam"
+          class="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 transition" />
+      </div>
+      <div>
+        <label class="block text-xs font-mono text-zinc-500 mb-2" for="email">Email</label>
+        <input id="email" required type="email" placeholder="sam@yourstartup.com"
+          class="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 transition" />
+      </div>
+      <div>
+        <label class="block text-xs font-mono text-zinc-500 mb-2" for="idea">What are you building? <span class="text-zinc-400">(1–2 sentences is plenty)</span></label>
+        <textarea id="idea" required rows="3" placeholder="Trying to build a tool that..."
+          class="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 transition resize-none"></textarea>
+      </div>
+      <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-purple text-white px-7 py-3.5 rounded-full font-medium hover:bg-ink dark:hover:bg-white dark:hover:text-ink transition-all hover:-translate-y-0.5">
+        Send it →
+      </button>
+      <p class="text-xs text-zinc-500">Or just <a href="mailto:hi@alex.dev" class="underline hover:text-brand-purple">email me directly</a> — that works too.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="max-w-4xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+  <div class="mb-12 reveal">
+    <p class="font-mono text-xs text-brand-purple mb-3">/ questions?</p>
+    <h2 class="font-display text-4xl sm:text-5xl font-bold">The stuff people ask first.</h2>
+  </div>
+
+  <div class="divide-y divide-zinc-200 dark:divide-white/10 border-y border-zinc-200 dark:border-white/10">
+    <details class="group py-6 reveal">
+      <summary class="flex items-center justify-between cursor-pointer list-none">
+        <span class="font-display text-lg sm:text-xl font-semibold pr-6">How much does a project cost?</span>
+        <span class="shrink-0 w-8 h-8 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 group-open:bg-brand-purple group-open:text-white group-open:border-brand-purple transition">
+          <svg class="w-3 h-3 group-open:rotate-45 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+      </summary>
+      <p class="mt-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">Most projects land between $8k and $40k depending on scope. I quote per-project (not per-hour) so you know the number upfront. Smaller things — landing pages, internal tools — start around $3k.</p>
+    </details>
+
+    <details class="group py-6 reveal">
+      <summary class="flex items-center justify-between cursor-pointer list-none">
+        <span class="font-display text-lg sm:text-xl font-semibold pr-6">How long does it take?</span>
+        <span class="shrink-0 w-8 h-8 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 group-open:bg-brand-purple group-open:text-white group-open:border-brand-purple transition">
+          <svg class="w-3 h-3 group-open:rotate-45 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+      </summary>
+      <p class="mt-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">Real MVPs usually take 4–8 weeks. Bigger builds, 2–4 months. I work with one or two clients at a time so your project actually gets attention, not a slot in a queue.</p>
+    </details>
+
+    <details class="group py-6 reveal">
+      <summary class="flex items-center justify-between cursor-pointer list-none">
+        <span class="font-display text-lg sm:text-xl font-semibold pr-6">Do you work alone or with a team?</span>
+        <span class="shrink-0 w-8 h-8 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 group-open:bg-brand-purple group-open:text-white group-open:border-brand-purple transition">
+          <svg class="w-3 h-3 group-open:rotate-45 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+      </summary>
+      <p class="mt-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">Solo, by default. For bigger projects I bring in a trusted designer or mobile dev I've shipped with before — you'll meet them up front, no anonymous handoffs.</p>
+    </details>
+
+    <details class="group py-6 reveal">
+      <summary class="flex items-center justify-between cursor-pointer list-none">
+        <span class="font-display text-lg sm:text-xl font-semibold pr-6">What if I just have a rough idea?</span>
+        <span class="shrink-0 w-8 h-8 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 group-open:bg-brand-purple group-open:text-white group-open:border-brand-purple transition">
+          <svg class="w-3 h-3 group-open:rotate-45 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+      </summary>
+      <p class="mt-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">Perfect — that's most of my clients. We'll spend the first week shaping it into something concrete: scope, priorities, what to cut. You don't need to come with a spec.</p>
+    </details>
+
+    <details class="group py-6 reveal">
+      <summary class="flex items-center justify-between cursor-pointer list-none">
+        <span class="font-display text-lg sm:text-xl font-semibold pr-6">What happens after launch?</span>
+        <span class="shrink-0 w-8 h-8 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 group-open:bg-brand-purple group-open:text-white group-open:border-brand-purple transition">
+          <svg class="w-3 h-3 group-open:rotate-45 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+      </summary>
+      <p class="mt-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">30 days of free fixes are included. After that, you can keep me on a small monthly retainer, hire me ad-hoc, or take everything in-house — the code is yours, well-documented, no lock-in.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-zinc-200/70 dark:border-white/5">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14">
+    <div class="grid md:grid-cols-3 gap-10 items-start">
+      <div>
+        <a href="#" class="font-display font-bold text-lg flex items-center gap-2">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-brand-green pulse-dot"></span>
+          alex<span class="text-brand-purple">.dev</span>
+        </a>
+        <p class="mt-4 text-sm text-zinc-600 dark:text-zinc-400 max-w-xs">Freelance full stack developer. Building things on the internet since 2017.</p>
+        <div class="mt-5 inline-flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-full bg-brand-green/10 text-brand-green border border-brand-green/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-green pulse-dot"></span>
+          Booking for June 2026
+        </div>
+      </div>
+
+      <div>
+        <p class="font-mono text-xs text-zinc-500 mb-4">/ get in touch</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="mailto:hi@alex.dev" class="hover:text-brand-purple transition">hi@alex.dev</a></li>
+          <li><a href="#" class="hover:text-brand-purple transition">Book a 30-min call →</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-mono text-xs text-zinc-500 mb-4">/ elsewhere</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-brand-purple transition">GitHub</a></li>
+          <li><a href="#" class="hover:text-brand-purple transition">LinkedIn</a></li>
+          <li><a href="#" class="hover:text-brand-purple transition">Twitter / X</a></li>
+          <li><a href="#" class="hover:text-brand-purple transition">Read.cv</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-zinc-200/70 dark:border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-zinc-500 font-mono">
+      <p>© 2026 Alex Rivera. Hand-built with too much coffee.</p>
+      <p>↑ <a href="#" class="hover:text-brand-purple transition">back to top</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    root.classList.add('dark');
+  }
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    root.classList.toggle('dark');
+    localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Featured posts multi-card carousel
+  (function() {
+    const track = document.getElementById('fpTrack');
+    if (!track) return;
+    const slides = Array.from(track.querySelectorAll('.fp-slide'));
+    const prev = document.getElementById('fpPrev');
+    const next = document.getElementById('fpNext');
+    const dotsWrap = document.getElementById('fpDots');
+    let i = 0;
+
+    function perView() {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 640) return 2;
+      return 1;
+    }
+    function maxIndex() { return Math.max(0, slides.length - perView()); }
+
+    function buildDots() {
+      dotsWrap.innerHTML = '';
+      const pages = maxIndex() + 1;
+      for (let p = 0; p < pages; p++) {
+        const d = document.createElement('button');
+        d.className = 'fp-dot';
+        d.setAttribute('aria-label', `Go to slide ${p + 1}`);
+        d.addEventListener('click', () => go(p));
+        dotsWrap.appendChild(d);
+      }
+    }
+
+    function go(n) {
+      i = Math.max(0, Math.min(maxIndex(), n));
+      const step = 100 / perView();
+      track.style.transform = `translateX(-${i * step}%)`;
+      Array.from(dotsWrap.children).forEach((d, idx) => d.classList.toggle('active', idx === i));
+      prev.disabled = i === 0;
+      next.disabled = i === maxIndex();
+    }
+
+    prev.addEventListener('click', () => go(i - 1));
+    next.addEventListener('click', () => go(i + 1));
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { buildDots(); go(Math.min(i, maxIndex())); }, 120);
+    });
+
+    let startX = 0, dx = 0, dragging = false;
+    track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; dragging = true; track.style.transition = 'none'; }, { passive: true });
+    track.addEventListener('touchmove',  (e) => { if (!dragging) return; dx = e.touches[0].clientX - startX; const step = 100 / perView(); track.style.transform = `translateX(calc(-${i * step}% + ${dx}px))`; }, { passive: true });
+    track.addEventListener('touchend',   () => {
+      dragging = false;
+      track.style.transition = '';
+      if (Math.abs(dx) > 60) go(i + (dx < 0 ? 1 : -1)); else go(i);
+      dx = 0;
+    });
+
+    buildDots();
+    go(0);
+  })();
+
+  // Case study carousel
+  (function() {
+    const track = document.getElementById('csTrack');
+    if (!track) return;
+    const slides = Array.from(track.querySelectorAll('.cs-slide'));
+    const prev = document.getElementById('csPrev');
+    const next = document.getElementById('csNext');
+    const dotsWrap = document.getElementById('csDots');
+    const progress = document.getElementById('csProgress');
+    const curEl = document.getElementById('csCurrent');
+    const totEl = document.getElementById('csTotal');
+    const titleEl = document.getElementById('csTitle');
+    let i = 0;
+
+    totEl.textContent = String(slides.length).padStart(2, '0');
+
+    slides.forEach((_, idx) => {
+      const d = document.createElement('button');
+      d.className = 'cs-dot';
+      d.setAttribute('aria-label', `Go to case study ${idx + 1}`);
+      d.addEventListener('click', () => go(idx));
+      dotsWrap.appendChild(d);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function go(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      track.style.transform = `translateX(-${i * 100}%)`;
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+      progress.style.width = `${((i + 1) / slides.length) * 100}%`;
+      curEl.textContent = String(i + 1).padStart(2, '0');
+      titleEl.textContent = slides[i].dataset.title;
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+      slides[i].querySelectorAll('.cs-metric-num').forEach(el => {
+        el.style.animation = 'none';
+        void el.offsetWidth;
+        el.style.animation = '';
+      });
+    }
+
+    prev.addEventListener('click', () => go(i - 1));
+    next.addEventListener('click', () => go(i + 1));
+
+    document.addEventListener('keydown', (e) => {
+      const section = document.getElementById('case-studies');
+      const r = section.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.6 && r.bottom > window.innerHeight * 0.4) {
+        if (e.key === 'ArrowRight') go(i + 1);
+        if (e.key === 'ArrowLeft')  go(i - 1);
+      }
+    });
+
+    let startX = 0, dx = 0, dragging = false;
+    track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; dragging = true; track.style.transition = 'none'; }, { passive: true });
+    track.addEventListener('touchmove',  (e) => { if (!dragging) return; dx = e.touches[0].clientX - startX; track.style.transform = `translateX(calc(-${i * 100}% + ${dx}px))`; }, { passive: true });
+    track.addEventListener('touchend',   () => {
+      dragging = false;
+      track.style.transition = '';
+      if (Math.abs(dx) > 60) go(i + (dx < 0 ? 1 : -1)); else go(i);
+      dx = 0;
+    });
+
+    go(0);
+  })();
+
+  // LinkedIn recommendations carousel
+  (function() {
+    const track = document.getElementById('recTrack');
+    if (!track) return;
+    const cards = Array.from(track.querySelectorAll('.rec-card'));
+    const prevBtn = document.getElementById('recPrev');
+    const nextBtn = document.getElementById('recNext');
+    const dotsWrap = document.getElementById('recDots');
+
+    cards.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'rec-dot';
+      d.setAttribute('aria-label', `Go to recommendation ${i + 1}`);
+      d.addEventListener('click', () => scrollToCard(i));
+      dotsWrap.appendChild(d);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function cardStep() {
+      if (cards.length < 2) return cards[0]?.offsetWidth || 0;
+      return cards[1].offsetLeft - cards[0].offsetLeft;
+    }
+    function scrollToCard(i) {
+      const step = cardStep();
+      track.scrollTo({ left: step * i, behavior: 'smooth' });
+    }
+    function currentIndex() {
+      const step = cardStep();
+      return step ? Math.round(track.scrollLeft / step) : 0;
+    }
+    function updateUI() {
+      const i = currentIndex();
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+      prevBtn.disabled = i <= 0;
+      nextBtn.disabled = i >= cards.length - 1;
+    }
+
+    prevBtn.addEventListener('click', () => scrollToCard(Math.max(0, currentIndex() - 1)));
+    nextBtn.addEventListener('click', () => scrollToCard(Math.min(cards.length - 1, currentIndex() + 1)));
+    track.addEventListener('scroll', () => { window.requestAnimationFrame(updateUI); }, { passive: true });
+    window.addEventListener('resize', updateUI);
+
+    cards.forEach(card => {
+      const btn = card.querySelector('.rec-toggle');
+      btn.addEventListener('click', () => {
+        const expanded = card.classList.toggle('expanded');
+        btn.textContent = expanded ? 'Show less ↑' : 'Read more →';
+      });
+    });
+
+    updateUI();
+  })();
+
+  // Easter egg
+  console.log('%c👋 hey, curious dev.', 'color:#8B5CF6;font-size:18px;font-weight:bold;font-family:monospace');
+  console.log('%cif you\'re reading this, we should probably work together.\nemail: hi@alex.dev', 'color:#10B981;font-family:monospace');
+</script>
+
+</body>
+</html>

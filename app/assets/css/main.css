@@ -11,6 +11,9 @@
 /* Preline Themes */
 @import "./themes/theme.css";
 
+/* Landing page tokens + custom utilities */
+@import "./landing.css";
+
 /* Adds pointer cursor to buttons */
 @layer base {
   button:not(:disabled),

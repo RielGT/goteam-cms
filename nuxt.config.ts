@@ -25,11 +25,17 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
         {
           rel: "stylesheet",
-          href: "https://a.storyblok.com/f/212319/x/e6ccda03b8/blueprint-blank.css",
+          href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
         },
       ],
+      htmlAttrs: { class: "scroll-smooth" },
+      bodyAttrs: {
+        class: "bg-paper text-ink dark:bg-ink dark:text-zinc-100 antialiased transition-colors duration-300",
+      },
     },
   },
 
