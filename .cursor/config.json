@@ -1,0 +1,4 @@
+{
+  "accessibility_audit": "policy",
+  "_comment": "accessibility_audit: 'policy' = use page-type defaults, 'always' = force on every run, 'off' = never. Docs: .cursor/agents/accessibility-auditor.md"
+}

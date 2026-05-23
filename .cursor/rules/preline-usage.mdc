@@ -1,0 +1,8 @@
+---
+description: Preline UI component patterns
+globs: app/components/**/*.vue
+alwaysApply: false
+---
+Use Preline component patterns as the base. Do not implement primitives from scratch when Preline provides them.
+Layer custom styling via Tailwind utility classes from the project theme.
+Reference: https://preline.co/docs/

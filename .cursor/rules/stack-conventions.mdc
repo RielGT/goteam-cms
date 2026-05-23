@@ -1,0 +1,8 @@
+---
+description: Core stack conventions for this project
+alwaysApply: true
+---
+Nuxt 4, Vue 3 Composition API with <script setup lang="ts">.
+Tailwind v4 via @tailwindcss/vite. Theme tokens in assets/css/main.css using @theme.
+Preline component patterns as the base UI library. @tailwindcss/forms for form baseline.
+TypeScript strict mode. Shared types in shared/types/.

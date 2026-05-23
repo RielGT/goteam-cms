@@ -1,0 +1,10 @@
+---
+description: Hard rules — never violated
+alwaysApply: true
+---
+Never use raw <img> tags — use <NuxtImg> with explicit width, height, loading, format.
+In Storyblok mode (when .storyblok/ exists), never hardcode copy in Vue components — copy comes from Storyblok blocks. In static mode, hardcoded copy in components is acceptable or use a content/ directory.
+Never edit the Storyblok schema via the UI — edit .storyblok/components/ and sync.
+Never run git commands — the developer handles all version control.
+Never deploy — the developer handles deployment.
+Never ask the user follow-up questions — infer from the brief, apply defaults, log assumptions in agent-changes.md.

@@ -1,0 +1,10 @@
+---
+description: Storyblok block component conventions
+globs: app/components/storyblok/**/*, .storyblok/**/*
+alwaysApply: false
+---
+Component filenames match Storyblok block names exactly.
+Every block root element uses v-editable="blok".
+Use <StoryblokComponent> for nested blocks.
+Use useAsyncStoryblok for page-level story fetching.
+Block schemas live in .storyblok/components/ — repo is the source of truth, not the Storyblok UI.

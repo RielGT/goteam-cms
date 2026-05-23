@@ -1,0 +1,8 @@
+---
+description: Tailwind v4 and theme token usage
+globs: **/*.vue, **/*.css
+alwaysApply: false
+---
+No tailwind.config.js — theme via @theme directive in assets/css/main.css.
+Use only tokens defined in the @theme block. Arbitrary values like text-[#3a4f] require justification.
+Use @tailwindcss/forms classes for form styling baseline.

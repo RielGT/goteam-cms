@@ -1,0 +1,9 @@
+---
+description: Nuxt 4 directory layout enforcement
+globs: app/**/*, server/**/*, shared/**/*
+alwaysApply: false
+---
+Client code lives under app/: pages/, components/, composables/, layouts/, middleware/.
+Server code at root under server/.
+Shared types in shared/types/ — auto-imported in both app/ and server/.
+Never put client code at the project root.
