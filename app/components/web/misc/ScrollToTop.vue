@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
+const props = withDefaults(
+  defineProps<{
+    threshold?: number;
+    ariaLabel?: string;
+  }>(),
+  { threshold: 400, ariaLabel: "Scroll to top" },
+);
+
 const visible = ref(false);
 
 function onScroll() {
-  visible.value = window.scrollY > 400;
+  visible.value = window.scrollY > props.threshold;
 }
 
 function scrollToTop() {
@@ -32,7 +40,7 @@ onBeforeUnmount(() => {
   >
     <button
       v-if="visible"
-      aria-label="Scroll to top"
+      :aria-label="ariaLabel"
       class="fixed bottom-24 right-5 sm:bottom-28 sm:right-8 z-40 w-12 h-12 grid place-items-center rounded-full border border-zinc-200 dark:border-white/10 bg-paper/95 dark:bg-ink/95 backdrop-blur text-zinc-600 dark:text-zinc-400 shadow-lg shadow-ink/5 dark:shadow-black/40 hover:-translate-y-0.5 hover:border-brand-purple hover:text-brand-purple transition print:hidden"
       @click="scrollToTop"
     >

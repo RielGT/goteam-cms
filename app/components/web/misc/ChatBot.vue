@@ -1,27 +1,28 @@
 <script setup lang="ts">
 import { ref, nextTick } from "vue";
+import type { ChatBot, ChatReply } from "../types";
 
-type ChatMessage = {
-  role: "bot" | "user";
-  text: string;
-};
+const props = withDefaults(
+  defineProps<{
+    bot: ChatBot;
+    quickReplies?: string[];
+    replies?: ChatReply[];
+    fallback?: string;
+  }>(),
+  {
+    quickReplies: () => [],
+    replies: () => [],
+    fallback: "Good question — I'll route that to the team.",
+  },
+);
+
+type ChatMessage = { role: "bot" | "user"; text: string };
 
 const open = ref(false);
 const userInput = ref("");
 const messagesEl = ref<HTMLElement | null>(null);
 
-const messages = ref<ChatMessage[]>([
-  {
-    role: "bot",
-    text: "Hey — I'm alex.bot. Ask me about projects, process, pricing, or availability.",
-  },
-]);
-
-const quickReplies = [
-  "What's your availability?",
-  "How much for an MVP?",
-  "Show me recent work",
-];
+const messages = ref<ChatMessage[]>([{ role: "bot", text: props.bot.greeting }]);
 
 function toggle() {
   open.value = !open.value;
@@ -29,23 +30,14 @@ function toggle() {
 
 function botReply(input: string): string {
   const q = input.toLowerCase();
-  if (q.includes("avail") || q.includes("free") || q.includes("when"))
-    return "I'm currently taking new projects — booking ~2 weeks out. Want to grab a quick intro call?";
-  if (q.includes("price") || q.includes("cost") || q.includes("mvp") || q.includes("budget"))
-    return "Most MVPs land between $8k–$25k depending on scope. Happy to scope it together — drop your idea below.";
-  if (q.includes("work") || q.includes("project") || q.includes("portfolio"))
-    return "Scroll up to / recent work — three case studies with real numbers. Want a deeper walk-through?";
-  if (q.includes("stack") || q.includes("tech"))
-    return "Day-to-day: Nuxt / Vue, TypeScript, Tailwind, Postgres, and whatever ships. Pragmatic over trendy.";
-  if (q.includes("contact") || q.includes("email") || q.includes("hire"))
-    return "Easiest path: hit the 'Let's chat' button up top, or book a call from the footer.";
-  return "Good question — I'll route that to Alex. In the meantime, the FAQ section covers most of it.";
+  for (const r of props.replies) {
+    if (r.match.some((m) => q.includes(m.toLowerCase()))) return r.text;
+  }
+  return props.fallback;
 }
 
 function scrollChatToBottom() {
-  if (messagesEl.value) {
-    messagesEl.value.scrollTop = messagesEl.value.scrollHeight;
-  }
+  if (messagesEl.value) messagesEl.value.scrollTop = messagesEl.value.scrollHeight;
 }
 
 async function sendMessage(text?: string) {
@@ -84,8 +76,8 @@ async function sendMessage(text?: string) {
               <span class="relative inline-block w-2.5 h-2.5 rounded-full bg-brand-green" />
             </span>
             <div class="leading-tight">
-              <p class="font-display font-semibold text-sm text-ink dark:text-white">alex.bot</p>
-              <p class="font-mono text-[10px] text-zinc-500">/ usually replies instantly</p>
+              <p class="font-display font-semibold text-sm text-ink dark:text-white">{{ bot.name }}</p>
+              <p class="font-mono text-[10px] text-zinc-500">{{ bot.tagline }}</p>
             </div>
           </div>
           <button
@@ -117,7 +109,7 @@ async function sendMessage(text?: string) {
           </div>
         </div>
 
-        <div v-if="messages.length <= 1" class="px-4 pb-2 flex flex-wrap gap-1.5">
+        <div v-if="messages.length <= 1 && quickReplies.length" class="px-4 pb-2 flex flex-wrap gap-1.5">
           <button
             v-for="q in quickReplies"
             :key="q"
