@@ -32,7 +32,7 @@ const posts: Post[] = [
       <div class="overflow-hidden -mx-2 reveal">
         <div id="fpTrack" class="fp-track">
           <div v-for="p in posts" :key="p.title" class="fp-slide">
-            <a href="#" class="fp-card group block h-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft">
+            <a href="#" class="fp-card group block h-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 hover:border-brand-purple transition shadow-soft">
               <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
                 <img :src="p.image" alt="" class="w-full h-full object-cover" loading="lazy">
                 <span class="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">{{ p.tag }}</span>

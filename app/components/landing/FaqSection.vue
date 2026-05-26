@@ -11,7 +11,7 @@ const faqs = [
 <template>
   <section id="faq" class="max-w-4xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
     <div class="mb-12 reveal">
-      <p class="font-mono text-xs text-brand-purple mb-3">/ questions?</p>
+      <p class="font-mono text-xs text-brand-orange mb-3">/ questions?</p>
       <h2 class="font-display text-4xl sm:text-5xl font-bold">The stuff people ask first.</h2>
     </div>
 

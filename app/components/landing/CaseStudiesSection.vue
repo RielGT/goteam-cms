@@ -105,7 +105,7 @@ const statColor = (c: Stat["color"]) =>
   <section id="case-studies" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
     <div class="grid lg:grid-cols-12 gap-8 mb-10 items-end reveal">
       <div class="lg:col-span-8">
-        <p class="font-mono text-xs text-brand-purple mb-3">/ go deeper</p>
+        <p class="font-mono text-xs text-brand-green mb-3">/ go deeper</p>
         <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight">Pick a project. See how it actually got built.</h2>
       </div>
       <p class="lg:col-span-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">No fluff — the real problem, the choices I made, what broke, and what it shipped as.</p>
@@ -174,7 +174,7 @@ const statColor = (c: Stat["color"]) =>
               </div>
               <div class="p-5 rounded-xl bg-brand-purple/5 dark:bg-brand-purple/10 border border-brand-purple/20">
                 <p class="font-mono text-xs text-brand-purple mb-2">→ the result</p>
-                <p class="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{{ s.result }}</p>
+                <p class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{{ s.result }}</p>
               </div>
               <div class="flex items-center gap-4">
                 <a href="#" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition">

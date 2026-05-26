@@ -94,7 +94,7 @@ const categoryClass = (c: Project["categoryColor"]) =>
           <h3 class="font-display text-3xl font-bold mb-3">{{ p.title }}</h3>
           <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5">{{ p.description }}</p>
           <ul class="text-sm space-y-2 mb-6">
-            <li v-for="b in p.bullets" :key="b" class="flex gap-3"><span class="text-brand-purple font-mono">→</span> {{ b }}</li>
+            <li v-for="b in p.bullets" :key="b" class="flex gap-3 text-zinc-700 dark:text-zinc-300"><span class="text-brand-purple font-mono">→</span> {{ b }}</li>
           </ul>
           <div class="flex items-center gap-4">
             <a href="#" class="inline-flex items-center gap-2 text-sm font-medium border-b border-current hover:text-brand-purple hover:border-brand-purple transition">

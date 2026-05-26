@@ -3,7 +3,7 @@
     <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
     <div class="relative max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
       <div class="max-w-2xl mb-14 reveal">
-        <p class="font-mono text-xs text-brand-purple mb-3">/ how I work — the cycle</p>
+        <p class="font-mono text-xs text-brand-green mb-3">/ how I work — the cycle</p>
         <h2 class="font-display text-4xl sm:text-5xl font-bold">It's not a line. It's a <span class="squiggle text-brand-orange">loop</span>.</h2>
         <p class="mt-4 text-zinc-600 dark:text-zinc-400 text-lg">Discovery never really ends. Each launch feeds back into the next round of discovery. Hover or tap a node to see what happens at each station.</p>
       </div>

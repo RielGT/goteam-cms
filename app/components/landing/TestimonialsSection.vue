@@ -1,7 +1,7 @@
 <template>
   <section id="words" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
     <div class="mb-14 reveal">
-      <p class="font-mono text-xs text-brand-purple mb-3">/ kind words</p>
+      <p class="font-mono text-xs text-brand-orange mb-3">/ kind words</p>
       <h2 class="font-display text-4xl sm:text-5xl font-bold max-w-2xl">What people have said after we shipped.</h2>
     </div>
 
@@ -15,7 +15,7 @@
           <img src="https://i.pravatar.cc/80?img=12" class="w-12 h-12 rounded-full border-2 border-white/30" alt="Maya Chen">
           <div>
             <div class="font-semibold">Maya Chen</div>
-            <div class="text-sm text-white/70">Founder, Finch Analytics</div>
+            <div class="text-sm text-white/85">Founder, Finch Analytics</div>
           </div>
         </figcaption>
       </figure>

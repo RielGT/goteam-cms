@@ -13,7 +13,7 @@ const onSubmit = (e: Event) => {
     <div class="absolute inset-0 bg-grid opacity-50 pointer-events-none" />
     <div class="relative max-w-5xl mx-auto px-5 sm:px-8 py-24 sm:py-32 grid lg:grid-cols-5 gap-12 items-start">
       <div class="lg:col-span-2 reveal">
-        <p class="font-mono text-xs text-brand-purple mb-3">/ let's talk</p>
+        <p class="font-mono text-xs text-brand-green mb-3">/ let's talk</p>
         <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight">Free 30-min call. No pitch deck.</h2>
         <p class="mt-5 text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed">Tell me what you're building. I'll tell you honestly whether I can help, what it'd take, and roughly when I could start.</p>
 

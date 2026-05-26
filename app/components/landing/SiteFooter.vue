@@ -16,7 +16,7 @@
 
         <div>
           <p class="font-mono text-xs text-zinc-500 mb-4">/ get in touch</p>
-          <ul class="space-y-2 text-sm">
+          <ul class="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
             <li><a href="mailto:hi@alex.dev" class="hover:text-brand-purple transition">hi@alex.dev</a></li>
             <li><a href="#" class="hover:text-brand-purple transition">Book a 30-min call →</a></li>
           </ul>
@@ -24,7 +24,7 @@
 
         <div>
           <p class="font-mono text-xs text-zinc-500 mb-4">/ elsewhere</p>
-          <ul class="space-y-2 text-sm">
+          <ul class="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
             <li><a href="#" class="hover:text-brand-purple transition">GitHub</a></li>
             <li><a href="#" class="hover:text-brand-purple transition">LinkedIn</a></li>
             <li><a href="#" class="hover:text-brand-purple transition">Twitter / X</a></li>

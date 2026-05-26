@@ -38,7 +38,7 @@
                 class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal"
                 loading="lazy"
               >
-              <div class="absolute top-4 left-4 bg-paper dark:bg-ink border border-zinc-200 dark:border-white/10 rounded-full px-3 py-1.5 text-xs font-mono shadow-soft">
+              <div class="absolute top-4 left-4 bg-paper dark:bg-ink text-ink dark:text-zinc-100 border border-zinc-200 dark:border-white/10 rounded-full px-3 py-1.5 text-xs font-mono shadow-soft">
                 ☕ probably on coffee #3
               </div>
             </div>

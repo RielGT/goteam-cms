@@ -27,7 +27,7 @@ const pills: Pill[] = [
         <span class="w-1.5 h-1.5 rounded-full bg-brand-green pulse-dot" />
         <span>/ tools I reach for daily</span>
         <span class="flex-1 h-px bg-zinc-200 dark:bg-white/5" />
-        <span class="hidden sm:inline text-zinc-400 dark:text-zinc-600">hover to pause →</span>
+        <span class="hidden sm:inline text-zinc-400 dark:text-zinc-500">hover to pause →</span>
       </div>
     </div>
 

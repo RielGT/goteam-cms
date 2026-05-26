@@ -2,7 +2,7 @@
   <section id="process" class="bg-white/40 dark:bg-white/[0.02] border-y border-zinc-200/70 dark:border-white/5">
     <div class="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
       <div class="max-w-2xl mb-16 reveal">
-        <p class="font-mono text-xs text-brand-purple mb-3">/ how I work</p>
+        <p class="font-mono text-xs text-brand-orange mb-3">/ how I work</p>
         <h2 class="font-display text-4xl sm:text-5xl font-bold">Simple. No surprises.</h2>
         <p class="mt-4 text-zinc-600 dark:text-zinc-400 text-lg">I keep the process boring on purpose. The fun part is your product.</p>
       </div>
