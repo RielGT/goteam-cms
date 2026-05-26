@@ -64,7 +64,11 @@ defineProps<{
                 <span class="w-2.5 h-2.5 rounded-full bg-green-400" />
                 <span class="ml-2 text-[10px] font-mono text-zinc-500">{{ codeSnippet.filename }}</span>
               </div>
-              <pre class="text-[11px] font-mono p-3 leading-relaxed text-zinc-700 dark:text-zinc-300" v-html="codeSnippet.html" />
+              <!-- eslint-disable-next-line vue/no-v-html -->
+              <pre
+                class="text-[11px] font-mono p-3 leading-relaxed text-zinc-700 dark:text-zinc-300"
+                v-html="codeSnippet.html"
+              />
             </div>
 
             <div

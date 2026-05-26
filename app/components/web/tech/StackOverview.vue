@@ -27,12 +27,14 @@ withDefaults(
       <div class="marquee-track">
         <div class="flex items-center">
           <span v-for="p in pills" :key="`a-${p.name}`" class="tech-pill">
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <span v-html="p.svg" />
             {{ p.name }}
           </span>
         </div>
         <div class="flex items-center" aria-hidden="true">
           <span v-for="p in pills" :key="`b-${p.name}`" class="tech-pill">
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <span v-html="p.svg" />
             {{ p.name }}
           </span>

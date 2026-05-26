@@ -10,7 +10,13 @@ withDefaults(
     legal?: string;
     backToTop?: NavLink;
   }>(),
-  { groups: () => [] },
+  {
+    tagline: undefined,
+    availability: undefined,
+    groups: () => [],
+    legal: undefined,
+    backToTop: undefined,
+  },
 );
 </script>
 

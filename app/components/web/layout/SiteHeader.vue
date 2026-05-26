@@ -9,7 +9,7 @@ withDefaults(
     themeToggle?: boolean;
     cta?: Cta;
   }>(),
-  { nav: () => [], themeToggle: true },
+  { nav: () => [], themeToggle: true, cta: undefined },
 );
 
 const isDark = ref(false);

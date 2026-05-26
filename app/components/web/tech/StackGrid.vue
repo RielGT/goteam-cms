@@ -45,7 +45,11 @@ const focused = computed(() =>
             <span class="w-1.5 h-1.5 rounded-full bg-brand-green pulse-dot" />
             <span>{{ header.eyebrow }}</span>
           </div>
-          <h2 class="font-display text-4xl sm:text-5xl font-bold text-ink dark:text-white leading-tight" v-html="header.title" />
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <h2
+            class="font-display text-4xl sm:text-5xl font-bold text-ink dark:text-white leading-tight"
+            v-html="header.title"
+          />
         </div>
 
         <div
@@ -102,6 +106,7 @@ const focused = computed(() =>
           @focusin="hoveredIdx = i"
         >
           <span class="tech-card__wash" aria-hidden="true" />
+          <!-- eslint-disable-next-line vue/no-v-html -->
           <span class="tech-card__icon" v-html="t.svg" />
 
           <div class="relative z-10 mt-3 flex items-center justify-between gap-2">

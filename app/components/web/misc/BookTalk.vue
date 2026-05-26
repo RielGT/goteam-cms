@@ -11,7 +11,13 @@ withDefaults(
     successLabel?: string;
     fallback?: { prefix: string; link: NavLink };
   }>(),
-  { submitLabel: "Send it →", successLabel: "Thanks — talk soon ✓" },
+  {
+    sectionId: undefined,
+    bullets: () => [],
+    submitLabel: "Send it →",
+    successLabel: "Thanks — talk soon ✓",
+    fallback: undefined,
+  },
 );
 
 const onSubmit = (e: Event, label: string) => {
@@ -32,11 +38,14 @@ const onSubmit = (e: Event, label: string) => {
 
         <div v-if="bullets?.length" class="mt-8 space-y-3 text-sm">
           <div v-for="(b, i) in bullets" :key="i" class="flex items-center gap-3">
-            <span class="w-1.5 h-1.5 rounded-full" :class="{
-              'bg-brand-green': (b.tone ?? 'green') === 'green',
-              'bg-brand-purple': b.tone === 'purple',
-              'bg-brand-orange': b.tone === 'orange',
-            }" />
+            <span
+              class="w-1.5 h-1.5 rounded-full"
+              :class="{
+                'bg-brand-green': (b.tone ?? 'green') === 'green',
+                'bg-brand-purple': b.tone === 'purple',
+                'bg-brand-orange': b.tone === 'orange',
+              }"
+            />
             {{ b.text }}
           </div>
         </div>

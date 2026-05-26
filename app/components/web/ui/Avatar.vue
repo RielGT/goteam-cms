@@ -10,7 +10,7 @@ const props = withDefaults(
     ringTone?: Tone;
     ring?: boolean;
   }>(),
-  { size: "md", ring: false },
+  { size: "md", ringTone: "purple", ring: false },
 );
 
 const sizeClass = computed(

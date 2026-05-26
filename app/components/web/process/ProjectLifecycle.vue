@@ -138,6 +138,7 @@ const toneText: Record<Tone, string> = {
             </div>
 
             <div class="relative p-5 sm:p-6 font-mono text-[12.5px] leading-relaxed min-h-[420px]">
+              <!-- eslint-disable-next-line vue/no-v-html -->
               <pre
                 v-for="(a, idx) in artifacts"
                 :key="a.filename"

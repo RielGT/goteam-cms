@@ -51,6 +51,7 @@ const ringClass = (t: Tone) =>
               </div>
             </header>
             <blockquote class="rec-quote text-[15px] leading-relaxed text-zinc-700 dark:text-zinc-300 flex-1">
+              <!-- eslint-disable-next-line vue/no-v-html -->
               <span class="line-clamp" v-html="r.quote" />
             </blockquote>
             <button class="rec-toggle mt-4 text-xs font-mono text-brand-purple hover:underline self-start">Read more →</button>

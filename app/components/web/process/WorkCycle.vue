@@ -91,7 +91,11 @@ const toneBg: Record<Tone, string> = {
                   </div>
                   <span class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono" :class="toneBg[panel.tone]">{{ panel.tag }}</span>
                 </div>
-                <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6" v-html="panel.body" />
+                <!-- eslint-disable-next-line vue/no-v-html -->
+                <p
+                  class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6"
+                  v-html="panel.body"
+                />
                 <div class="grid sm:grid-cols-2 gap-3">
                   <div v-for="card in panel.cards" :key="card.label" class="p-4 rounded-xl border border-zinc-200 dark:border-white/10">
                     <p class="text-[11px] font-mono text-zinc-400 mb-1">{{ card.label }}</p>
