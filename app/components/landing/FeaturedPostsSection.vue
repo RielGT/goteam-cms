@@ -34,13 +34,13 @@ const posts: Post[] = [
           <div v-for="p in posts" :key="p.title" class="fp-slide">
             <a href="#" class="fp-card group block h-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft">
               <div class="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
-                <img :src="p.image" alt="" class="w-full h-full object-cover" loading="lazy"/>
+                <img :src="p.image" alt="" class="w-full h-full object-cover" loading="lazy">
                 <span class="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">{{ p.tag }}</span>
               </div>
               <div class="p-6">
                 <div class="flex items-center gap-2 text-[11px] font-mono text-zinc-500 mb-3">
                   <span>{{ p.date }}</span>
-                  <span class="w-1 h-1 rounded-full bg-zinc-400"></span>
+                  <span class="w-1 h-1 rounded-full bg-zinc-400" />
                   <span>{{ p.readTime }}</span>
                 </div>
                 <h3 class="font-display text-xl font-bold leading-snug group-hover:text-brand-purple transition">{{ p.title }}</h3>
@@ -55,7 +55,7 @@ const posts: Post[] = [
       </div>
 
       <div class="flex items-center justify-between gap-4 mt-10">
-        <div id="fpDots" class="flex items-center gap-2"></div>
+        <div id="fpDots" class="flex items-center gap-2" />
         <a href="#" class="inline-flex items-center gap-2 text-sm font-medium hover:text-brand-purple transition">All posts →</a>
       </div>
     </div>

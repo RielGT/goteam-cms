@@ -27,7 +27,7 @@ const ringClass = (c: Rec["ringColor"]) =>
 
 <template>
   <section id="linkedin" class="border-y border-zinc-200/70 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] relative overflow-hidden">
-    <div class="absolute inset-0 bg-grid opacity-40 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-grid opacity-40 pointer-events-none" />
     <div class="relative max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 reveal">
         <div>
@@ -52,7 +52,7 @@ const ringClass = (c: Rec["ringColor"]) =>
         <div id="recTrack" class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-6 -mx-5 px-5 sm:mx-0 sm:px-0 scroll-smooth" style="scrollbar-width: thin;">
           <article v-for="r in recs" :key="r.name" class="rec-card snap-start shrink-0 w-[88%] sm:w-[420px] p-7 rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink hover:border-brand-purple transition shadow-soft flex flex-col">
             <header class="flex items-start gap-4 mb-5">
-              <img :src="r.avatar" :alt="r.name" class="w-12 h-12 rounded-full ring-2" :class="ringClass(r.ringColor)" />
+              <img :src="r.avatar" :alt="r.name" class="w-12 h-12 rounded-full ring-2" :class="ringClass(r.ringColor)">
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-1.5">
                   <h3 class="font-semibold text-sm truncate">{{ r.name }}</h3>
@@ -69,16 +69,16 @@ const ringClass = (c: Rec["ringColor"]) =>
           </article>
         </div>
 
-        <div id="recDots" class="flex items-center justify-center gap-2 mt-6"></div>
+        <div id="recDots" class="flex items-center justify-center gap-2 mt-6" />
       </div>
 
       <div class="mt-10 flex flex-wrap items-center justify-between gap-4 reveal">
         <div class="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400">
           <div class="flex -space-x-2">
-            <img src="https://i.pravatar.cc/40?img=15" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt=""/>
-            <img src="https://i.pravatar.cc/40?img=47" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt=""/>
-            <img src="https://i.pravatar.cc/40?img=11" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt=""/>
-            <img src="https://i.pravatar.cc/40?img=49" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt=""/>
+            <img src="https://i.pravatar.cc/40?img=15" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt="">
+            <img src="https://i.pravatar.cc/40?img=47" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt="">
+            <img src="https://i.pravatar.cc/40?img=11" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt="">
+            <img src="https://i.pravatar.cc/40?img=49" class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink" alt="">
             <div class="w-7 h-7 rounded-full border-2 border-paper dark:border-ink bg-brand-purple text-white text-[10px] font-mono grid place-items-center">+3</div>
           </div>
           <span><span class="font-semibold text-ink dark:text-white">7 recommendations</span> on LinkedIn</span>

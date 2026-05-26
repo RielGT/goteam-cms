@@ -1,6 +1,6 @@
 <template>
   <section id="process-cycle" class="relative overflow-hidden bg-white/40 dark:bg-white/[0.02] border-b border-zinc-200/70 dark:border-white/5">
-    <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
     <div class="relative max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
       <div class="max-w-2xl mb-14 reveal">
         <p class="font-mono text-xs text-brand-purple mb-3">/ how I work — the cycle</p>
@@ -10,7 +10,7 @@
 
       <div class="grid lg:grid-cols-12 gap-10 items-center">
         <div class="lg:col-span-5 reveal">
-          <div class="relative aspect-square max-w-[480px] mx-auto" id="pcWheel">
+          <div id="pcWheel" class="relative aspect-square max-w-[480px] mx-auto">
             <div class="absolute inset-0 grid place-items-center pointer-events-none">
               <div class="text-center">
                 <p class="font-mono text-[10px] text-zinc-400 mb-1">/ currently</p>
@@ -32,7 +32,7 @@
               <line id="pcSpoke" x1="200" y1="200" x2="200" y2="200" stroke="currentColor" class="text-brand-purple" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.5" style="transition: all .6s ease;"/>
             </svg>
 
-            <div id="pcNodes" class="absolute inset-0"></div>
+            <div id="pcNodes" class="absolute inset-0" />
           </div>
 
           <div class="mt-8 flex items-center justify-center gap-3">
@@ -52,7 +52,7 @@
         <div class="lg:col-span-7 reveal">
           <div class="relative rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink shadow-soft overflow-hidden min-h-[460px]">
             <div class="flex items-center gap-1 px-6 pt-5 pb-3 border-b border-zinc-200/70 dark:border-white/5 overflow-x-auto">
-              <span id="pcCrumbs" class="flex items-center gap-1 text-[11px] font-mono text-zinc-400 whitespace-nowrap"></span>
+              <span id="pcCrumbs" class="flex items-center gap-1 text-[11px] font-mono text-zinc-400 whitespace-nowrap" />
             </div>
 
             <div id="pcContent" class="p-7 sm:p-9">

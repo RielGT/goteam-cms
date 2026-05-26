@@ -86,7 +86,7 @@ const categoryClass = (c: Project["categoryColor"]) =>
       <article v-for="p in projects" :key="p.number" class="project-card grid lg:grid-cols-12 gap-8 lg:gap-14 items-center reveal">
         <div class="lg:col-span-7" :class="p.reverse ? 'order-2 lg:order-1' : ''">
           <div class="relative rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-soft">
-            <img :src="p.image" :alt="p.alt" class="w-full aspect-[16/10] object-cover" loading="lazy"/>
+            <img :src="p.image" :alt="p.alt" class="w-full aspect-[16/10] object-cover" loading="lazy">
           </div>
         </div>
         <div class="lg:col-span-5" :class="p.reverse ? 'order-1 lg:order-2' : ''">

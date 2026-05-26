@@ -24,9 +24,9 @@ const pills: Pill[] = [
   <section aria-label="Tech stack" class="border-y border-zinc-200/70 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] py-10 overflow-hidden">
     <div class="max-w-6xl mx-auto px-5 sm:px-8 mb-6">
       <div class="flex items-center gap-3 text-xs font-mono text-zinc-500 dark:text-zinc-500">
-        <span class="w-1.5 h-1.5 rounded-full bg-brand-green pulse-dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-green pulse-dot" />
         <span>/ tools I reach for daily</span>
-        <span class="flex-1 h-px bg-zinc-200 dark:bg-white/5"></span>
+        <span class="flex-1 h-px bg-zinc-200 dark:bg-white/5" />
         <span class="hidden sm:inline text-zinc-400 dark:text-zinc-600">hover to pause →</span>
       </div>
     </div>

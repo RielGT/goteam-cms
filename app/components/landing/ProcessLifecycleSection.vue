@@ -1,8 +1,8 @@
 <template>
   <section id="process-lifecycle" class="relative overflow-hidden border-y border-zinc-200/70 dark:border-white/5 bg-paper dark:bg-ink">
-    <div class="absolute inset-0 bg-grid opacity-40 pointer-events-none"></div>
-    <div class="absolute -top-32 -left-24 w-96 h-96 rounded-full bg-brand-purple/10 blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-32 -right-24 w-96 h-96 rounded-full bg-brand-green/10 blur-3xl pointer-events-none"></div>
+    <div class="absolute inset-0 bg-grid opacity-40 pointer-events-none" />
+    <div class="absolute -top-32 -left-24 w-96 h-96 rounded-full bg-brand-purple/10 blur-3xl pointer-events-none" />
+    <div class="absolute -bottom-32 -right-24 w-96 h-96 rounded-full bg-brand-green/10 blur-3xl pointer-events-none" />
 
     <div class="relative max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
       <div class="max-w-2xl mb-12 reveal">
@@ -11,19 +11,23 @@
         <p class="mt-4 text-zinc-600 dark:text-zinc-400 text-lg">Click any phase to see what actually happens — the artifacts, the cadence, and the receipts.</p>
       </div>
 
-      <div class="relative mb-10 pt-2" id="lcRail">
+      <div id="lcRail" class="relative mb-10 pt-2">
         <div class="hidden sm:block absolute top-1/2 -translate-y-1/2 h-1 rounded-full bg-zinc-200 dark:bg-white/10 overflow-hidden" style="left: 8.333%; right: 8.333%;">
-          <div id="lcProgress" class="h-full bg-gradient-to-r from-brand-purple via-brand-green to-brand-orange transition-all duration-700 ease-out" style="width: 0%"></div>
+          <div id="lcProgress" class="h-full bg-gradient-to-r from-brand-purple via-brand-green to-brand-orange transition-all duration-700 ease-out" style="width: 0%" />
         </div>
 
         <div role="tablist" aria-label="Project lifecycle phases" class="relative grid grid-cols-3 sm:grid-cols-6 gap-3 sm:gap-2">
           <button v-for="(p, idx) in steps" :key="p.label" role="tab" :data-lc-step="idx" :aria-selected="idx === 0 ? 'true' : 'false'" class="lc-step group flex flex-col items-center gap-2 focus:outline-none">
-            <span class="lc-dot relative w-12 h-12 rounded-full grid place-items-center font-mono text-xs font-semibold border-2 bg-paper dark:bg-ink shadow-soft transition-all"
-                  :class="idx === 0 ? 'border-brand-purple text-brand-purple' : 'border-zinc-300 dark:border-white/15 text-zinc-500 dark:text-zinc-400'">
+            <span
+              class="lc-dot relative w-12 h-12 rounded-full grid place-items-center font-mono text-xs font-semibold border-2 bg-paper dark:bg-ink shadow-soft transition-all"
+              :class="idx === 0 ? 'border-brand-purple text-brand-purple' : 'border-zinc-300 dark:border-white/15 text-zinc-500 dark:text-zinc-400'"
+            >
               {{ p.num }}
             </span>
-            <span class="lc-label text-[11px] sm:text-xs font-mono text-center"
-                  :class="idx === 0 ? 'text-ink dark:text-white font-semibold' : 'text-zinc-500 dark:text-zinc-400 transition'">
+            <span
+              class="lc-label text-[11px] sm:text-xs font-mono text-center"
+              :class="idx === 0 ? 'text-ink dark:text-white font-semibold' : 'text-zinc-500 dark:text-zinc-400 transition'"
+            >
               {{ p.label }}
             </span>
           </button>
@@ -58,7 +62,7 @@
             <article v-for="(panel, idx) in panels" :key="panel.title" :data-lc-panel="idx" class="lc-panel" :class="idx !== 0 ? 'hidden' : ''">
               <div class="flex items-center gap-2 mb-4">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono" :class="toneBg[panel.tone]">
-                  <span class="w-1.5 h-1.5 rounded-full" :class="toneDot[panel.tone]"></span> phase {{ panel.num }}
+                  <span class="w-1.5 h-1.5 rounded-full" :class="toneDot[panel.tone]" /> phase {{ panel.num }}
                 </span>
                 <span class="text-[11px] font-mono text-zinc-400">{{ panel.duration }}</span>
               </div>
@@ -78,9 +82,9 @@
           <div class="rounded-2xl border border-zinc-200 dark:border-white/10 bg-zinc-950 text-zinc-100 shadow-soft overflow-hidden">
             <div class="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/[0.03]">
               <div class="flex items-center gap-1.5">
-                <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
-                <span class="w-3 h-3 rounded-full bg-yellow-400/80"></span>
-                <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
+                <span class="w-3 h-3 rounded-full bg-red-400/80" />
+                <span class="w-3 h-3 rounded-full bg-yellow-400/80" />
+                <span class="w-3 h-3 rounded-full bg-green-400/80" />
               </div>
               <div id="lcArtifactTitle" class="text-[11px] font-mono text-zinc-400 truncate">discovery-call-recap.md</div>
               <div class="text-[10px] font-mono text-zinc-500">live</div>

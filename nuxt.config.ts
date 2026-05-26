@@ -1,3 +1,4 @@
+import { defineNuxtConfig } from "nuxt/config";
 import mkcert from "vite-plugin-mkcert";
 import tailwindcss from "@tailwindcss/vite";
 

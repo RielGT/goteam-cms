@@ -1,9 +1,9 @@
 <template>
   <section class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
     <div class="relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-white/10 bg-ink dark:bg-gradient-to-br dark:from-zinc-900 dark:to-ink p-8 sm:p-14">
-      <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none"></div>
-      <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-brand-purple/30 blur-3xl pointer-events-none"></div>
-      <div class="absolute -bottom-24 -left-16 w-72 h-72 rounded-full bg-brand-green/20 blur-3xl pointer-events-none"></div>
+      <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
+      <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-brand-purple/30 blur-3xl pointer-events-none" />
+      <div class="absolute -bottom-24 -left-16 w-72 h-72 rounded-full bg-brand-green/20 blur-3xl pointer-events-none" />
 
       <div class="relative grid lg:grid-cols-12 gap-10 items-center">
         <div class="lg:col-span-7 text-white reveal">
@@ -40,7 +40,7 @@
             </div>
             <div>
               <div class="font-display text-2xl font-bold text-white flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-brand-green pulse-dot"></span> active
+                <span class="w-2 h-2 rounded-full bg-brand-green pulse-dot" /> active
               </div>
               <div class="text-xs font-mono text-zinc-400 mt-1">posts weekly</div>
             </div>
@@ -51,10 +51,10 @@
           <div class="relative">
             <div class="rounded-2xl bg-white dark:bg-zinc-900 overflow-hidden shadow-soft border border-zinc-200 dark:border-white/10 rotate-[-1.5deg] hover:rotate-0 transition-transform duration-500">
               <div class="h-24 bg-gradient-to-r from-brand-purple via-brand-purple to-brand-green relative">
-                <div class="absolute inset-0 bg-grid opacity-30"></div>
+                <div class="absolute inset-0 bg-grid opacity-30" />
               </div>
               <div class="px-5 pb-5 -mt-10 relative">
-                <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=200&q=80" alt="" class="w-20 h-20 rounded-full ring-4 ring-white dark:ring-zinc-900 object-cover relative z-10"/>
+                <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=200&q=80" alt="" class="w-20 h-20 rounded-full ring-4 ring-white dark:ring-zinc-900 object-cover relative z-10">
                 <div class="mt-3">
                   <div class="flex items-center gap-1.5">
                     <h3 class="font-semibold text-ink dark:text-white">Alex Rivera</h3>

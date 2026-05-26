@@ -128,7 +128,7 @@ const statColor = (c: Stat["color"]) =>
     </div>
 
     <div class="h-1 rounded-full bg-zinc-200/70 dark:bg-white/5 overflow-hidden mb-10 reveal">
-      <div id="csProgress" class="h-full bg-gradient-to-r from-brand-purple to-brand-green transition-all duration-500" style="width:25%"></div>
+      <div id="csProgress" class="h-full bg-gradient-to-r from-brand-purple to-brand-green transition-all duration-500" style="width:25%" />
     </div>
 
     <div class="cs-carousel relative -mx-5 sm:mx-0 overflow-hidden">
@@ -137,7 +137,7 @@ const statColor = (c: Stat["color"]) =>
           <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start rounded-2xl border border-zinc-200 dark:border-white/10 bg-paper dark:bg-ink p-6 sm:p-10 shadow-soft">
             <div class="lg:col-span-7 space-y-5">
               <div class="relative rounded-xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900">
-                <img :src="s.image" :alt="s.alt" class="w-full aspect-[16/10] object-cover"/>
+                <img :src="s.image" :alt="s.alt" class="w-full aspect-[16/10] object-cover">
                 <div class="absolute top-4 left-4 flex items-center gap-2">
                   <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-paper/95 dark:bg-ink/95 backdrop-blur border border-zinc-200 dark:border-white/10">{{ s.tag }}</span>
                   <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-brand-green/15 text-brand-green border border-brand-green/30">{{ s.status }}</span>
@@ -189,6 +189,6 @@ const statColor = (c: Stat["color"]) =>
       </div>
     </div>
 
-    <div id="csDots" class="flex items-center justify-center gap-2 mt-8"></div>
+    <div id="csDots" class="flex items-center justify-center gap-2 mt-8" />
   </section>
 </template>

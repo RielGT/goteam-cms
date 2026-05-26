@@ -1,11 +1,11 @@
 <template>
   <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-grid opacity-60 pointer-events-none" />
     <div class="max-w-6xl mx-auto px-5 sm:px-8 pt-16 sm:pt-24 pb-20 relative">
       <div class="grid lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-7 reveal">
           <div class="inline-flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-full bg-brand-green/10 text-brand-green border border-brand-green/20">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-green pulse-dot"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-green pulse-dot" />
             Booking for June 2026
           </div>
 
@@ -32,9 +32,12 @@
         <div class="lg:col-span-5 reveal relative">
           <div class="relative">
             <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-gradient-to-br from-brand-purple/20 via-brand-green/10 to-brand-orange/20 border border-zinc-200 dark:border-white/10">
-              <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=900&q=80"
-                   alt="Alex working at a sunlit desk with coffee"
-                   class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" loading="lazy" />
+              <img
+                src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=900&q=80"
+                alt="Alex working at a sunlit desk with coffee"
+                class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal"
+                loading="lazy"
+              >
               <div class="absolute top-4 left-4 bg-paper dark:bg-ink border border-zinc-200 dark:border-white/10 rounded-full px-3 py-1.5 text-xs font-mono shadow-soft">
                 ☕ probably on coffee #3
               </div>
@@ -42,9 +45,9 @@
 
             <div class="hidden sm:block absolute -bottom-8 -left-8 w-64 rotate-[-3deg] rounded-xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-soft">
               <div class="flex items-center gap-1.5 px-3 py-2 border-b border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-zinc-950">
-                <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-red-400" />
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                <span class="w-2.5 h-2.5 rounded-full bg-green-400" />
                 <span class="ml-2 text-[10px] font-mono text-zinc-500">ship.ts</span>
               </div>
               <pre class="text-[11px] font-mono p-3 leading-relaxed text-zinc-700 dark:text-zinc-300"><span class="text-brand-purple">const</span> ship = <span class="text-brand-orange">async</span> () =&gt; {
