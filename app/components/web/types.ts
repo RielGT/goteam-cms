@@ -266,6 +266,61 @@ export interface Faq {
   a: string;
 }
 
+// ──────────────────────────────────────────────────────────────────────────────
+// Content pages — blogs, case studies, featured posts.
+// ──────────────────────────────────────────────────────────────────────────────
+
+export interface PostCardData {
+  id: string;
+  tag: string;
+  tagTone?: Tone;
+  date: string;
+  dateISO?: string;
+  readTime?: string;
+  title: string;
+  excerpt: string;
+  href: string;
+  image?: string;
+  imageAlt?: string;
+  featured?: boolean;
+}
+
+export interface CaseStudyCardData
+  extends Pick<CaseStudySlide, "title" | "tag" | "status" | "image" | "stats" | "stack"> {
+  id: string;
+  imageAlt?: string;
+  excerpt: string;
+  href: string;
+  featured?: boolean;
+}
+
+export interface ArticleMetaData {
+  tag: string;
+  tagTone?: Tone;
+  date: string;
+  dateISO?: string;
+  readTime?: string;
+  author?: string;
+}
+
+export interface TagFilterOption {
+  id: string;
+  label: string;
+}
+
+export interface ArticleContent {
+  id: string;
+  slug: string;
+  title: string;
+  lede?: string;
+  meta: ArticleMetaData;
+  coverImage?: string;
+  coverImageAlt?: string;
+  coverCaption?: string;
+  html: string;
+  related: PostCardData[];
+}
+
 // ChatBot.
 export interface ChatReply {
   match: string[]; // case-insensitive substrings; first match wins

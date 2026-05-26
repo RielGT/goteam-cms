@@ -19,6 +19,11 @@ withDefaults(
     avatarHref: "#",
     connectHref: "#",
     messageHref: "#",
+    eyebrow: undefined,
+    body: undefined,
+    secondaryLink: undefined,
+    stats: undefined,
+    cardCallout: undefined,
   },
 );
 </script>

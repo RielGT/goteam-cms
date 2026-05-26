@@ -14,6 +14,11 @@ withDefaults(
   }>(),
   {
     imageClass: "w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal",
+    availability: undefined,
+    subheadline: undefined,
+    ctas: undefined,
+    codeSnippet: undefined,
+    floatingBadge: undefined,
   },
 );
 </script>
