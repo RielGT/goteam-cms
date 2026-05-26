@@ -1,7 +1,12 @@
 <script setup lang="ts">
 definePageMeta({ layout: false });
 
+const defaultTheme: "light" | "dark" = "light";
+
 useHead({
+  htmlAttrs: {
+    "data-default-theme": defaultTheme,
+  },
   title: "Alex Rivera — Freelance Full Stack Developer",
   meta: [
     {
@@ -12,8 +17,10 @@ useHead({
   ],
   script: [
     {
-      // Runs before paint to apply saved theme and avoid flash
-      innerHTML: `(function(){var t=localStorage.getItem('theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}})();`,
+      // Runs before paint to apply saved theme and avoid flash.
+      // Falls back to the page-level default (data-default-theme) when no
+      // user preference is stored — overrides the OS-level prefers-color-scheme.
+      innerHTML: `(function(){var t=localStorage.getItem('theme');var d=document.documentElement.getAttribute('data-default-theme')||'light';var dark=t?t==='dark':d==='dark';document.documentElement.classList.toggle('dark',dark);})();`,
       tagPosition: "head",
     },
   ],
@@ -39,5 +46,7 @@ useHead({
     <WebMiscBookTalk />
     <WebMiscCommonQuestions />
     <WebLayoutSiteFooter />
+    <WebMiscScrollToTop />
+    <WebMiscChatBot />
   </div>
 </template>
