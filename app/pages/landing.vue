@@ -22,23 +22,23 @@ useHead({
 
 <template>
   <div>
-    <LandingSiteHeader />
-    <LandingHeroSection />
-    <LandingTechStackSection />
-    <LandingTechStackGrid />
-    <LandingHookSection />
-    <LandingRecentWorkSection />
-    <LandingCaseStudiesSection />
-    <LandingPatternCardsSection />
-    <LandingFeaturedPostsSection />
-    <LandingHowIWorkSection />
-    <LandingProcessLifecycleSection />
-    <LandingProcessCycleSection />
-    <LandingTestimonialsSection />
-    <LandingLinkedInRecsSection />
-    <LandingLinkedInCtaSection />
-    <LandingTalkSection />
-    <LandingFaqSection />
-    <LandingSiteFooter />
+    <WebSiteHeader />
+    <WebHeroSection />
+    <WebTechStackSection />
+    <WebTechStackGrid />
+    <WebHookSection />
+    <WebRecentWorkSection />
+    <WebCaseStudiesSection />
+    <WebPatternCardsSection />
+    <WebFeaturedPostsSection />
+    <WebHowIWorkSection />
+    <WebProcessLifecycleSection />
+    <WebProcessCycleSection />
+    <WebTestimonialsSection />
+    <WebLinkedInRecsSection />
+    <WebLinkedInCtaSection />
+    <WebTalkSection />
+    <WebFaqSection />
+    <WebSiteFooter />
   </div>
 </template>

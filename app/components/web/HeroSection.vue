@@ -50,11 +50,13 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-green-400" />
                 <span class="ml-2 text-[10px] font-mono text-zinc-500">ship.ts</span>
               </div>
-              <pre class="text-[11px] font-mono p-3 leading-relaxed text-zinc-700 dark:text-zinc-300"><span class="text-brand-purple">const</span> ship = <span class="text-brand-orange">async</span> () =&gt; {
-  <span class="text-zinc-400">// no scope creep</span>
-  <span class="text-brand-purple">await</span> build()
-  <span class="text-brand-purple">return</span> <span class="text-brand-green">'on time'</span>
-}</pre>
+              <pre class="text-[11px] font-mono p-3 leading-relaxed text-zinc-700 dark:text-zinc-300">
+                <span class="text-brand-purple">const</span> ship = <span class="text-brand-orange">async</span> () =&gt; {
+                <span class="text-zinc-400">// no scope creep</span>
+                <span class="text-brand-purple">await</span> build()
+                <span class="text-brand-purple">return</span> <span class="text-brand-green">'on time'</span>
+                }
+              </pre>
             </div>
 
             <div class="hidden sm:flex absolute -top-6 -right-4 rotate-[6deg] items-center gap-2 bg-brand-orange text-white px-3 py-1.5 rounded-full text-xs font-medium shadow-soft">
