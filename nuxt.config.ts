@@ -42,6 +42,23 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
+  hooks: {
+    "pages:extend"(pages) {
+      // Strip `/public` and `/private` prefixes so folder names act as route groups only.
+      const strip = (prefix: string) => {
+        for (const page of pages) {
+          if (page.path === prefix) {
+            page.path = "/";
+          } else if (page.path.startsWith(`${prefix}/`)) {
+            page.path = page.path.slice(prefix.length);
+          }
+        }
+      };
+      strip("/public");
+      strip("/private");
+    },
+  },
+
   ssr: true,
 
   devServer: {

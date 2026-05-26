@@ -22,23 +22,22 @@ useHead({
 
 <template>
   <div>
-    <WebSiteHeader />
-    <WebHeroSection />
-    <WebTechStackSection />
+    <WebLayoutSiteHeader />
+    <WebHeroMainHero />
+    <WebTechStackOverview />
     <WebTechStackGrid />
-    <WebHookSection />
-    <WebRecentWorkSection />
-    <WebCaseStudiesSection />
-    <WebPatternCardsSection />
-    <WebFeaturedPostsSection />
-    <WebHowIWorkSection />
-    <WebProcessLifecycleSection />
-    <WebProcessCycleSection />
-    <WebTestimonialsSection />
-    <WebLinkedInRecsSection />
-    <WebLinkedInCtaSection />
-    <WebTalkSection />
-    <WebFaqSection />
-    <WebSiteFooter />
+    <WebMiscOpeningHook />
+    <WebWorkRecentProjects />
+    <WebWorkCaseStudies />
+    <WebWorkFeaturedPosts />
+    <WebProcessWorkApproach />
+    <WebProcessProjectLifecycle />
+    <WebProcessWorkCycle />
+    <WebSocialClientTestimonials />
+    <WebLinkedinPeerRecs />
+    <WebLinkedinProfileCta />
+    <WebMiscBookTalk />
+    <WebMiscCommonQuestions />
+    <WebLayoutSiteFooter />
   </div>
 </template>
