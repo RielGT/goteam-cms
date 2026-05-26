@@ -1,0 +1,55 @@
+---
+description: Brand style guide enforcement for all UI work
+alwaysApply: true
+---
+
+# Brand Style — `alex.dev` Portfolio
+
+The canonical brand reference is `.cursor/docs/brand-style-guide.md`. **Read it before any UI/styling decision.** This rule is a short reminder of the non-negotiables.
+
+## Color Tokens (Use Only These)
+
+| Token | Hex | Use |
+|---|---|---|
+| `brand-purple` | `#8B5CF6` | Primary CTAs, links, focus rings, active states |
+| `brand-green` | `#10B981` | Availability, success, "shipped" badges |
+| `brand-orange` | `#FB923C` | Accent stickers, third-rotation labels |
+| `paper` | `#FEFCFB` | Light-mode page background |
+| `ink` | `#0D0B1E` | Dark-mode page background, light-mode body text |
+
+- Never invent arbitrary hex (`text-[#abc123]`) when a token exists.
+- Background tints use `/5 → /20`; border tints use `/20 → /30`.
+- Brand-color text only for eyebrows, inline emphasis, or metric numbers — never paragraphs.
+
+## Typography
+
+- **Display** (`font-display`) = Space Grotesk → headings, hero numbers only
+- **Body** (default) = Inter → paragraphs, buttons, nav
+- **Mono** (`font-mono`) = JetBrains Mono → eyebrows (`/ section`), tech tags, code, micro-labels
+
+Never `uppercase`. Eyebrows are lowercase with a leading `/`.
+
+## Spacing & Layout
+
+- Containers: `max-w-6xl` (default), `max-w-4xl` (long-form), `max-w-5xl` (CTA)
+- Horizontal padding: always `px-5 sm:px-8`
+- Major section vertical: `py-24 sm:py-32`
+- Mobile-first: every component must specify both `sm:`/`lg:` responsive and `dark:` mode
+
+## Buttons
+
+- Always `rounded-full` (pill). Never `rounded-md` or `rounded-lg` for action buttons.
+- Primary: `bg-brand-purple text-white px-6 py-3.5` + hover lift `-translate-y-0.5`
+- Pair primary + ghost — never two primaries side-by-side.
+
+## Accessibility Guardrails
+
+- `text-brand-purple` on white fails AA for small text — only use for large text, icons, or as bold mono micro-labels. For small body links, use `text-ink` with underline.
+- Focus rings: `focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20`
+- Every interactive element needs a visible focus state.
+
+## Voice
+
+Lowercase, conversational, contractions OK, em-dashes welcome. No marketing fluff ("cutting-edge", "world-class").
+
+When unsure, **open `.cursor/docs/brand-style-guide.md` and cite the exact section.**

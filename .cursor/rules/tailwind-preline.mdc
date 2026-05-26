@@ -1,0 +1,74 @@
+---
+description: Tailwind CSS v4 and Preline UI usage conventions
+globs: app/**/*.{vue,ts,css}
+alwaysApply: false
+---
+
+# Tailwind v4 + Preline UI
+
+## Tailwind v4
+
+- This project uses **Tailwind CSS v4** via `@tailwindcss/vite` with a config-less setup. Brand tokens are declared in `@theme` blocks inside `app/assets/css/main.css` and `landing.css`.
+- Brand-extended utilities available: `bg-brand-purple`, `bg-brand-green`, `bg-brand-orange`, `bg-paper`, `bg-ink`, `font-display`, `font-mono`, plus the standard Tailwind utilities.
+- Use tokens, not arbitrary values. Bad: `text-[#8B5CF6]`. Good: `text-brand-purple`.
+- Dark mode is class-based (`dark:`). Always pair light/dark variants.
+- Mobile-first responsive: write base classes for mobile, then `sm:`, `md:`, `lg:` overrides.
+
+## Preline UI
+
+Preline is the chosen interactive primitive library. Use it whenever a component needs JS-driven state (open/close, focus trap, ARIA wiring).
+
+### When to Reach for Preline
+
+| Need | Use |
+|---|---|
+| Dropdown menus | Preline `hs-dropdown` |
+| Modals / dialogs | Preline `hs-overlay` |
+| Tabs | Preline `hs-tab` |
+| Carousels | Preline `hs-carousel` |
+| Tooltips | Preline `hs-tooltip` |
+| Comboboxes / search | Preline `hs-combobox` |
+| Simple accordion (FAQ) | Native `<details>` (per brand guide §11) |
+
+### Initialization
+
+Preline must be initialized **once** in a Nuxt client plugin (e.g. `app/plugins/preline.client.ts`). Never import or re-init inside individual components.
+
+```ts
+// app/plugins/preline.client.ts
+import "preline/preline";
+
+export default defineNuxtPlugin(() => {
+  // Preline auto-binds on DOMContentLoaded; trigger on route change too.
+});
+```
+
+### Styling Preline Primitives
+
+- Always restyle with brand Tailwind classes — never ship Preline's default theme.
+- Preserve required `hs-*` data attributes and class hooks; layer brand styles on top.
+
+```html
+<div class="hs-dropdown relative inline-flex">
+  <button
+    class="hs-dropdown-toggle inline-flex items-center gap-2
+           bg-brand-purple text-white px-6 py-3.5 rounded-full
+           hover:bg-ink hover:-translate-y-0.5 transition-all"
+  >
+    Options
+  </button>
+  <div class="hs-dropdown-menu hidden ... rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-soft">
+    ...
+  </div>
+</div>
+```
+
+### Don'ts
+
+- Don't pair Preline with another UI framework (Headless UI, Radix, Nuxt UI) — pick one.
+- Don't use Preline's default purple/blue theme — always override with brand tokens.
+- Don't re-implement Preline behaviors with custom JS when the primitive exists.
+
+## Class Order (Conventional)
+
+`layout → positioning → display → spacing → sizing → typography → colors → borders → effects → transitions → states (`hover:`, `focus:`, `dark:`)` — keep readability over strict order, but group related utilities.

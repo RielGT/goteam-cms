@@ -1,0 +1,79 @@
+---
+description: Vue 3 + Nuxt 4 component conventions for app/components/web
+globs: app/components/**/*.vue
+alwaysApply: false
+---
+
+# Vue Component Conventions
+
+## File Structure
+
+- One component per file, PascalCase filename matching the component name.
+- Components live under `app/components/web/<domain>/` grouped by domain, not by type.
+- Atomic primitives reused by 3+ domains → `app/components/web/ui/`.
+- Auto-imported as `WebDomainComponentName` (e.g. `<WebUiCta />`, `<WebHeroMainHero />`).
+
+## Allowed Domains
+
+`hero/`, `layout/`, `linkedin/`, `misc/`, `process/`, `social/`, `tech/`, `ui/`, `work/`
+
+Create a new domain folder only when no existing domain fits. Never overload `misc/`.
+
+## Script Block
+
+- Always `<script setup lang="ts">`. No Options API. No `defineComponent`.
+- Use `defineProps<{...}>()` with `withDefaults(...)` for defaults.
+- Shared types live in `app/components/web/types.ts` — import via relative path:
+
+```ts
+import type { Cta, BadgeContent } from "../types";
+```
+
+## Template Block
+
+- Single root element preferred; use semantic HTML (`<section>`, `<article>`, `<nav>`, `<header>`, `<footer>`).
+- Props drive all content — no hardcoded copy (Storyblok will bind later).
+- Loop with `v-for` + stable `:key`. Iterables should be typed.
+
+## Styling
+
+- Tailwind utility classes only. No `<style scoped>` unless absolutely necessary for non-tokenizable behavior.
+- Brand tokens from `.cursor/docs/brand-style-guide.md` only — no arbitrary `[#hex]`.
+- Every component must declare **both** light and `dark:` variants.
+- Every layout must specify mobile-first plus `sm:` and/or `lg:` breakpoints.
+
+## Example Skeleton
+
+```vue
+<script setup lang="ts">
+import type { Cta } from "../types";
+
+withDefaults(
+  defineProps<{
+    eyebrow: string;
+    title: string;
+    ctas?: Cta[];
+  }>(),
+  {},
+);
+</script>
+
+<template>
+  <section class="max-w-6xl mx-auto px-5 sm:px-8 py-24 sm:py-32">
+    <p class="font-mono text-xs text-brand-purple mb-3">/ {{ eyebrow }}</p>
+    <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight">
+      {{ title }}
+    </h2>
+    <div v-if="ctas?.length" class="mt-9 flex flex-wrap gap-4">
+      <WebUiCta v-for="c in ctas" :key="c.href" v-bind="c" />
+    </div>
+  </section>
+</template>
+```
+
+## Don'ts
+
+- Don't use Options API, `data()`, or `methods`.
+- Don't import components manually — rely on Nuxt auto-imports.
+- Don't hardcode copy or links — accept via props.
+- Don't add component-local CSS that overrides brand tokens.
