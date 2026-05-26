@@ -215,7 +215,7 @@ const footerGroups: FooterGroup[] = [
           </h1>
           <p
             v-if="article.lede"
-            class="mt-6 sm:mt-8 text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl"
+            class="mt-6 sm:mt-8 text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-2xl"
           >
             {{ article.lede }}
           </p>
@@ -230,7 +230,7 @@ const footerGroups: FooterGroup[] = [
           >
           <figcaption
             v-if="article.coverCaption"
-            class="mt-3 text-xs font-mono text-zinc-500 dark:text-zinc-500"
+            class="mt-3 text-xs font-mono text-zinc-500 dark:text-zinc-400"
           >{{ article.coverCaption }}</figcaption>
         </figure>
 

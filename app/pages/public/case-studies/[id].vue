@@ -271,7 +271,7 @@ const footerGroups: FooterGroup[] = [
           </h1>
           <p
             v-if="caseStudy.lede"
-            class="mt-6 text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl"
+            class="mt-6 text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-2xl"
           >
             {{ caseStudy.lede }}
           </p>
@@ -305,7 +305,7 @@ const footerGroups: FooterGroup[] = [
             <span
               v-for="t in caseStudy.stack"
               :key="t"
-              class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400"
+              class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/10 text-zinc-600 dark:text-zinc-300"
             >{{ t }}</span>
           </div>
         </div>

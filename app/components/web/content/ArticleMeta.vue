@@ -18,7 +18,7 @@ withDefaults(
   <div
     role="group"
     aria-label="article metadata"
-    class="flex flex-wrap items-center gap-3 text-[11px] font-mono text-zinc-500 dark:text-zinc-500"
+    class="flex flex-wrap items-center gap-3 text-[11px] font-mono text-zinc-500 dark:text-zinc-400"
   >
     <WebUiBadge :label="tag" :tone="tagTone" :dot="false" />
     <span class="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700" aria-hidden="true" />

@@ -71,15 +71,15 @@ const toneRotation: Tone[] = ["purple", "green", "orange"];
         :class="image ? (featured ? 'lg:col-span-5' : 'lg:col-span-3') : 'lg:col-span-12'"
       >
         <h3
-          class="font-display font-bold leading-snug"
+          class="font-display font-bold leading-snug text-ink dark:text-white"
           :class="featured ? 'text-3xl sm:text-4xl' : 'text-2xl sm:text-3xl'"
         >
           <a
             :href="href"
-            class="group-hover:text-brand-purple transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple/40 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-ink rounded-sm"
+            class="group-hover:text-brand-purple dark:group-hover:text-brand-purple transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple/40 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-ink rounded-sm"
           >{{ title }}</a>
         </h3>
-        <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">{{ excerpt }}</p>
+        <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">{{ excerpt }}</p>
 
         <div v-if="stats?.length" class="grid grid-cols-3 gap-3">
           <WebUiStat
@@ -96,7 +96,7 @@ const toneRotation: Tone[] = ["purple", "green", "orange"];
           <span
             v-for="t in stack"
             :key="t"
-            class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-white/10 text-zinc-600 dark:text-zinc-300"
           >{{ t }}</span>
         </div>
 

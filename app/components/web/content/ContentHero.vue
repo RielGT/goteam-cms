@@ -35,7 +35,7 @@ const eyebrowClass = computed(
       />
       <p
         v-if="description"
-        class="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl"
+        class="text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-2xl"
       >
         {{ description }}
       </p>

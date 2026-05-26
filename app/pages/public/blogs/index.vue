@@ -255,7 +255,7 @@ const footerGroups: FooterGroup[] = [
 
         <p
           v-if="filtered.length === 0"
-          class="text-center text-zinc-500 dark:text-zinc-500 font-mono text-sm py-16"
+          class="text-center text-zinc-500 dark:text-zinc-400 font-mono text-sm py-16"
         >
           / nothing here yet — try a different tag.
         </p>

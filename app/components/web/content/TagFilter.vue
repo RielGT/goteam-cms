@@ -30,8 +30,8 @@ defineEmits<{
       class="font-mono text-[11px] px-3 py-1.5 rounded-full border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple/40 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-ink"
       :class="
         modelValue === t.id
-          ? 'bg-brand-purple/10 border-brand-purple/20 text-brand-purple'
-          : 'border-zinc-200 dark:border-white/10 text-zinc-600 dark:text-zinc-400 hover:border-brand-purple hover:text-brand-purple'
+          ? 'bg-brand-purple/15 border-brand-purple/30 text-brand-purple dark:text-violet-300'
+          : 'border-zinc-200 dark:border-white/10 text-zinc-600 dark:text-zinc-300 hover:border-brand-purple hover:text-brand-purple dark:hover:text-brand-purple'
       "
       @click="$emit('update:modelValue', t.id)"
     >
