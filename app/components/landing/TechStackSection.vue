@@ -1,6 +1,8 @@
 <script setup lang="ts">
 interface Pill { name: string; svg: string; }
 
+withDefaults(defineProps<{ contained?: boolean }>(), { contained: true });
+
 const pills: Pill[] = [
   { name: "TypeScript", svg: '<svg viewBox="0 0 128 128"><path fill="#3178C6" d="M0 64v64h128V0H0z"/><path fill="#fff" d="M22.7 65.1v5.2h16.6v47.1h11.7V70.3h16.6v-5.1c0-2.8 0-5.2-.2-5.2-.1-.1-10-.2-22-.1l-21.9.1zm81.6-5.4c3.2.8 5.7 2.2 7.9 4.5 1.2 1.3 2.9 3.5 3.1 4 0 .2-5.5 3.9-8.8 6-.1 0-.6-.5-1.1-1.4-1.6-2.3-3.3-3.3-5.8-3.5-3.8-.3-6.3 1.7-6.3 5 0 1 .2 1.6.5 2.3.8 1.6 2.2 2.5 6.7 4.5 8.4 3.6 12 6 14.2 9.3 2.5 3.7 3.1 9.7 1.4 14.1-1.9 4.8-6.4 8-12.7 9.1-2 .3-6.6.3-8.7 0-4.7-.9-9-3.2-12.1-6.5-1.2-1.3-3.6-4.8-3.5-5 .2-.1.7-.5 1.2-.8.5-.4 2.4-1.5 4.1-2.5l3.2-1.9.7 1c.9 1.4 2.9 3.4 4.1 4 3.4 1.8 8.1 1.6 10.4-.5.9-.9 1.2-1.8 1.2-3.2 0-1.3-.2-1.9-.9-2.9-.9-1.3-2.7-2.4-7.9-4.6-5.9-2.5-8.4-4.1-10.7-6.5-1.3-1.5-2.5-3.7-3.1-5.7-.4-1.7-.5-5.8-.2-7.5 1.1-5 4.9-8.5 10.4-9.6 1.8-.3 5.9-.2 7.6.2z"/></svg>' },
   { name: "React", svg: '<svg viewBox="0 0 128 128"><circle fill="#61DAFB" cx="64" cy="64" r="11.4"/><g stroke="#61DAFB" stroke-width="4" fill="none"><ellipse cx="64" cy="64" rx="56" ry="21"/><ellipse cx="64" cy="64" rx="56" ry="21" transform="rotate(60 64 64)"/><ellipse cx="64" cy="64" rx="56" ry="21" transform="rotate(120 64 64)"/></g></svg>' },
@@ -21,7 +23,8 @@ const pills: Pill[] = [
 </script>
 
 <template>
-  <section aria-label="Tech stack" class="border-y border-zinc-200/70 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] py-10 overflow-hidden">
+  <section aria-label="Tech stack" class="border-y border-zinc-200/70 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] py-10">
+    <!-- Label row — contained, matches all other sections -->
     <div class="max-w-6xl mx-auto px-5 sm:px-8 mb-6">
       <div class="flex items-center gap-3 text-xs font-mono text-zinc-500 dark:text-zinc-500">
         <span class="w-1.5 h-1.5 rounded-full bg-brand-green pulse-dot" />
@@ -31,7 +34,8 @@ const pills: Pill[] = [
       </div>
     </div>
 
-    <div class="marquee marquee-mask">
+    <!-- Marquee — full-bleed by default, contained when prop is set -->
+    <div class="overflow-hidden marquee marquee-mask" :class="contained ? 'max-w-6xl mx-auto px-5 sm:px-8' : 'w-full'">
       <div class="marquee-track">
         <div class="flex items-center">
           <span v-for="p in pills" :key="`a-${p.name}`" class="tech-pill">
