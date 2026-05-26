@@ -321,6 +321,82 @@ export interface ArticleContent {
   related: PostCardData[];
 }
 
+// ──────────────────────────────────────────────────────────────────────────────
+// Section content templates — reusable marketing/content blocks consumed by
+// landing-style pages. Each shape pairs with one component under
+// app/components/web/<domain>/.
+// ──────────────────────────────────────────────────────────────────────────────
+
+// Process — FeatureTabs (vertical tab list + image panel, Preline tabs).
+export interface FeatureTab {
+  icon?: string; // inline SVG, optional
+  title: string;
+  body: string;
+  image: string;
+  imageAlt: string;
+}
+
+export interface FeatureTabsContent {
+  header: SectionHeaderContent;
+  sectionId?: string;
+  tabs: FeatureTab[];
+  activeTone?: Tone;
+  imageAspect?: "4/5" | "16/10";
+  imageOrder?: "left" | "right";
+  ctas?: Cta[];
+}
+
+// Misc — BentoFeatures (asymmetric capability grid).
+export interface BentoTile {
+  icon: string;
+  title: string;
+  body: string;
+  tone: Tone;
+}
+
+export interface BentoFeaturesContent {
+  header: SectionHeaderContent;
+  sectionId?: string;
+  tiles: BentoTile[];
+  pattern?: "2-3" | "3-2" | "1-2-2-1";
+}
+
+// Process — ComparisonSplit (with / without contrast).
+export interface ComparisonColumn {
+  label: string;
+  items: string[];
+}
+
+export interface ComparisonSplitContent {
+  header: SectionHeaderContent;
+  sectionId?: string;
+  left: ComparisonColumn;
+  right: ComparisonColumn;
+}
+
+// Social — LogosWall (static trust strip).
+export interface LogoItem {
+  name: string;
+  svg: string;
+  href?: string;
+}
+
+export interface LogosWallContent {
+  sectionId?: string;
+  eyebrow?: string;
+  caption?: string;
+  logos: LogoItem[];
+  monochrome?: boolean;
+}
+
+// Social — MetricStrip (horizontal row of headline metrics).
+export interface MetricStripContent {
+  sectionId?: string;
+  eyebrow?: string;
+  items: StatItem[];
+  livePulseOnFirst?: boolean;
+}
+
 // ChatBot.
 export interface ChatReply {
   match: string[]; // case-insensitive substrings; first match wins

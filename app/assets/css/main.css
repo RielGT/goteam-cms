@@ -2,6 +2,14 @@
 @import "../../../node_modules/preline/variants.css";
 @source "../../../node_modules/preline/dist/*.js";
 
+/* Explicit source globs so newly-added component files are picked up by the
+ * Tailwind v4 source-scan without needing a dev-server restart. The Vite plugin
+ * already scans the module graph, but new files only enter the graph after
+ * something imports them — touching CSS or restarting otherwise required. */
+@source "../../components/**/*.vue";
+@source "../../pages/**/*.vue";
+@source "../../layouts/**/*.vue";
+
 /* Enable class-based dark mode for Tailwind v4 */
 @variant dark (&:where(.dark, .dark *));
 

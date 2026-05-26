@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   compatibilityDate: "2026-01-13",
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   modules: [
     [
       "@storyblok/nuxt",
