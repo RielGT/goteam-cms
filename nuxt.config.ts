@@ -33,7 +33,7 @@ export default defineNuxtConfig({
           href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
         },
       ],
-      htmlAttrs: { class: "scroll-smooth" },
+      htmlAttrs: { lang: "en" },
       bodyAttrs: {
         class: "bg-paper text-ink dark:bg-ink dark:text-zinc-100 antialiased transition-colors duration-300",
       },
