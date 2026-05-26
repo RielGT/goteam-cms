@@ -25,6 +25,7 @@ useHead({
     <LandingSiteHeader />
     <LandingHeroSection />
     <LandingTechStackSection />
+    <LandingTechStackGrid />
     <LandingHookSection />
     <LandingRecentWorkSection />
     <LandingCaseStudiesSection />
