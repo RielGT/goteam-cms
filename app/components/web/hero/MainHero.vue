@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import type { BadgeContent, Cta, HeroImage, HeroCodeSnippet } from "../types";
 
-defineProps<{
-  availability?: BadgeContent;
-  headline: string;
-  subheadline?: string;
-  ctas?: Cta[];
-  image: HeroImage;
-  codeSnippet?: HeroCodeSnippet;
-  floatingBadge?: string;
-}>();
+withDefaults(
+  defineProps<{
+    availability?: BadgeContent;
+    headline: string;
+    subheadline?: string;
+    ctas?: Cta[];
+    image: HeroImage;
+    imageClass?: string;
+    codeSnippet?: HeroCodeSnippet;
+    floatingBadge?: string;
+  }>(),
+  {
+    imageClass: "w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal",
+  },
+);
 </script>
 
 <template>
@@ -43,7 +49,7 @@ defineProps<{
               <img
                 :src="image.src"
                 :alt="image.alt"
-                class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal"
+                :class="imageClass"
                 loading="lazy"
               >
               <div

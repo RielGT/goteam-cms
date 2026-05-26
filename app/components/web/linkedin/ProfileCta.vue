@@ -1,16 +1,26 @@
 <script setup lang="ts">
 import type { BadgeContent, Cta, StatItem, LinkedInCard, NavLink } from "../types";
 
-defineProps<{
-  eyebrow?: BadgeContent;
-  headline: string;
-  body?: string;
-  primaryCta: Cta;
-  secondaryLink?: NavLink;
-  stats?: StatItem[];
-  card: LinkedInCard;
-  cardCallout?: string;
-}>();
+withDefaults(
+  defineProps<{
+    eyebrow?: BadgeContent;
+    headline: string;
+    body?: string;
+    primaryCta: Cta;
+    secondaryLink?: NavLink;
+    stats?: StatItem[];
+    card: LinkedInCard;
+    cardCallout?: string;
+    avatarHref?: string;
+    connectHref?: string;
+    messageHref?: string;
+  }>(),
+  {
+    avatarHref: "#",
+    connectHref: "#",
+    messageHref: "#",
+  },
+);
 </script>
 
 <template>
@@ -67,7 +77,9 @@ defineProps<{
                 <div class="absolute inset-0 bg-grid opacity-30" />
               </div>
               <div class="px-5 pb-5 -mt-10 relative">
-                <img :src="card.avatar" alt="" class="w-20 h-20 rounded-full ring-4 ring-white dark:ring-zinc-900 object-cover relative z-10">
+                <a :href="avatarHref" class="inline-block relative z-10">
+                  <img :src="card.avatar" alt="" class="w-20 h-20 rounded-full ring-4 ring-white dark:ring-zinc-900 object-cover">
+                </a>
                 <div class="mt-3">
                   <div class="flex items-center gap-1.5">
                     <h3 class="font-semibold text-ink dark:text-white">{{ card.name }}</h3>
@@ -77,11 +89,11 @@ defineProps<{
                   <p class="text-xs text-zinc-500 mt-1">{{ card.subline }}</p>
                 </div>
                 <div class="mt-4 flex items-center gap-2">
-                  <button class="flex-1 inline-flex items-center justify-center gap-1.5 bg-brand-purple text-white text-sm font-medium py-2 rounded-full hover:bg-ink transition">
+                  <a :href="connectHref" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-brand-purple text-white text-sm font-medium py-2 rounded-full hover:bg-ink transition">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
                     Connect
-                  </button>
-                  <button class="px-4 py-2 rounded-full border border-zinc-300 dark:border-white/10 text-sm font-medium text-ink dark:text-white hover:border-brand-purple hover:text-brand-purple transition">Message</button>
+                  </a>
+                  <a :href="messageHref" class="px-4 py-2 rounded-full border border-zinc-300 dark:border-white/10 text-sm font-medium text-ink dark:text-white hover:border-brand-purple hover:text-brand-purple transition">Message</a>
                 </div>
               </div>
             </div>

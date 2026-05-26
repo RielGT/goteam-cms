@@ -116,6 +116,7 @@ const hero = {
     "I'm Alex — a freelance full stack developer helping founders and small teams turn ideas into shipped products. No agency overhead. No vague timelines.",
   ctas: heroCtas,
   image: heroImage,
+  imageClass: "w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal",
   codeSnippet: heroCodeSnippet,
   floatingBadge: "Shipping since 2014",
 };
